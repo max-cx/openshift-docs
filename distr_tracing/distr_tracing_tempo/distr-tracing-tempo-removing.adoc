@@ -1,6 +1,6 @@
 :_content-type: ASSEMBLY
 [id="dist-tracing-tempo-removing"]
-= Removing distributed tracing platform Tempo
+= Removing {TempoShortName}
 include::_attributes/common-attributes.adoc[]
 :context: dist-tracing-tempo-removing
 
