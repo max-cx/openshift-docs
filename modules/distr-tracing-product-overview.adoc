@@ -23,8 +23,8 @@ With {DTShortName} you can perform the following functions:
 
 {DTProductName} consists of three components:
 
-* *{JaegerName}* - This component is based on the open source link:https://www.jaegertracing.io/[Jaeger project].
+* *{JaegerName}*, which is based on the open source link:https://www.jaegertracing.io/[Jaeger project].
 
-* *{TempoName}* - This component is based on the open source link:https://github.com/grafana/tempo[Grafana Tempo project].
+* *{TempoName}*, which is based on the open source link:https://github.com/grafana/tempo[Grafana Tempo project].
 
-* *{OTELNAME}* - This component is based on the open source link:https://opentelemetry.io/[OpenTelemetry project].
+* *{OTELNAME}*, which is based on the open source link:https://opentelemetry.io/[OpenTelemetry project].
