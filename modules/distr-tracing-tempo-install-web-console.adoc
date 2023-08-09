@@ -135,7 +135,7 @@ link:https://github.com/openshift/openshift-docs/pull/62410/files#r1284564005[Wa
 
 . Use the *Project:* dropdown list to select the namespace of the *TempoStack* instance.
 
-. Verify that the `status` of all TempoStack `components` is `Running` and the `conditions` are `type: Ready`.
+. Go to *Operators* -> *Installed Operators* to verify that the *Status* of the TempoStack is *Condition: Ready*.
 
 . Go to *Workloads* -> *Pods* to verify that all the TempoStack component pods are running.
 
