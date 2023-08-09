@@ -164,7 +164,6 @@ $ oc apply -f - << EOF
 EOF
 ----
 
-link:https://github.com/openshift/openshift-docs/pull/62410/files#r1284564654[Waiting for SME input for the following:]
 
 .Verification
 
