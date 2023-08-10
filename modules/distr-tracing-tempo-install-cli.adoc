@@ -10,7 +10,7 @@ You can install the {TempoShortName} on the command line.
 
 .Prerequisites
 
-* An active OpenShift CLI (`oc`) session by a xref:https://docs.openshift.com/container-platform/latest/admin_solutions/user_role_mgmt.html#creating-a-cluster-administrator[cluster administrator with the `cluster-admin` role]. See link:https://docs.openshift.com/container-platform/{ocp4-ver}/cli_reference/openshift_cli/getting-started-cli.html[Getting started with the OpenShift CLI].
+* An active OpenShift CLI (`oc`) session by a cluster administrator with the `cluster-admin` role.
 +
 TIP: Ensure that your OpenShift CLI (`oc`) version is up to date and matches your {product-title} version.
 

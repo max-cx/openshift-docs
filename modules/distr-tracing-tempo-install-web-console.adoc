@@ -10,9 +10,7 @@ You can install the {TempoShortName} in the OpenShift web console.
 
 .Prerequisites
 
-* You are logged in to the OpenShift xref:https://docs.openshift.com/container-platform/latest/web_console/web-console.html[web console] as a xref:https://docs.openshift.com/container-platform/latest/admin_solutions/user_role_mgmt.html#creating-a-cluster-administrator[cluster administrator with the `cluster-admin` role].
-// https://docs.openshift.com/container-platform/latest/web_console/web-console.html
-// https://docs.openshift.com/container-platform/latest/admin_solutions/user_role_mgmt.html#creating-a-cluster-administrator
+* You are logged in to the OpenShift web console as a cluster administrator with the `cluster-admin` role.
 
 * You are using a supported provider of object storage: link:https://www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation[Red Hat OpenShift Data Foundation], link:https://min.io/[MinIO], link:https://aws.amazon.com/s3/[Amazon S3], link:https://azure.microsoft.com/en-us/products/storage/blobs/[Azure Blob Storage], link:https://cloud.google.com/storage/[Google Cloud Storage].
 
@@ -139,9 +137,3 @@ The stack deployed in this example is configured to receive Jaeger Thrift over H
 . Go to *Workloads* -> *Pods* to verify that all the TempoStack component pods are running.
 
 . Go to *Networking* -> *Route* to get the Route for the TempoStack query UI.
-
-.Additional resources
-
-* link:https://operatorhub.io/[OperatorHub.io]
-* link:https://docs.openshift.com/container-platform/latest/operators/admin/olm-adding-operators-to-cluster.html#olm-installing-from-operatorhub-using-web-console_olm-adding-operators-to-a-cluster[Installing from OperatorHub using the web console]
-* link:https://docs.openshift.com/container-platform/latest/operators/user/olm-creating-apps-from-installed-operators.html[Creating applications from installed Operators]
