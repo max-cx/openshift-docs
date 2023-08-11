@@ -20,7 +20,7 @@ This example deploys the collector in deployment mode. For other modes, see the 
 . Create a service account for the OpenTelemetry collector.
 +
 ====
-[source,yaml]
+[example,source,yaml]
 ----
 apiVersion: v1
 kind: ServiceAccount
@@ -32,7 +32,7 @@ metadata:
 . Create a cluster role for the service account.
 +
 ====
-[source,yaml]
+[example,source,yaml]
 ----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -46,13 +46,13 @@ rules:
   verbs: ["get", "watch", "list"]
 ----
 ====
-
++
 Some permissions are neccesary to make the `k8sattributesprocessor` and `resourcedetectionprocessor` works, and those are recomended.
 
 . Bind the cluster role to the service account.
 +
 ====
-[source,yaml]
+[example,source,yaml]
 ----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -73,7 +73,7 @@ roleRef:
 +
 ====
 ----
-[source,yaml]
+[example,source,yaml]
 apiVersion: opentelemetry.io/v1alpha1
 kind: OpenTelemetryCollector
 metadata:
@@ -117,9 +117,9 @@ spec:
           exporters: [otlp]
 ----
 ====
-
++
 The collector is configured with a receiver for Jaeger traces, OpenCensus traces over the OpenCensus protocol, Zipkin traces over the Zipkin protocol and OTLP traces over the GRPC protocol. The collector exporter is configured to export OTLP, and is pointing to the tempo distributor endpoint, in this case "tempo-simplest-distributor:4317" which should be already created.
-
++
 You can find more examples of how to deploy OpenTelemetry with tempo in sidecar mode and multitenant here: https://github.com/os-observability/redhat-rhosdt-samples
 +
 [WARNING]
@@ -130,6 +130,7 @@ The previous link is a pointer to material from the upstream community. This mat
 [TIP]
 ====
 You can deploy the `tracegen` as a test:
+[example,source,yaml]
 ----
 apiVersion: batch/v1
 kind: Job
