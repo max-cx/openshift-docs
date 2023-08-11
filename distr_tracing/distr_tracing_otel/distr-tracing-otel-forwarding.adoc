@@ -19,6 +19,7 @@ This example deploys the collector in deployment mode. For other modes, see the 
 
 . Create a service account for the OpenTelemetry collector.
 +
+.ServiceAccount
 ====
 [example,source,yaml]
 ----
@@ -31,6 +32,7 @@ metadata:
 
 . Create a cluster role for the service account.
 +
+.ClusterRole
 ====
 [example,source,yaml]
 ----
@@ -51,6 +53,7 @@ Some permissions are neccesary to make the `k8sattributesprocessor` and `resourc
 
 . Bind the cluster role to the service account.
 +
+.ClusterRoleBinding
 ====
 [example,source,yaml]
 ----
@@ -71,6 +74,7 @@ roleRef:
 
 . Create the YAML file to define the `OpenTelemetryCollector` custom resource (CR).
 +
+.OpenTelemetryCollector
 ====
 ----
 [example,source,yaml]
