@@ -1,0 +1,158 @@
+// Module included in the following assemblies:
+//
+// * cli_reference/openshift_cli/developer-cli-commands.adoc
+
+:_content-type: PROCEDURE
+[id="distr-tracing-otel-forwarding_{context}"]
+= Forwarding traces to TempoStack by using OpenTelemetry Collector
+
+To configure log forwarding to the TempoStack, you deploy and configure an OpenTelemetry collector.
+
+.Prerequisites
+
+* Tempo Operator is installed.
+* TempoStack is deployed on the cluster.
+* Red Hat OpenShift distributed tracing data collection operator is installed.
+
+.Procedure
+
+Deploy an OpenTelemetry collector by using the recomended processors/receivers/exporters.
+This example deploys the collector in deployment mode. For other modes, see the OpenTelemetry collector documentation.
+
+. Create a service account for the OpenTelemetry collector.
++
+.ServiceAccount
+====
+[source,yaml]
+----
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: otel-collector-deployment
+----
+====
+
+. Create a cluster role for the service account.
++
+.ClusterRole
+====
+[source,yaml]
+----
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: otel-collector
+rules:
+  <1>
+  <2>
+- apiGroups: ["", "config.openshift.io"]
+  resources: ["pods", "namespaces", "infrastructures", "infrastructures/status"]
+  verbs: ["get", "watch", "list"]
+----
+<1> The `k8sattributesprocessor` requires permissions for pods and namespaces resources.
+<2> The `resourcedetectionprocessor` requires Permissions for infrastructures and infrastructures/status.
+====
+
+. Bind the cluster role to the service account.
++
+.ClusterRoleBinding
+====
+[source,yaml]
+----
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: otel-collector
+subjects:
+- kind: ServiceAccount
+  name: otel-collector-deployment
+  namespace: otel-collector-example
+roleRef:
+  kind: ClusterRole
+  name: otel-collector
+  apiGroup: rbac.authorization.k8s.io
+----
+====
+
+. Create the YAML file to define the `OpenTelemetryCollector` custom resource (CR).
++
+.OpenTelemetryCollector
+====
+----
+[source,yaml]
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel
+spec:
+  mode: deployment
+  serviceAccount: otel-collector-deployment
+  config: |
+    receivers:
+      jaeger:
+        protocols:
+          grpc:
+          thrift_binary:
+          thrift_compact:
+          thrift_http:
+      opencensus:
+      otlp:
+        protocols:
+          grpc:
+          http:
+      zipkin:
+    processors:
+      batch:
+      k8sattributes:
+      memory_limiter:
+        check_interval: 1s
+        limit_percentage: 50
+        spike_limit_percentage: 30
+      resourcedetection:
+        detectors: [openshift]
+    exporters:
+      otlp:
+        endpoint: "tempo-simplest-distributor:4317" # Endpoint for the tempo distributor. <1>
+        tls:
+          insecure: true
+    service:
+      pipelines:
+        traces:
+          receivers: [jaeger, opencensus, otlp, zipkin] <2>
+          processors: [memory_limiter, k8sattributes, resourcedetection, batch]
+          exporters: [otlp]
+----
+<1> The collector exporter is configured to export OTLP and points to the Tempo distributor endpoint, `"tempo-simplest-distributor:4317"` in this example, which is already created.
+<2> The collector is configured with a receiver for Jaeger traces, OpenCensus traces over the OpenCensus protocol, Zipkin traces over the Zipkin protocol, and OTLP traces over the GRPC protocol.
+====
+
+[TIP]
+====
+You can deploy the `tracegen` as a test:
+[source,yaml]
+----
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: tracegen
+spec:
+  template:
+    spec:
+      containers:
+        - name: tracegen
+          image: ghcr.io/open-telemetry/opentelemetry-collector-contrib/tracegen:latest
+          command:
+            - "./tracegen"
+          args:
+            - -otlp-endpoint=otel-collector:4317
+            - -otlp-insecure
+            - -duration=30s
+            - -workers=1
+      restartPolicy: Never
+  backoffLimit: 4
+----
+====
+
+.Additional resources
+
+* link:https://github.com/os-observability/redhat-rhosdt-samples[More examples of how to deploy OpenTelemetry with tempo in sidecar mode and multitenant]
