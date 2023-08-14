@@ -122,6 +122,7 @@ endif::[]
 :JaegerVersion: 1.47.0
 :OTELName: Red Hat OpenShift distributed tracing data collection
 :OTELShortName: distributed tracing data collection
+:OTELOperator: Red Hat OpenShift distributed tracing data collection Operator
 :OTELVersion: 0.81.0
 :TempoName: Red Hat OpenShift distributed tracing platform (Tempo)
 :TempoShortName: distributed tracing platform (Tempo)

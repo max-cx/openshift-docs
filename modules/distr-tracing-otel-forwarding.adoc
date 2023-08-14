@@ -4,22 +4,17 @@
 
 :_content-type: PROCEDURE
 [id="distr-tracing-otel-forwarding_{context}"]
-= Forwarding traces to TempoStack by using OpenTelemetry Collector
+= Forwarding traces to a TempoStack by using the OpenTelemetry Collector
 
-To configure log forwarding to the TempoStack, you deploy and configure an OpenTelemetry collector.
+To configure log forwarding to a TempoStack, you can deploy and configure the OpenTelemetry Collector. You can deploy the OpenTelemetry Collector in the deployment mode by using the specified processors, receivers, and exporters. For other modes, see the OpenTelemetry Collector documentation linked in **Additional resources**.
 
 .Prerequisites
 
-* Tempo Operator is installed.
-* TempoStack is deployed on the cluster.
-* Red Hat OpenShift distributed tracing data collection operator is installed.
+* {OTELOperator} is installed.
 
 .Procedure
 
-Deploy an OpenTelemetry collector by using the recomended processors/receivers/exporters.
-This example deploys the collector in deployment mode. For other modes, see the OpenTelemetry collector documentation.
-
-. Create a service account for the OpenTelemetry collector.
+. Create a service account for the OpenTelemetry Collector.
 +
 .ServiceAccount
 ====
@@ -50,7 +45,7 @@ rules:
   verbs: ["get", "watch", "list"]
 ----
 <1> The `k8sattributesprocessor` requires permissions for pods and namespaces resources.
-<2> The `resourcedetectionprocessor` requires Permissions for infrastructures and infrastructures/status.
+<2> The `resourcedetectionprocessor` requires permissions for infrastructures and status.
 ====
 
 . Bind the cluster role to the service account.
@@ -122,8 +117,8 @@ spec:
           processors: [memory_limiter, k8sattributes, resourcedetection, batch]
           exporters: [otlp]
 ----
-<1> The collector exporter is configured to export OTLP and points to the Tempo distributor endpoint, `"tempo-simplest-distributor:4317"` in this example, which is already created.
-<2> The collector is configured with a receiver for Jaeger traces, OpenCensus traces over the OpenCensus protocol, Zipkin traces over the Zipkin protocol, and OTLP traces over the GRPC protocol.
+<1> The Collector exporter is configured to export OTLP and points to the Tempo distributor endpoint, `"tempo-simplest-distributor:4317"` in this example, which is already created.
+<2> The Collector is configured with a receiver for Jaeger traces, OpenCensus traces over the OpenCensus protocol, Zipkin traces over the Zipkin protocol, and OTLP traces over the GRPC protocol.
 ====
 
 [TIP]
@@ -155,4 +150,5 @@ spec:
 
 .Additional resources
 
-* link:https://github.com/os-observability/redhat-rhosdt-samples[More examples of how to deploy OpenTelemetry with tempo in sidecar mode and multitenant]
+* link:https://opentelemetry.io/docs/collector/[OpenTelemetry Collector documentation]
+* link:https://github.com/os-observability/redhat-rhosdt-samples[Deployment examples on GitHub]
