@@ -110,25 +110,18 @@ spec:
         detectors: [openshift]
     exporters:
       otlp:
-        endpoint: "tempo-simplest-distributor:4317" # Endpoint for the tempo distributor.
+        endpoint: "tempo-simplest-distributor:4317" # Endpoint for the tempo distributor. <1>
         tls:
           insecure: true
     service:
       pipelines:
         traces:
-          receivers: [jaeger, opencensus, otlp, zipkin]
+          receivers: [jaeger, opencensus, otlp, zipkin] <2>
           processors: [memory_limiter, k8sattributes, resourcedetection, batch]
           exporters: [otlp]
 ----
-====
-+
-The collector is configured with a receiver for Jaeger traces, OpenCensus traces over the OpenCensus protocol, Zipkin traces over the Zipkin protocol and OTLP traces over the GRPC protocol. The collector exporter is configured to export OTLP, and is pointing to the tempo distributor endpoint, in this case "tempo-simplest-distributor:4317" which should be already created.
-+
-You can find more examples of how to deploy OpenTelemetry with tempo in sidecar mode and multitenant here: https://github.com/os-observability/redhat-rhosdt-samples
-+
-[WARNING]
-====
-The previous link is a pointer to material from the upstream community. This material represents the very latest available content and the most recent best practices. These tips have not yet been vetted by Red Hat's QE department, and they have not yet been proven by a wide user group. Please, use this information cautiously. It is best used for educational and 'developmental' purposes rather than 'production' purposes.
+<1> The collector exporter is configured to export OTLP and points to the Tempo distributor endpoint, `"tempo-simplest-distributor:4317"` in this example, which is already created.
+<2> The collector is configured with a receiver for Jaeger traces, OpenCensus traces over the OpenCensus protocol, Zipkin traces over the Zipkin protocol, and OTLP traces over the GRPC protocol.
 ====
 
 [TIP]
@@ -157,3 +150,7 @@ spec:
   backoffLimit: 4
 ----
 ====
+
+.Additional resources
+
+* link:https://github.com/os-observability/redhat-rhosdt-samples[More examples of how to deploy OpenTelemetry with tempo in sidecar mode and multitenant here]
