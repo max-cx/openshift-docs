@@ -3568,7 +3568,7 @@ Topics:
     - Name: Configuring
       File: distr-tracing-otel-configuring
     - Name: Forwarding
-      File: distr-tracing-otel-???
+      File: distr-tracing-otel-temp
     - Name: Migrating
       File: distr-tracing-otel-migrating
 
