@@ -19,13 +19,16 @@ This example deploys the collector in deployment mode. For other modes, see the 
 
 . Create a service account for the OpenTelemetry collector.
 +
-[example,source,yaml]
+.ServiceAccount
+====
+[source,yaml]
 ----
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: otel-collector-deployment
 ----
+====
 
 . Create a cluster role for the service account.
 +
