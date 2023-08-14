@@ -4,4 +4,6 @@
 include::_attributes/common-attributes.adoc[]
 :context: distr-tracing-otel-temp
 
-include::modules/distr-tracing-otel-forwarding.adoc[leveloffset+1]
+toc::[]
+
+include::modules/distr-tracing-otel-forwarding.adoc[leveloffset=+1]
