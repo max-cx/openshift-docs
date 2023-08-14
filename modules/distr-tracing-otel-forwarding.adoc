@@ -10,7 +10,9 @@ To configure log forwarding to a TempoStack, you can deploy and configure the Op
 
 .Prerequisites
 
-* {OTELOperator} is installed.
+* The {OTELOperator} is installed.
+* The {TempoOperator} is installed.
+* A TempoStack is deployed on the cluster.
 
 .Procedure
 
