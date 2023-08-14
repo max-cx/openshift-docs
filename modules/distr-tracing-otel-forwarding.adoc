@@ -1,6 +1,6 @@
 // Module included in the following assemblies:
 //
-// * cli_reference/openshift_cli/developer-cli-commands.adoc
+// * /distr_tracing/distr_tracing_otel/distr-tracing-otel-???.adoc
 
 :_content-type: PROCEDURE
 [id="distr-tracing-otel-forwarding_{context}"]
