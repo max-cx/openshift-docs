@@ -66,8 +66,6 @@ include::modules/distr-tracing-tempo-deploy-default.adoc[leveloffset=+1]
 [id="customizing-your-tempo-deployment"]
 == Customizing your deployment
 
-include::modules/distr-tracing-tempo-deployment-best-practices.adoc[leveloffset=+2]
-
 ifdef::openshift-enterprise,openshift-dedicated[]
 For information about configuring persistent storage, see xref:../../storage/understanding-persistent-storage.adoc[Understanding persistent storage] and the appropriate configuration topic for your chosen storage option.
 endif::[]
@@ -77,8 +75,6 @@ include::modules/distr-tracing-tempo-config-default.adoc[leveloffset=+2]
 include::modules/distr-tracing-tempo-config-storage.adoc[leveloffset=+2]
 
 include::modules/distr-tracing-tempo-config-query-frontend.adoc[leveloffset=+2]
-
-include::modules/distr-tracing-tempo-config-ingester.adoc[leveloffset=+2]
 
 == Setting up monitoring for {TempoShortName}
 
