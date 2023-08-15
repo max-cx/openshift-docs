@@ -109,7 +109,7 @@ spec:
         detectors: [openshift]
     exporters:
       otlp:
-        endpoint: "tempo-simplest-distributor:4317" # Endpoint for the tempo distributor. <1>
+        endpoint: "tempo-simplest-distributor:4317" <1>
         tls:
           insecure: true
     service:
