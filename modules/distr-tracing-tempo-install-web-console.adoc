@@ -46,14 +46,14 @@ include::snippets/distr-tracing-tempo-required-secret-parameters.adoc[]
 include::snippets/distr-tracing-tempo-secret-example.adoc[]
 --
 
-. Create a namespace for the *TempoStack* instance that you will create in the next step.
+. Create an OpenShift project of your choice for the *TempoStack* instance that you will create in the next step.
 +
 You can do this in the *Administrator* view of the OpenShift web console: go to *Home* -> *Projects* -> *Create Project*.
 
 
 . Create a *TempoStack* instance.
 +
-NOTE: You can create multiple *TempoStack* instances in separate namespaces on the same cluster.
+NOTE: You can create multiple *TempoStack* instances in separate projects on the same cluster.
 +
 You can create a *TempoStack* instance as follows:
 
@@ -61,7 +61,7 @@ You can create a *TempoStack* instance as follows:
 +
 [TIP]
 ====
-You can use the *Project:* dropdown list to select the namespace that you created for the *TempoStack* instance in the previous step.
+You can use the *Project:* dropdown list to select the OpenShift project that you created for the *TempoStack* instance in the previous step.
 ====
 
 .. Select *TempoStack* -> *Create TempoStack* -> *YAML view*.
@@ -74,7 +74,7 @@ apiVersion: tempo.grafana.com/v1alpha1
 kind: TempoStack
 metadata:
   name: sample
-  namespace: <namespace_from_previous_step>
+  namespace: <openshift_project_of_tempostack_instance>
 spec:
   storageSize: 1Gi
   storage:
@@ -101,7 +101,7 @@ apiVersion: tempo.grafana.com/v1alpha1
 kind: TempoStack
 metadata:
   name: simplest
-  namespace: tempostacknamespace
+  namespace: <openshift_project_of_tempostack_instance>
 spec:
   storageSize: 1Gi
   storage:
@@ -130,7 +130,7 @@ The stack deployed in this example is configured to receive Jaeger Thrift over H
 
 .Verification
 
-. Use the *Project:* dropdown list to select the namespace of the *TempoStack* instance.
+. Use the *Project:* dropdown list to select the OpenShift project of the *TempoStack* instance.
 
 . Go to *Operators* -> *Installed Operators* to verify that the *Status* of the TempoStack is *Condition: Ready*.
 

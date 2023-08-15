@@ -8,24 +8,17 @@ toc::[]
 
 The steps for removing {DTProductName} from an {product-title} cluster are as follows:
 
-. Shut down any {DTProductName} pods.
-. Remove any {DTProductName} instances.
-. Remove the {TempoName} Operator.
-. Remove the {OTELName} Operator.
+. Shut down all {DTProductName} pods.
+. Remove any TempoStack instances.
+. Remove the {TempoOperator}.
 
-include::modules/distr-tracing-removing-tempo-instance.adoc[leveloffset=+1]
+include::modules/distr-tracing-tempo-remove-web-console.adoc[leveloffset=+1]
 
-include::modules/distr-tracing-removing-tempo-instance-cli.adoc[leveloffset=+1]
+include::modules/distr-tracing-tempo-remove-cli.adoc[leveloffset=+1]
 
+[role="_additional-resources"]
+[id="additional-resources_dist-tracing-tempo-removing"]
+== Additional resources
 
-== Removing the {DTProductName} Operators
-
-.Procedure
-
-. Follow the instructions for xref:../../operators/admin/olm-deleting-operators-from-cluster.adoc#olm-deleting-operators-from-a-cluster[Deleting Operators from a cluster].
-
-* Remove the {TempoName} Operator.
-
-//* Remove the {OTELName} Operator.
-
-* After the {TempoName} Operator has been removed, if appropriate, remove the OpenShift Elasticsearch Operator.
+* xref:../../operators/admin/olm-deleting-operators-from-cluster.adoc#olm-deleting-operators-from-a-cluster[Deleting Operators from a cluster]
+* xref:../../cli_reference/openshift_cli/getting-started-cli.adoc#getting-started-cli[Getting started with the OpenShift CLI]
