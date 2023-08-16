@@ -23,6 +23,6 @@ WARNING: Removing a TempoStack instance that uses in-memory storage results in p
 You can use the *Project:* drop-down list to select the relevant OpenShift project.
 ====
 
-. For the TempoStack instance to be deleted, go to the *Options* menu {kebab} -> *Delete TempoStack* -> *Delete*.
+. For the TempoStack instance to be deleted, go to {kebab} -> *Delete TempoStack* -> *Delete*.
 
 . Optional: Remove the {TempoOperator}.
