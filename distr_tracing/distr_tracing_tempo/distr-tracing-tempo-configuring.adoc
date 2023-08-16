@@ -78,7 +78,7 @@ include::modules/distr-tracing-tempo-config-query-frontend.adoc[leveloffset=+2]
 
 == Setting up monitoring for {TempoShortName}
 
-The {TempoOperator} supports monitoring and alerting of each {TempoShortName} component (distributor, ingester, etc.) and exposes upgrade and operational metrics about the operator itself.
+The {TempoOperator} supports monitoring and alerting of each TempoStack component (distributor, ingester, etc.) and exposes upgrade and operational metrics about the operator itself.
 
 include::modules/distr-tracing-tempo-configuring-tempostack-metrics-and-alerts.adoc[leveloffset=+2]
 

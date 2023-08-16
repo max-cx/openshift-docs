@@ -25,6 +25,6 @@ With {DTShortName} you can perform the following functions:
 
 * *{JaegerName}*, which is based on the open source link:https://www.jaegertracing.io/[Jaeger project].
 
-* *{TempoName}*, which is based on the open source link:https://github.com/grafana/tempo[Grafana Tempo project].
+* *{TempoName}*, which is based on the open source link:https://grafana.com/oss/tempo/[Grafana Tempo project].
 
 * *{OTELNAME}*, which is based on the open source link:https://opentelemetry.io/[OpenTelemetry project].
