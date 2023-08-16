@@ -1,0 +1,30 @@
+// Module included in the following assemblies:
+//
+// * /distr_tracing/distr_tracing_otel/distr-tracing-otel-temp.adoc
+
+:_content-type: PROCEDURE
+[id="distr-tracing-otel-send-traces-and-metrics-to-otel-collector_{context}"]
+= Sending traces and metrics to the OpenTelemetry collector
+
+Introductory paragraph(s).
+
+.Prerequisites
+
+* Any?
+
+.Procedure
+
+. Step 1.
+
+. Step 2.
+
+. Step 3.
+
+.Verification
+
+. Any verification step(s)?
+
+.Additional resources
+
+* link:
+* link:
