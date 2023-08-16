@@ -2,19 +2,20 @@
 //
 // * virt/virtual_machines/vm_networking/virt-attaching-vm-to-sriov-network.adoc
 
+:_content-type: PROCEDURE
 [id="virt-attaching-vm-to-sriov-network_{context}"]
-= Attaching a virtual machine to an SR-IOV network
+= Connecting a virtual machine to an SR-IOV network
 
-You can attach the virtual machine to the SR-IOV network by including the network details in the virtual machine configuration. 
+You can connect the virtual machine (VM) to the SR-IOV network by including the network details in the VM configuration.
 
 .Procedure
 
-. Include the SR-IOV network details in the `spec.domain.devices.interfaces` and `spec.networks` of the virtual machine configuration:
+. Include the SR-IOV network details in the `spec.domain.devices.interfaces` and `spec.networks` of the VM configuration:
 +
 [source,yaml]
 ----
 kind: VirtualMachine
-...
+# ...
 spec:
   domain:
     devices:
@@ -29,7 +30,7 @@ spec:
   - name: <nic1> <5>
     multus:
         networkName: <sriov-network> <6>
-...
+# ...
 ----
 <1> A unique name for the interface that is connected to the pod network.
 <2> The `masquerade` binding to the default pod network.

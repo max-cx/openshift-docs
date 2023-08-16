@@ -2,6 +2,7 @@
 //
 // * virt/virtual_machines/advanced_vm_management/virt-configuring-pci-passthrough.adoc
 
+:_content-type: PROCEDURE
 [id="virt-removing-pci-device-from-cluster_{context}"]
 = Removing PCI host devices from the cluster using the CLI
 
@@ -33,7 +34,7 @@ spec:
       resourceName: "nvidia.com/GV100GL_Tesla_V100"
     - pciDeviceSelector: "10DE:1EB8"
       resourceName: "nvidia.com/TU104GL_Tesla_T4"
-...
+# ...
 ----
 
 . Save your changes and exit the editor.

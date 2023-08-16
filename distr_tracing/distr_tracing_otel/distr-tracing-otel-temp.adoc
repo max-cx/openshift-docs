@@ -1,0 +1,9 @@
+:_content-type: PROCEDURE
+[id="distr-tracing-otel-temp"]
+= Temp
+include::_attributes/common-attributes.adoc[]
+:context: distr-tracing-otel-temp
+
+toc::[]
+
+include::modules/distr-tracing-otel-forwarding.adoc[leveloffset=+1]

@@ -1,0 +1,36 @@
+//Module included in the following assemblies:
+//
+//* distr_tracing_install/dist-tracing-tempo-removing.adoc
+
+:_content-type: PROCEDURE
+[id="distr-tracing-removing-tempo-instance_{context}"]
+= Removing a TempoStack instance by using the OpenShift web console
+
+You can remove a TempoStack instance in the OpenShift web console.
+
+WARNING: Removing a TempoStack instance that uses in-memory storage results in permanent loss of all related data.
+
+.Prerequisites
+
+* You are logged in to the OpenShift web console as a cluster administrator with the `cluster-admin` role.
+
+.Procedure
+
+////
+. Select the project where the {TempoOperator} is installed from the *Project:* menu.
+. Select the name of the project where the Operators are installed from the *Project* menu, for example, `openshift-operators`.
+. Use the *Project:* dropdown list to select the OpenShift project of the *TempoStack* instance.
++
+[TIP]
+====
+You can use the *Project:* dropdown list to select the OpenShift project of the *TempoStack* instance.
+====
+////
+
+. Go to *Operators* -> *Installed Operators* -> *{TempoOperator}* -> *Tempo*.
+
+. Click the Options menu {kebab} next to the TempoStack instance to be deleted and select *Delete Tempo*.
+
+. In the confirmation message, click *Delete*.
+
+. Optional: Remove the {TempoOperator}.

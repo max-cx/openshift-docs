@@ -1,12 +1,13 @@
+:_content-type: ASSEMBLY
 [id="installing-aws-government-region"]
-= Installing a cluster on AWS into a government or secret region
-include::modules/common-attributes.adoc[]
+= Installing a cluster on AWS into a government region
+include::_attributes/common-attributes.adoc[]
 :context: installing-aws-government-region
 
 toc::[]
 
 In {product-title} version {product-version}, you can install a cluster on
-Amazon Web Services (AWS) into a government or secret region. To configure the
+Amazon Web Services (AWS) into a government region. To configure the
 region, modify parameters in the `install-config.yaml` file before you
 install the cluster.
 
@@ -25,24 +26,33 @@ If you have an AWS profile stored on your computer, it must not use a temporary 
 
 include::modules/installation-aws-about-government-region.adoc[leveloffset=+1]
 
+include::modules/installation-prereq-aws-private-cluster.adoc[leveloffset=+1]
+
 include::modules/private-clusters-default.adoc[leveloffset=+1]
 include::modules/private-clusters-about-aws.adoc[leveloffset=+2]
 
 include::modules/installation-custom-aws-vpc.adoc[leveloffset=+1]
+include::modules/installation-aws-security-groups.adoc[leveloffset=+2]
 
 include::modules/cluster-entitlements.adoc[leveloffset=+1]
 
 include::modules/ssh-agent-using.adoc[leveloffset=+1]
 
+include::modules/installation-aws-marketplace-subscribe.adoc[leveloffset=+1]
+
 include::modules/installation-obtaining-installer.adoc[leveloffset=+1]
 
 include::modules/installation-initializing-manual.adoc[leveloffset=+1]
 include::modules/installation-configuration-parameters.adoc[leveloffset=+2]
-include::modules/installation-supported-aws-machine-types.adoc[leveloffset=+2]
+
+include::modules/installation-minimum-resource-requirements.adoc[leveloffset=+2]
+include::modules/installation-aws-tested-machine-types.adoc[leveloffset=+2]
+include::modules/installation-aws-arm-tested-machine-types.adoc[leveloffset=+2]
 include::modules/installation-aws-config-yaml.adoc[leveloffset=+2]
-include::modules/installation-aws-regions-with-no-ami.adoc[leveloffset=+2]
-include::modules/installation-aws-upload-custom-rhcos-ami.adoc[leveloffset=+2]
+
 include::modules/installation-configure-proxy.adoc[leveloffset=+2]
+
+include::modules/installation-applying-aws-security-groups.adoc[leveloffset=+2]
 
 include::modules/installation-launching-installer.adoc[leveloffset=+1]
 
@@ -52,12 +62,14 @@ include::modules/cli-logging-in-kubeadmin.adoc[leveloffset=+1]
 
 include::modules/logging-in-by-using-the-web-console.adoc[leveloffset=+1]
 
+[role="_additional-resources"]
 .Additional resources
 
 * See xref:../../web_console/web-console.adoc#web-console[Accessing the web console] for more details about accessing and understanding the {product-title} web console.
 
 include::modules/cluster-telemetry.adoc[leveloffset=+1]
 
+[role="_additional-resources"]
 .Additional resources
 
 * See xref:../../support/remote_health_monitoring/about-remote-health-monitoring.adoc#about-remote-health-monitoring[About remote health monitoring] for more information about the Telemetry service.
