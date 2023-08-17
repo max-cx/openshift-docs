@@ -106,6 +106,7 @@ metadata:
   namespace: otel-collector-example
 spec:
   mode: sidecar
+  serviceAccount: otel-collector-sidecar
   config: |
     receivers:
       jaeger:
