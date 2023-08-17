@@ -12,7 +12,7 @@ If the checkbox was not selected during installation, you can manually enable me
 
 .Procedure
 
-* Add the `openshift.io/cluster-monitoring: "true"` label in the `openshift-operators` namespace.
+* Add the `openshift.io/cluster-monitoring: "true"` label in the OpenShift project where the {TempoOperator} is installed, which is `openshift-tempo-operator` by default.
 
 .Verification
 
