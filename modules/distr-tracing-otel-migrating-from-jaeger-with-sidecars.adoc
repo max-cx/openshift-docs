@@ -88,10 +88,11 @@ metadata:
   name: otel-collector-sidecar
 subjects:
 - kind: ServiceAccount
-  name: otel-collector-sidecar
+  name: otel-collector-deployment
+  namespace: otel-collector-example
 roleRef:
   kind: ClusterRole
-  name: otel-collector-sidecar
+  name: otel-collector
   apiGroup: rbac.authorization.k8s.io
 ----
 
