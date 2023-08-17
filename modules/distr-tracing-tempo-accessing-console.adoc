@@ -25,16 +25,6 @@ The *Location* column displays the linked address for each route.
 
 . Click *Log In With OpenShift*.
 
-////
-.Procedure from Kiali console
-
-. Launch the Kiali console.
-
-. Click *Distributed Tracing* in the left navigation pane.
-
-. Click *Log In With OpenShift*.
-////
-
 .Procedure from the CLI
 
 . Log in to the {product-title} CLI as a user with the `cluster-admin` role. If you use {product-dedicated}, you must have an account with the `dedicated-admin` role.
