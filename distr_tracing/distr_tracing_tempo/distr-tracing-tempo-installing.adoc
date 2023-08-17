@@ -6,7 +6,13 @@ include::_attributes/common-attributes.adoc[]
 
 toc::[]
 
-include::modules/distr-tracing-tempo-install-about.adoc[leveloffset=+1]
+Installing the {TempoShortName} involves the following steps:
+
+* Setting up supported object storage.
+* Installing the {TempoOperator}.
+* Creating a Secret for the object storage credentials.
+* Creating a namespace for a TempoStack instance.
+* Creating a TempoStack custom resource to deploy at least one TempoStack instance.
 
 include::modules/distr-tracing-tempo-install-web-console.adoc[leveloffset=+1]
 
