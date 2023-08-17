@@ -38,7 +38,7 @@ include::modules/distr-tracing-tempo-deploy-default.adoc[leveloffset=+1]
 == Customizing your deployment
 
 ifdef::openshift-enterprise,openshift-dedicated[]
-For information about configuring the backend storage, see xref:../../storage/understanding-persistent-storage.adoc[Understanding persistent storage] and the appropriate configuration topic for your chosen storage option.
+For information about configuring the back-end storage, see xref:../../storage/understanding-persistent-storage.adoc[Understanding persistent storage] and the appropriate configuration topic for your chosen storage option.
 endif::[]
 
 include::modules/distr-tracing-tempo-config-default.adoc[leveloffset=+2]
