@@ -1,0 +1,152 @@
+// Module included in the following assemblies:
+//
+// * /distr_tracing/distr_tracing_otel/distr-tracing-otel-temp.adoc
+
+:_content-type: PROCEDURE
+[id="distr-tracing-otel-send-traces-and-metrics-to-otel-collector-no-sidecar_{context}"]
+
+== Sending traces and metrics to the OpenTelemetry collector without the sidecar injection
+
+.Procedure
+
+In this case, it is needed to configure manually the environment variables needed
+to send telemetry data to an OpenTelemetry Collector instance.
+
+
+First we need to create a Project where our OpenTelemtry Collector will be deployed.
+
+Create a Project where our workloads will be deployed.
+
+[source,yaml]
+----
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  name: observability
+----
+====
+
+Create a ServiceAccount.
+
+[source,yaml]
+----
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: otel-collector-deployment
+  namespace: observability
+----
+
+Grant permissions to the ServiceAccount for the k8sattributes and
+resourcedetection processors.
+
+[source,yaml]
+----
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: otel-collector
+rules:
+- apiGroups: ["", "config.openshift.io"]
+  resources: ["pods", "namespaces", "infrastructures", "infrastructures/status"]
+  verbs: ["get", "watch", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: otel-collector
+subjects:
+- kind: ServiceAccount
+  name: otel-collector-sidecar
+  namespace: observability
+roleRef:
+  kind: ClusterRole
+  name: otel-collector
+  apiGroup: rbac.authorization.k8s.io
+----
+
+Deploy the OpenTelemetry Collector as deployment
+
+[source,yaml]
+----
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel
+  namespace: observability
+spec:
+  mode: deployment
+  serviceAccount: otel-collector-deployment
+  config: |
+    receivers:
+      jaeger:
+        protocols:
+          grpc:
+          thrift_binary:
+          thrift_compact:
+          thrift_http:
+      opencensus:
+      otlp:
+        protocols:
+          grpc:
+          http:
+      zipkin:
+    processors:
+      batch:
+      k8sattributes:
+      memory_limiter:
+        check_interval: 1s
+        limit_percentage: 50
+        spike_limit_percentage: 30
+      resourcedetection:
+        detectors: [openshift]
+    exporters:
+      otlp:
+        endpoint: "tempo-simplest-distributor:4317" <1>
+        tls:
+          insecure: true
+    service:
+      pipelines:
+        traces:
+          receivers: [jaeger, opencensus, otlp, zipkin]
+          processors: [memory_limiter, k8sattributes, resourcedetection, batch]
+          exporters: [otlp]
+----
+<1> This points to the Gateway of a Tempo instance deployed by using the `<example>` Tempo Operator.
+
+
+After that, you will need to set the following environment variables in the container
+with your instrumented application.
+
+[options="header"]
+[cols="l, a, a"]
+|===
+|Name |Description |Default value
+|OTEL_SERVICE_NAME
+|Sets the value of the service.name resource attribute.
+|""
+
+|OTEL_EXPORTER_OTLP_ENDPOINT
+|A base endpoint URL for any signal type, with an optionally-specified port number.
+|https://localhost:4317
+
+|OTEL_EXPORTER_OTLP_CERTIFICATE
+|Path to the certificate file for TLS credentials of gRPC client.
+|https://localhost:4317
+
+|OTEL_TRACES_SAMPLER
+|Sampler to be used for trace.
+|parentbased_always_on
+
+|OTEL_EXPORTER_OTLP_PROTOCOL
+|Transport protocol for the OTLP exporter
+|grpc
+
+|OTEL_EXPORTER_OTLP_TIMEOUT
+|Maximum time the OTLP exporter will wait for each batch export.
+|10s
+
+|OTEL_EXPORTER_OTLP_INSECURE
+|Disable client transport security for gRPC requests. An https schema takes precedence over this configuration setting.
+|False
+|===

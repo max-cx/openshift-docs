@@ -1,0 +1,119 @@
+// Module included in the following assemblies:
+//
+// * /distr_tracing/distr_tracing_otel/distr-tracing-otel-temp.adoc
+
+:_content-type: PROCEDURE
+[id="distr-tracing-otel-send-traces-and-metrics-to-otel-collector_{context}"]
+= Sending traces and metrics to the OpenTelemetry collector
+
+
+.Prerequisites
+
+* {OTELName} is installed.
+
+== Sending traces and metrics to the OpenTelemetry collector using the sidecar injection
+
+.Procedure
+
+The {OTELName} Operator allows the sidecar injection into Deployment workloads. This configures
+automatically your instrumentation to send telemetry data to the OpenTelemetry Collector.
+
+Create a Project where our workloads will be deployed.
+====
+[source,yaml]
+----
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  name: observability
+----
+====
+
+Create a ServiceAccount.
+====
+[source,yaml]
+----
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: otel-collector-sidecar
+  namespace: observability
+----
+====
+
+The next step is to grant permissions to the ServiceAccount for the k8sattributes and
+resourcedetection processors.
+====
+[source,yaml]
+----
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: otel-collector
+rules:
+- apiGroups: ["", "config.openshift.io"]
+  resources: ["pods", "namespaces", "infrastructures", "infrastructures/status"]
+  verbs: ["get", "watch", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: otel-collector
+subjects:
+- kind: ServiceAccount
+  name: otel-collector-sidecar
+  namespace: observability
+roleRef:
+  kind: ClusterRole
+  name: otel-collector
+  apiGroup: rbac.authorization.k8s.io
+----
+====
+
+Deploy the OpenTelemetry Collector as a sidecar.
+====
+[source,yaml]
+----
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel
+  namespace: observability
+spec:
+  mode: sidecar
+  config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+          http:
+    processors:
+      batch:
+      memory_limiter:
+        check_interval: 1s
+        limit_percentage: 50
+        spike_limit_percentage: 30
+      resourcedetection:
+        detectors: [openshift]
+        timeout: 2s
+    exporters:
+      otlp:
+        endpoint: "tempo-<example>-gateway:8090" <1>
+        tls:
+          insecure: true
+    service:
+      pipelines:
+        traces:
+          receivers: [jaeger]
+          processors: [memory_limiter, resourcedetection, batch]
+          exporters: [otlp]
+----
+<1> This points to the Gateway of a Tempo instance deployed by using the `<example>` Tempo Operator.
+
+
+Now, you need to create your Deployment using the "otel-collector-sidecar"
+ServiceAccount.
+
+Add the 'sidecar.opentelemetry.io/inject: "true"' annotation to your deployment.
+This will inject all the needed environment variables to send data from your
+workloads to the OpenTelemetryCollector instance.
