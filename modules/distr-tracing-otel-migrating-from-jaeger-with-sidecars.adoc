@@ -11,7 +11,7 @@ The {OTELName} Operator supports sidecar injection into Deployment workloads, so
 .Prerequisites
 
 * The {JaegerName} is used on the cluster.
-* {OTELName} is installed.
+* The {OTELName} is installed.
 
 .Procedure
 
@@ -23,7 +23,7 @@ apiVersion: opentelemetry.io/v1alpha1
 kind: OpenTelemetryCollector
 metadata:
   name: otel
-  namespace: otel-collector-example
+  namespace: <otel-collector-namespace>
 spec:
   mode: sidecar
   config: |
@@ -55,7 +55,7 @@ spec:
           processors: [memory_limiter, resourcedetection, batch]
           exporters: [otlp]
 ----
-<1> This endpoint points to the Gateway of a Tempo instance deployed by using the `<example>` Tempo Operator.
+<1> This endpoint points to the Gateway of a TempoStack instance deployed by using the `<example>` {TempoOperator}.
 
 . Create a Service Account for running your application.
 +
