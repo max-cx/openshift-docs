@@ -1,0 +1,37 @@
+// Module included in the following assemblies:
+//
+// * distr_tracing_tempo/distr-tracing-tempo-installing.adoc
+
+:_content-type: PROCEDURE
+[id="distr-tracing-tempo-accessing-tempo-console-web-console_{context}"]
+= Accessing the Tempo console
+
+The installation process creates a route to the Tempo console.
+
+You can access the Tempo console by visiting its URL.
+
+You can get the URL in the OpenShift web console as follows.
+
+.Prerequisites
+
+//* {TempoName} or {SMProductName} is installed.
+* {TempoName} is installed, configured, and deployed.
+* You are logged in to the OpenShift web console as a cluster administrator with the `cluster-admin` role. For {product-dedicated}, you must have an account with the `dedicated-admin` role.
+
+.Procedure
+
+. Go to *Networking* -> *Routes*.
+
+. On the *Routes* page, select the control plane project from the *Namespace* menu.
++
+The *Location* column displays the linked address for each route.
++
+. Optional: Filter to the *tempo* route.
+
+. Select the *Location* route to open the Tempo console.
+
+. Select *Log In With OpenShift* to use your cluster administrator credentials for the OpenShift web console.
+
+. Optional: If you have added services to the service mesh and have generated traces, you can use the filters and *Find Traces* button to search your trace data.
++
+NOTE: If you are validating the console installation, there is no trace data to display.
