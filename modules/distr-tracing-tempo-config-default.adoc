@@ -115,7 +115,7 @@ spec:
 |
 |===
 
-The following example YAML is the minimum required to create a {TempoName} deployment using the default settings.
+The following YAML example is the required minimum for creating a {TempoShortName} deployment with the default settings. This example assumes that  you have deployed one of the supported object storage backends and created the Secret with credentials for access to the object storage.
 
 .Example minimum required dist-tracing-all-in-one.yaml
 [source,yaml]
