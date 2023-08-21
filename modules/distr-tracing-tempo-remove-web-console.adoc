@@ -8,8 +8,6 @@
 
 You can remove a TempoStack instance in the OpenShift web console.
 
-WARNING: Removing a TempoStack instance that uses in-memory storage results in permanent loss of all related data.
-
 .Prerequisites
 
 * You are logged in to the OpenShift web console as a cluster administrator with the `cluster-admin` role.

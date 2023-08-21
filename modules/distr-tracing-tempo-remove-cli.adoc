@@ -8,8 +8,6 @@
 
 You can remove a TempoStack instance on the command line.
 
-WARNING: Removing a TempoStack instance that uses in-memory storage results in permanent loss of all related data.
-
 .Prerequisites
 
 * An active OpenShift CLI (`oc`) session by a cluster administrator with the `cluster-admin` role.
