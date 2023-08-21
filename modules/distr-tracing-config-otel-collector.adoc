@@ -238,6 +238,44 @@ Zipkin receiver ingests data in the Zipkin V1 and V2 formats.
 <1> The Zipkin HTTP endpoint. If omitted the default `+0.0.0.0:9411+` is used.
 <2> The TLS server side configuration. See the OTLP receiver configuration section for more details.
 
+
+=== Processors
+
+==== Resource Detection Processor.
+
+Resource Detection processor is designed to identify host resource details in alignment with OpenTelemetry's resource semantic standards.
+It can then either add or replace the resource values in telemetry data using this detected information.
+
+.Needed permissions to use the Resource Detection Processor in OpenShift.
+[source,yaml]
+----
+kind: ClusterRole
+metadata:
+  name: otel-collector
+rules:
+- apiGroups: ["config.openshift.io"]
+  resources: ["infrastructures", "infrastructures/status"]
+  verbs: ["get", "watch", "list"]
+----
+
+* Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
+* Supported signals: traces, metrics
+
+.OpenTelemetry collector using the resource detection processor.
+[source,yaml]
+----
+  config: |
+    processor:
+      resourcedetection:
+        detectors: [openshift]
+    service:
+      pipelines:
+        traces:
+          processors: [resourcedetection]
+        metrics:
+          processors: [resourcedetection]
+----
+
 === Exporters
 
 ==== OTLP Exporter
