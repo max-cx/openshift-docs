@@ -4,7 +4,7 @@
 
 :_content-type: PROCEDURE
 [id="distr-tracing-deploy-default-cli_{context}"]
-== Deploying the {DTShortName} default strategy from the CLI
+= Deploying the {DTShortName} default strategy from the CLI
 
 Follow this procedure to create an instance of {TempoShortName} from the command line.
 
