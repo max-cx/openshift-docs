@@ -4,7 +4,7 @@
 
 :_content-type: PROCEDURE
 [id="distr-tracing-otel-migrating-from-jaeger-without-sidecars_{context}"]
-= (Temporary title) Migrating from {JaegerName} to {OTELName} without sidecars
+= Migrating from the {JaegerName} to the {OTELName} without sidecars
 
 .Prerequisites
 
@@ -36,7 +36,7 @@ metadata:
   namespace: observability
 ----
 
-. Create a ClusterRole for some permissions needed by some processors.
+. Create a ClusterRole for setting the required permissions for the processors.
 +
 [source,yaml]
 ----
@@ -52,7 +52,7 @@ rules:
   verbs: ["get", "watch", "list"]
 ----
 
-. Create a ClusterRoleBinding to give those permissions to the Service Account.
+. Create a ClusterRoleBinding to set the permissions for the Service Account.
 +
 [source,yaml]
 ----
@@ -72,7 +72,7 @@ roleRef:
 
 . Create the OpenTelemetry Collector instance.
 +
-NOTE: This collector will be exporting traces to a Tempo instance. Ensure you create your Tempo instance using the Red Hat Tempo Operator and place here the correct endpoint.
+NOTE: This collector will be exporting traces to a Tempo instance. You must create your Tempo instance using the Red Hat Tempo Operator and place here the correct endpoint.
 +
 ----
 apiVersion: opentelemetry.io/v1alpha1
