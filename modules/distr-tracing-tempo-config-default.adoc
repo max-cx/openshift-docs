@@ -11,33 +11,23 @@ The Tempo custom resource (CR) defines the architecture and settings to be used 
 .Tempo generic YAML example
 [source,yaml]
 ----
-apiVersion: tempotracing.io/v1
-kind: Tempo
+apiVersion: tempo.grafana.com/v1alpha1
+kind: TempoStack
 metadata:
   name: name
 spec:
-  strategy: <deployment_strategy>
-  allInOne:
-    options: {}
-    resources: {}
-  agent:
-    options: {}
-    resources: {}
-  collector:
-    options: {}
-    resources: {}
-  sampling:
-    options: {}
-  storage:
-    type:
-    options: {}
-  query:
-    options: {}
-    resources: {}
-  ingester:
-    options: {}
-    resources: {}
-  options: {}
+  storage: {}
+  resources: {}
+  storageSize: 200M
+  replicationFactor: 1
+  retention: {}
+  template:
+      distributor:{}
+      ingester: {}
+      compactor: {}
+      querier: {}
+      queryFrontend: {}
+      gateway: {}
 ----
 
 .Tempo parameters
@@ -67,31 +57,25 @@ spec:
 
 |`spec:`
 |Specification for the object to be created.
-|Contains all of the configuration parameters for your {TempoShortName} instance. When a common definition for all Tempo components is required, it is defined under the `spec` node. When the definition relates to an individual component, it is placed under the `spec/<component>` node.
+|Contains all of the configuration parameters for your {TempoShortName} instance. When a common definition for all Tempo components is required, it is defined under the `spec` node. When the definition relates to an individual component, it is placed under the `spec/template/<component>` node.
 |N/A
 
-|`strategy:`
-|Tempo deployment strategy
-|`allInOne`, `production`, or `streaming`
-|`allInOne`
+|`resources:`
+|Tempo stack assigned resources
 
-|`allInOne:`
-|Because the `allInOne` image deploys the Agent, Collector, Query, Ingester, and Tempo UI in a single pod, configuration for this deployment must nest component configuration under the `allInOne` parameter.
-|
-|
 
-|`agent:`
-|Configuration options that define the Agent.
+|`storageSize:`
+|Storage size for ingester PVCs
 |
 |
 
-|`collector:`
-|Configuration options that define the Tempo Collector.
+|`replicationFactor:`
+|Configuration for replication factor
 |
 |
 
-|`sampling:`
-|Configuration options that define the sampling strategies for tracing.
+|`retention:`
+|Configuration options retention of the traces.
 |
 |
 
@@ -100,13 +84,33 @@ spec:
 |
 |
 
-|`query:`
-|Configuration options that define the Query service.
+|`template.distributor:`
+|Configuration options that tempo distributor
 |
 |
 
-|`ingester:`
-|Configuration options that define the Ingester service.
+|`template.ingester:`
+|Configuration options that tempo ingester
+|
+|
+
+|`template.compactor:`
+|Configuration options that tempo compactor
+|
+|
+
+|`template.querier:`
+|Configuration options that tempo querier
+|
+|
+
+|`template.queryFrontend:`
+|Configuration options that tempo query-frontend
+|
+|
+
+|`template.gateway:`
+|Configuration options that tempo gateway
 |
 |
 |===
@@ -116,8 +120,24 @@ The following example YAML is the minimum required to create a {TempoName} deplo
 .Example minimum required dist-tracing-all-in-one.yaml
 [source,yaml]
 ----
-apiVersion: tempotracing.io/v1
-kind: Tempo
+apiVersion: tempo.grafana.com/v1alpha1
+kind: TempoStack
 metadata:
-  name: tempo-all-in-one-inmemory
+  name: simplest
+spec:
+  storage:
+    secret:
+      name: minio
+      type: s3
+  resources:
+    total:
+      limits:
+        memory: 2Gi
+        cpu: 2000m
+  template:
+    queryFrontend:
+      jaegerQuery:
+        enabled: true
+        ingress:
+          type: route
 ----
