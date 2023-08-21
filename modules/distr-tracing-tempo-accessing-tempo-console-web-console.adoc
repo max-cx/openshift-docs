@@ -4,7 +4,7 @@
 
 :_content-type: PROCEDURE
 [id="distr-tracing-tempo-accessing-tempo-console-web-console_{context}"]
-= Accessing the Tempo console
+= Accessing the Tempo console from the OpenShift web console
 
 The installation process creates a route to the Tempo console.
 
