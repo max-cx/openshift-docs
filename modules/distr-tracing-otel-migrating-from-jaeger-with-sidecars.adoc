@@ -6,6 +6,8 @@
 [id="distr-tracing-otel-migrating-from-jaeger-with-sidecars_{context}"]
 = (Temporary title) Migrating from {JaegerName} to {OTELName} with sidecars
 
+The {OTELName} Operator can inject sidecars into Deployment workloads.
+
 .Prerequisites
 
 * {JaegerName} is used on the cluster.
@@ -13,10 +15,9 @@
 
 .Procedure
 
-The {OTELName} Operator can inject sidecars into Deployment workloads.
-
-Configure OpenTelemetry Collector as sidecar
-
+. Configure OpenTelemetry Collector as a sidecar.
++
+[source,yaml]
 ----
 apiVersion: opentelemetry.io/v1alpha1
 kind: OpenTelemetryCollector
@@ -56,8 +57,9 @@ spec:
 ----
 <1> This points to the Gateway of a Tempo instance deployed by using the `<example>` Tempo Operator.
 
-Create a Service Account for running your application:
-
+. Create a Service Account for running your application.
++
+[source,yaml]
 ----
 apiVersion: v1
 kind: ServiceAccount
@@ -65,8 +67,9 @@ metadata:
   name: otel-collector-sidecar
 ----
 
-Create a ClusterRole for the permissions needed by some processors
-
+. Create a ClusterRole for the permissions needed by some processors.
++
+[source,yaml]
 ----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -79,8 +82,9 @@ rules:
   verbs: ["get", "watch", "list"]
 ----
 
-Create a ClusterRoleBinding to give those permissions to the Service Account
-
+. Create a ClusterRoleBinding to give those permissions to the Service Account.
++
+[source,yaml]
 ----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -96,8 +100,9 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ----
 
-Deploy the OpenTelemetry Collector as sidecar
-
+. Deploy the OpenTelemetry Collector as a sidecar.
++
+[source,yaml]
 ----
 apiVersion: opentelemetry.io/v1alpha1
 kind: OpenTelemetryCollector
@@ -137,12 +142,12 @@ spec:
           exporters: [otlp]
 ----
 
-Remove the injected Jaeger Agent from your application
+. Remove the injected Jaeger Agent from your application.
 
-To remove the automatic sidecar injection from the Jaeger Operator, you need to remove the "sidecar.jaegertracing.io/inject": "true" annotation from your Deployment.
+. To remove the automatic sidecar injection from the Jaeger Operator, you need to remove the "sidecar.jaegertracing.io/inject": "true" annotation from your Deployment.
 Enable automatic injection of the OpenTelemetry sidecar
 
-To enable automatic injection of the OpenTelemetry sidecar, add the sidecar.opentelemetry.io/inject: "true" annotation to the .spec.template.metadata.annotations field of your Deployment.
+. To enable automatic injection of the OpenTelemetry sidecar, add the sidecar.opentelemetry.io/inject: "true" annotation to the .spec.template.metadata.annotations field of your Deployment.
 Use the created Service Account for your deployment
 
-Use the Service Account we created before (otel-collector-sidecar) for the deployment of your application. This will allow the processors to get the correct information and add it to your traces.
+. Use the Service Account we created before (otel-collector-sidecar) for the deployment of your application. This will allow the processors to get the correct information and add it to your traces.

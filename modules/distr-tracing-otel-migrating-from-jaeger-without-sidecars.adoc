@@ -9,14 +9,15 @@
 .Prerequisites
 
 * Existing instrumentation of applications uses {JaegerName} for tracing.
-* {OTELName} is installed.
+* The {OTELName} is installed.
 
 .Procedure
 
-Configure OpenTelemetry Collector deployment
+. Configure OpenTelemetry Collector deployment.
 
-Create the OpenShift project where the OpenTelemetry Collector will be deployed
-
+. Create the OpenShift project where the OpenTelemetry Collector will be deployed.
++
+[source,yaml]
 ----
 apiVersion: project.openshift.io/v1
 kind: Project
@@ -24,8 +25,9 @@ metadata:
   name: observability
 ----
 
-Create a Service Account for running the OpenTelemetry Collector instance:
-
+. Create a Service Account for running the OpenTelemetry Collector instance.
++
+[source,yaml]
 ----
 apiVersion: v1
 kind: ServiceAccount
@@ -34,8 +36,9 @@ metadata:
   namespace: observability
 ----
 
-Create a ClusterRole for some permissions needed by some processors
-
+. Create a ClusterRole for some permissions needed by some processors.
++
+[source,yaml]
 ----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -49,8 +52,9 @@ rules:
   verbs: ["get", "watch", "list"]
 ----
 
-Create a ClusterRoleBinding to give those permissions to the Service Account
-
+. Create a ClusterRoleBinding to give those permissions to the Service Account.
++
+[source,yaml]
 ----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -66,10 +70,10 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ----
 
-Create the OpenTelemetry Collector instance
-
-Note this collector will be exporting traces to a Tempo instance. Ensure you create your Tempo instance using the Red Hat Tempo Operator and place here the correct endpoint.
-
+. Create the OpenTelemetry Collector instance.
++
+NOTE: This collector will be exporting traces to a Tempo instance. Ensure you create your Tempo instance using the Red Hat Tempo Operator and place here the correct endpoint.
++
 ----
 apiVersion: opentelemetry.io/v1alpha1
 kind: OpenTelemetryCollector
@@ -109,14 +113,14 @@ spec:
           exporters: [otlp]
 ----
 
-Point your tracing endpoint to the OpenTelemetry Operator
+. Point your tracing endpoint to the OpenTelemetry Operator.
 
-If you are exporting your traces directly from your application to Jaeger, you will need to change the API endpoint from the Jaeger endpoint to the OpenTelemetry Collector endpoint.
-
-For instance, if you are using Golang and exporting your traces using the jaegerexporter, you can be using something like this:
-
+. If you are exporting your traces directly from your application to Jaeger, you will need to change the API endpoint from the Jaeger endpoint to the OpenTelemetry Collector endpoint.
++
+For example, if you are using Golang and exporting your traces using the jaegerexporter, you can be using something like this:
++
 ----
 exp, err := jaeger.New(jaeger.WithCollectorEndpoint(jaeger.WithEndpoint(url)))
 ----
-
-url needs to point now to the OpenTelemetry Collector API endpoint.
++
+The URL must point to the OpenTelemetry Collector API endpoint.
