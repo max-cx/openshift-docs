@@ -4,9 +4,9 @@
 
 :_content-type: PROCEDURE
 [id="distr-tracing-otel-migrating-from-jaeger-with-sidecars_{context}"]
-= (Temporary title) Migrating from the {JaegerName} to the {OTELName} with sidecars
+= Migrating from the {JaegerName} to the {OTELName} with sidecars
 
-The {OTELName} Operator can inject sidecars into Deployment workloads.
+The {OTELName} Operator supports sidecar injection into Deployment workloads, so you can migrate from a {JaegerName} sidecar to a {OTELName} sidecar.
 
 .Prerequisites
 

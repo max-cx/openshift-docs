@@ -6,9 +6,8 @@ include::_attributes/common-attributes.adoc[]
 
 toc::[]
 
-This migration guide is intended for customers who have already instrumented their applications using Jaeger for distributed tracing and are now looking to transition to OpenTelemetry. OpenTelemetry is an open-source project that provides a set of APIs, libraries, agents, and instrumentation to facilitate observability in distributed systems. Fortunately, you don't need to change the SDKs in your applications, as the OpenTelemetry Collector can ingest the Jaeger protocol. This guide will walk you through the process of configuring the OpenTelemetry Collector and your applications to report traces seamlessly.
+If you are already using Jaeger for distributed tracing of your applications, you can migrate to the {OTELName}. OpenTelemetry is an open-source project that provides a set of APIs, libraries, agents, and instrumentation to facilitate observability in distributed systems. The OpenTelemetry Collector can ingest the Jaeger protocol, so you do not need to change the SDKs in your applications. Migration from the {JaegerName} to the {OTELName} requires configuring the OpenTelemetry Collector and your applications to report traces seamlessly. You can migrate sidecar and sidecarless deployments.
 
 include::modules/distr-tracing-otel-migrating-from-jaeger-with-sidecars.adoc[leveloffset=+1]
 
 include::modules/distr-tracing-otel-migrating-from-jaeger-without-sidecars.adoc[leveloffset=+1]
-

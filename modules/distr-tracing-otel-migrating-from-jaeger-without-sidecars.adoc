@@ -6,6 +6,8 @@
 [id="distr-tracing-otel-migrating-from-jaeger-without-sidecars_{context}"]
 = Migrating from the {JaegerName} to the {OTELName} without sidecars
 
+You can migrate from the {JaegerName} to the {OTELName} without sidecar deployment.
+
 .Prerequisites
 
 * Existing instrumentation of applications uses {JaegerName} for tracing.
