@@ -8,11 +8,6 @@
 
 The custom resource definition (CRD) defines the configuration used when you deploy an instance of {DTProductName}. The default CR is configured with minimal resources to ensure that you can successfully install it on a default {product-title} installation. You can use this default configuration to create a basic {TempoName} instance, or you can define your own custom resource file.
 
-[NOTE]
-====
-In-memory storage is not persistent. If the Tempo pod shuts down, restarts, or is replaced, your trace data will be lost. For persistent storage, you must use the `production` or `streaming` strategies, which use Elasticsearch as the default storage.
-====
-
 .Prerequisites
 
 * The {TempoName} Operator has been installed.
