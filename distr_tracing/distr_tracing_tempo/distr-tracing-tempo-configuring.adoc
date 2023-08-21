@@ -32,7 +32,9 @@ spec:
         enabled: true
 ----
 
-include::modules/distr-tracing-tempo-deploy-default.adoc[leveloffset=+1]
+include::modules/distr-tracing-tempo-deploy-default-web-console.adoc[leveloffset=+1]
+
+include::modules/distr-tracing-tempo-deploy-default-cli.adoc[leveloffset=+1]
 
 [id="customizing-your-tempo-deployment"]
 == Customizing your deployment

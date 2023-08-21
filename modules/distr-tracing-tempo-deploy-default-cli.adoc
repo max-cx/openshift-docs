@@ -3,47 +3,6 @@
 // * distr_tracing_tempo/distr-tracing-tempo-configuring.adoc
 
 :_content-type: PROCEDURE
-[id="distr-tracing-tempo-deploy-default_{context}"]
-= Deploying the {DTShortName} default strategy from the web console
-
-The custom resource definition (CRD) defines the configuration used when you deploy an instance of {DTProductName}. The default CR is configured with minimal resources to ensure that you can successfully install it on a default {product-title} installation. You can use this default configuration to create a basic {TempoName} instance, or you can define your own custom resource file.
-
-.Prerequisites
-
-* The {TempoName} Operator has been installed.
-* You have reviewed the instructions for how to customize the deployment.
-* You have access to the cluster as a user with the `cluster-admin` role.
-* Supported Object Store (AWS S3, Google Cloud Storage, Azure, Minio, OpenShift Data Foundation)
-
-.Procedure
-
-. Log in to the {product-title} web console as a user with the `cluster-admin` role.
-
-. Create a new project, for example `tracing-system`.
-
-.. Navigate to *Home* -> *Projects*.
-
-.. Click *Create Project*.
-
-.. Enter `tracing-system` in the *Name* field.
-
-.. Click *Create*.
-
-. Navigate to *Operators* -> *Installed Operators*.
-
-. If necessary, select `tracing-system` from the *Project* menu. You may have to wait a few moments for the Operators to be copied to the new project.
-
-. Click the {TempoName} Operator. On the *Details* tab, under *Provided APIs*, the Operator provides a single link.
-
-. Under *Tempo*, click *Create Instance*.
-
-. On the *Create Tempo* page, to install using the defaults, click *Create* to create the {TempoShortName} instance.
-
-. On the *Tempos* page, click the name of the {TempoShortName} instance, for example, `example`.
-
-. On the *Tempo Details* page, click the *Resources* tab. Wait until the pod has a status of "Running" before continuing.
-
-
 [id="distr-tracing-deploy-default-cli_{context}"]
 == Deploying the {DTShortName} default strategy from the CLI
 
