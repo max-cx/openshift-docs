@@ -23,7 +23,7 @@ You can get the URL in the *Administrator* view of the OpenShift web console as 
 
 . kbd:[Ctrl+F] to search for `tempo`.
 
-. Open the *Location* URL for the Tempo console.
+. In the *Location* column, open the URL to the Tempo console.
 
 . Select *Log In With OpenShift* to use your cluster administrator credentials for the OpenShift web console.
 
