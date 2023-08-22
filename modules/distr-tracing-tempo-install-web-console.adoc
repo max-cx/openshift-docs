@@ -85,7 +85,7 @@ spec:
             termination: edge
           type: route
 ----
-<1> The value of `name` in the `metadata` of the Secret.
+<1> The value of the `name` in the `metadata` of the Secret.
 <2> The accepted values are `azure` for Azure Blob Storage, `gcs` for Google Cloud Storage, and `s3` for Amazon S3 or MinIO or Red Hat OpenShift Data Foundation.
 +
 .TempoStack CR for AWS S3 and MinIO storage
