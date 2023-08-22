@@ -14,7 +14,6 @@ You can get the URL in the *Administrator* view of the OpenShift web console as 
 
 .Prerequisites
 
-* {SMProductName} or {DTProductName} is installed.
 * The {TempoName} is installed, configured, and deployed.
 * You are logged in to the OpenShift web console as a cluster administrator with the `cluster-admin` role. For {product-dedicated}, you must have an account with the `dedicated-admin` role.
 
@@ -28,6 +27,6 @@ You can get the URL in the *Administrator* view of the OpenShift web console as 
 
 . Select *Log In With OpenShift* to use your cluster administrator credentials for the OpenShift web console.
 
-. If you have added services to the service mesh and have generated traces, you can use the filters and the *Find Traces* button to search your trace data.
-+
-NOTE: The Tempo console initially shows no trace data to display following the Tempo console installation.
+NOTE: The Tempo console initially shows no trace data following the Tempo console installation.
+
+TIP: If you have added services to the service mesh and have generated traces, you can use the filters and the *Find Traces* button to search your trace data.
