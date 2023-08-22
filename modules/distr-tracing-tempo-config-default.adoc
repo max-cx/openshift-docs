@@ -122,7 +122,7 @@ spec:
 
 .Minimum required configuration
 ====
-This example shows the required minimum for creating a {TempoShortName} deployment with the default settings. This example assumes that you have deployed one of the supported object storage back ends and created the Secret with credentials for access to the object storage.
+The following is the required minimum for creating a {TempoShortName} deployment with the default settings:
 
 [source,yaml]
 ----
@@ -131,7 +131,7 @@ kind: TempoStack
 metadata:
   name: simplest
 spec:
-  storage:
+  storage: <1>
     secret:
       name: minio
       type: s3
@@ -147,4 +147,5 @@ spec:
         ingress:
           type: route
 ----
+<1> This section specifies the deployed object storage back end, which requires a created Secret with credentials for access to the object storage.
 ====
