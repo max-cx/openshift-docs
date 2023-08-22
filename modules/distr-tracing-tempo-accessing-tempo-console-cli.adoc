@@ -14,7 +14,8 @@ You can get the URL on the command line as follows.
 
 .Prerequisites
 
-* To access the Tempo console you must have either {SMProductName} or {DTProductName} installed, and {TempoName} installed, configured, and deployed.
+* {SMProductName} or {DTProductName} is installed.
+* The {TempoName} installed, configured, and deployed.
 * An active OpenShift CLI (`oc`) session by a cluster administrator with the `cluster-admin` role.
 +
 [TIP]
@@ -42,6 +43,6 @@ $ export TEMPO_URL=$(oc get route -n <control_plane_namespace> tempo -o jsonpath
 
 . Log in using your cluster administrator credentials for the OpenShift web console.
 
-. If you have added services to the service mesh and have generated traces, you can use the filters and *Find Traces* button to search your trace data.
+. If you have added services to the service mesh and have generated traces, you can use the filters and the *Find Traces* button to search your trace data.
 +
-NOTE: If you are validating the console installation, there is no trace data to display.
+NOTE: The Tempo console initially shows no trace data to display following the Tempo console installation.
