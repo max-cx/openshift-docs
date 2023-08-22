@@ -22,11 +22,9 @@ You can get the URL in the *Administrator* view of the OpenShift web console as 
 
 . Go to *Networking* -> *Routes*.
 
-. On the *Routes* page, select the control plane project from the *Namespace* menu.
-+
-TIP: You can filter to the *tempo* route.
+. kbd:[Ctrl+F] to search for `tempo`.
 
-. Select the *Location* route for the Tempo console.
+. Open the *Location* URL for the Tempo console.
 
 . Select *Log In With OpenShift* to use your cluster administrator credentials for the OpenShift web console.
 
