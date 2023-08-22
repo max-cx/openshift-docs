@@ -8,8 +8,9 @@
 
 The Tempo custom resource (CR) defines the architecture and settings to be used when creating the {TempoShortName} resources. You can modify these parameters to customize your {TempoShortName} implementation to your business needs.
 
-.Tempo generic YAML example
+.Generic Tempo YAML
 [source,yaml]
+====
 ----
 apiVersion: tempo.grafana.com/v1alpha1
 kind: TempoStack
@@ -29,6 +30,7 @@ spec:
       queryFrontend: {}
       gateway: {}
 ----
+====
 
 .Tempo parameters
 [options="header"]
@@ -46,78 +48,79 @@ spec:
 |
 
 |`metadata:`
-|Data that helps uniquely identify the object, including a `name` string, `UID`, and optional `namespace`.
+|Data that uniquely identifies the object, including a `name` string, `UID`, and optional `namespace`.
 |
 |{product-title} automatically generates the `UID` and completes the `namespace` with the name of the project where the object is created.
 
 |`name:`
 |Name for the object.
-|The name of your {TempoShortName} instance.
+|Name of your TempoStack instance.
 |`tempo-all-in-one-inmemory`
 
 |`spec:`
 |Specification for the object to be created.
-|Contains all of the configuration parameters for your {TempoShortName} instance. When a common definition for all Tempo components is required, it is defined under the `spec` node. When the definition relates to an individual component, it is placed under the `spec/template/<component>` node.
+|Contains all of the configuration parameters for your TempoStack instance. When a common definition for all Tempo components is required, it is defined under the `spec` node. When the definition relates to an individual component, it is placed under the `spec/template/<component>` node.
 |N/A
 
 |`resources:`
-|Tempo stack assigned resources
+|Resources assigned to the TempoStack.
 
 
 |`storageSize:`
-|Storage size for ingester PVCs
+|Storage size for ingester PVCs.
 |
 |
 
 |`replicationFactor:`
-|Configuration for replication factor
+|Configuration for the replication factor.
 |
 |
 
 |`retention:`
-|Configuration options retention of the traces.
+|Configuration options for retention of traces.
 |
 |
 
 |`storage:`
-|Configuration options that define the storage. All storage-related options must be placed under `storage`, rather than under the `allInOne` or other component options.
+|Configuration options that define the storage. All storage-related options must be placed under `storage` and not under the `allInOne` or other component options.
 |
 |
 
 |`template.distributor:`
-|Configuration options that tempo distributor
+|Configuration options for the Tempo `distributor`.
 |
 |
 
 |`template.ingester:`
-|Configuration options that tempo ingester
+|Configuration options for the Tempo `ingester`.
 |
 |
 
 |`template.compactor:`
-|Configuration options that tempo compactor
+|Configuration options for the Tempo `compactor`.
 |
 |
 
 |`template.querier:`
-|Configuration options that tempo querier
+|Configuration options for the Tempo `querier`.
 |
 |
 
 |`template.queryFrontend:`
-|Configuration options that tempo query-frontend
+|Configuration options for the Tempo `query-frontend`.
 |
 |
 
 |`template.gateway:`
-|Configuration options that tempo gateway
+|Configuration options for the Tempo `gateway`.
 |
 |
 |===
 
 The following YAML example is the required minimum for creating a {TempoShortName} deployment with the default settings. This example assumes that  you have deployed one of the supported object storage backends and created the Secret with credentials for access to the object storage.
 
-.Example minimum required dist-tracing-all-in-one.yaml
+.Minimum required YAML
+====
 [source,yaml]
 ----
 apiVersion: tempo.grafana.com/v1alpha1
@@ -141,3 +144,4 @@ spec:
         ingress:
           type: route
 ----
+====

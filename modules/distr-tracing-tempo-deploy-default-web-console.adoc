@@ -6,7 +6,7 @@
 [id="distr-tracing-tempo-deploy-default_{context}"]
 = Deploying the {DTShortName} default strategy from the web console
 
-The custom resource definition (CRD) defines the configuration used when you deploy an instance of {DTProductName}. The default CR is configured with minimal resources to ensure that you can successfully install it on a default {product-title} installation. You can use this default configuration to create a basic {TempoName} instance, or you can define your own custom resource file.
+The custom resource definition (CRD) defines the configuration used when you deploy an instance of the {DTProductName}. The default CR is configured with minimal resources to ensure that you can successfully install it on a default {product-title} installation. You can use this default configuration to create a basic TempoStack instance, or you can define your own custom resource file.
 
 .Prerequisites
 

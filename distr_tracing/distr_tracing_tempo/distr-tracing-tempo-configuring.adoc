@@ -8,9 +8,10 @@ toc::[]
 
 The {TempoName} Operator uses a custom resource definition (CRD) file that defines the architecture and configuration settings to be used when creating and deploying the {TempoShortName} resources. You can either install the default configuration or modify the file to better suit your business requirements.
 
-{TempoName} has predefined deployment strategies. You specify a deployment strategy in the custom resource file. When you create a {TempoShortName} instance the Operator uses this configuration file to create the objects necessary for the deployment.
+The {TempoName} has predefined deployment strategies. You specify a deployment strategy in the custom resource file. When you create a TempoStack instance, the Operator uses this configuration file to create the objects necessary for the deployment.
 
 .Tempo custom resource file showing deployment strategy
+====
 [source,yaml]
 ----
 apiVersion: tempo.grafana.com/v1alpha1
@@ -31,6 +32,7 @@ spec:
         # Enable the Jaeger UI
         enabled: true
 ----
+====
 
 include::modules/distr-tracing-tempo-deploy-default-web-console.adoc[leveloffset=+1]
 
@@ -49,9 +51,9 @@ include::modules/distr-tracing-tempo-config-storage.adoc[leveloffset=+2]
 
 include::modules/distr-tracing-tempo-config-query-frontend.adoc[leveloffset=+2]
 
-== Setting up monitoring for {TempoShortName}
+== Setting up monitoring for the {TempoShortName}
 
-The {TempoOperator} supports monitoring and alerting of each TempoStack component (distributor, ingester, etc.) and exposes upgrade and operational metrics about the operator itself.
+The {TempoOperator} supports monitoring and alerting of each TempoStack component (distributor, ingester, etc.) and exposes upgrade and operational metrics about the Operator itself.
 
 include::modules/distr-tracing-tempo-configuring-tempostack-metrics-and-alerts.adoc[leveloffset=+2]
 
