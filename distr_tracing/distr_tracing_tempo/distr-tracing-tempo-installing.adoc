@@ -16,11 +16,7 @@ Installing the {TempoShortName} involves the following steps:
 
 include::modules/distr-tracing-tempo-install-web-console.adoc[leveloffset=+1]
 
-include::modules/distr-tracing-tempo-accessing-tempo-console-web-console.adoc[leveloffset=+1]
-
 include::modules/distr-tracing-tempo-install-cli.adoc[leveloffset=+1]
-
-include::modules/distr-tracing-tempo-accessing-tempo-console-cli.adoc[leveloffset=+1]
 
 [role="_additional-resources"]
 [id="additional-resources_dist-tracing-tempo-installing"]

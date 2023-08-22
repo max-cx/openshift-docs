@@ -10,7 +10,7 @@ You can install the {TempoShortName} by using the *Administrator* view of the Op
 
 .Prerequisites
 
-* You are logged in to the OpenShift web console as a cluster administrator with the `cluster-admin` role.
+* You are logged in to the OpenShift web console as a cluster administrator with the `cluster-admin` role. For {product-dedicated}, you must have an account with the `dedicated-admin` role.
 
 * You are using a supported provider of object storage: link:https://www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation[Red Hat OpenShift Data Foundation], link:https://min.io/[MinIO], link:https://aws.amazon.com/s3/[Amazon S3], link:https://azure.microsoft.com/en-us/products/storage/blobs/[Azure Blob Storage], link:https://cloud.google.com/storage/[Google Cloud Storage].
 
@@ -132,3 +132,13 @@ The stack deployed in this example is configured to receive Jaeger Thrift over H
 . Go to *Workloads* -> *Pods* to verify that all the TempoStack component pods are running.
 
 . Go to *Networking* -> *Route* to get the Route for the TempoStack query UI.
+
+. Access the Tempo console:
+
+.. Go to *Networking* -> *Routes* and kbd:[Ctrl+F] to search for `tempo`.
+
+.. In the *Location* column, open the URL to access the Tempo console.
+
+.. Select *Log In With OpenShift* to use your cluster administrator credentials for the OpenShift web console.
++
+NOTE: The Tempo console initially shows no trace data following the Tempo console installation.

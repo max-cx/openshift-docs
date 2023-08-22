@@ -189,8 +189,17 @@ $ oc get tempostacks.tempo.grafana.com simplest -o yaml
 $ oc get pods
 ----
 
-. Get the Route for the TempoStack query UI.
+. Access the Tempo console:
+
+.. Query the route details:
 +
+[source,terminal]
 ----
-$ oc get route -n <openshift_project_of_tempostack_instance>
+$ export TEMPO_URL=$(oc get route -n <control_plane_namespace> tempo -o jsonpath='{.spec.host}')
 ----
+
+.. Open `\https://<route_from_previous_step>` in a web browser.
+
+.. Log in using your cluster administrator credentials for the OpenShift web console.
++
+NOTE: The Tempo console initially shows no trace data following the Tempo console installation.
