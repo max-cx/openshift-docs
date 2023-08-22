@@ -6,7 +6,7 @@
 [id="distr-tracing-tempo-install-web-console_{context}"]
 = Installing the {TempoShortName} by using the OpenShift web console
 
-You can install the {TempoShortName} in the OpenShift web console.
+You can install the {TempoShortName} by using the *Administrator* view of the OpenShift web console.
 
 .Prerequisites
 
@@ -18,7 +18,7 @@ You can install the {TempoShortName} in the OpenShift web console.
 
 . Install the {TempoOperator}:
 
-.. In the *Administrator* view of the OpenShift web console, go to *Operators* -> *OperatorHub* and search for `{TempoOperator}`.
+.. Go to *Operators* -> *OperatorHub* and search for `{TempoOperator}`.
 
 .. Select *{TempoOperator}* that is *OpenShift Operator for Tempo* -> *Install* -> *Install* -> *View Operator*.
 +
@@ -34,9 +34,7 @@ This installs the Operator with the default presets:
 
 .. In the *Details* tab of the installed Operator page, under *ClusterServiceVersion details*, verify that the installation *Status* is *Succeeded*.
 
-. Create a Secret for your object storage bucket.
-+
-You can do this in the *Administrator* view of the OpenShift web console: go to *Workloads* -> *Secrets* -> *Create* -> *From YAML*.
+. Create a Secret for your object storage bucket: go to *Workloads* -> *Secrets* -> *Create* -> *From YAML*.
 +
 --
 include::snippets/distr-tracing-tempo-required-secret-parameters.adoc[]
@@ -46,10 +44,7 @@ include::snippets/distr-tracing-tempo-required-secret-parameters.adoc[]
 include::snippets/distr-tracing-tempo-secret-example.adoc[]
 --
 
-. Create an OpenShift project of your choice for the *TempoStack* instance that you will create in the next step.
-+
-You can do this in the *Administrator* view of the OpenShift web console: go to *Home* -> *Projects* -> *Create Project*.
-
+. Create an OpenShift project of your choice for the *TempoStack* instance that you will create in the next step: go to *Home* -> *Projects* -> *Create Project*.
 
 . Create a *TempoStack* instance.
 +
