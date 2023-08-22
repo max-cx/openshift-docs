@@ -64,7 +64,8 @@ spec:
 
 |`resources:`
 |Resources assigned to the TempoStack.
-
+|
+|
 
 |`storageSize:`
 |Storage size for ingester PVCs.
@@ -117,10 +118,12 @@ spec:
 |
 |===
 
-The following YAML example is the required minimum for creating a {TempoShortName} deployment with the default settings. This example assumes that  you have deployed one of the supported object storage backends and created the Secret with credentials for access to the object storage.
 
-.Minimum required YAML
+
+.Minimum required configuration
 ====
+This example shows the required minimum for creating a {TempoShortName} deployment with the default settings. This example assumes that you have deployed one of the supported object storage back ends and created the Secret with credentials for access to the object storage.
+
 [source,yaml]
 ----
 apiVersion: tempo.grafana.com/v1alpha1
