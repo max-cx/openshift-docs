@@ -665,8 +665,6 @@ include::snippets/technology-preview.adoc[leveloffset=+1]
 [IMPORTANT]
 ====
 * The Elasticsearch node and the Tempo instances must be deployed in the same namespace, for example, `tracing-system`.
-
-For installation of the Red Hat Elasticsearch Operator, see xref:../logging/cluster-logging-deploying.adoc#cluster-logging-deploying[Installing the {logging-title}].
 ====
 
 Starting with version 2.4, the {TempoOperator} delegates certificate creation to the Red Hat Elasticsearch Operator by using the following annotations in the Elasticsearch custom resource:
