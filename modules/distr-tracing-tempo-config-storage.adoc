@@ -185,8 +185,8 @@ spec:
 ====
 
 .Storage with persistent storage
-[source,yaml]
 ====
+[source,yaml]
 ----
 apiVersion: tempotracing.io/v1
 kind: Tempo
@@ -725,9 +725,9 @@ spec:
     elasticsearch:
       name: custom-es
       doNotProvision: true
-      useCertManagement: true
+      useCertManagement: true <1>
 ----
-<1> Enables certificate management by setting `spec.storage.elasticsearch.useCertManagement` to `true` .
+<1> The `true` value enables certificate management.
 ====
 
 The {TempoOperator} sets the Elasticsearch custom resource `name` to the value of `spec.storage.elasticsearch.name` from the Tempo custom resource when provisioning Elasticsearch.
