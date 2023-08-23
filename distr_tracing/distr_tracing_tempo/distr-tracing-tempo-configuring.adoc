@@ -8,36 +8,6 @@ toc::[]
 
 The {TempoOperator} uses a custom resource definition (CRD) file that defines the architecture and configuration settings to be used when creating and deploying the {TempoShortName} resources. You can either install the default configuration or modify the file to better suit your business requirements.
 
-The {TempoName} has predefined deployment strategies. You specify a deployment strategy in the custom resource file. When you create a TempoStack instance, the Operator uses this configuration file to create the objects necessary for the deployment.
-
-.Tempo custom resource file showing deployment strategy
-====
-[source,yaml]
-----
-apiVersion: tempo.grafana.com/v1alpha1
-kind: TempoStack
-metadata:
-  name: simple
-  namespace: tempo-example
-spec:
-  storage:
-    secret:
-      # Name of the secret with the information to access the object storage
-      name: tempostack-odf
-      type: s3
-  storageSize: 1Gi
-  template:
-    queryFrontend:
-      jaegerQuery:
-        # Enable the Jaeger UI
-        enabled: true
-----
-====
-
-include::modules/distr-tracing-tempo-deploy-default-web-console.adoc[leveloffset=+1]
-
-include::modules/distr-tracing-tempo-deploy-default-cli.adoc[leveloffset=+1]
-
 [id="customizing-your-tempo-deployment"]
 == Customizing your deployment
 
