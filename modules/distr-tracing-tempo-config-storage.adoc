@@ -8,7 +8,7 @@
 
 You configure storage for the Collector, Ingester, Distributor, and Query services under `spec.storage`. Multiple instances of each of these components can be provisioned as required for performance and resilience purposes.
 
-.General storage parameters used by the {TempoName} Operator to define distributed tracing storage
+.General storage parameters used by the {TempoOperator} to define distributed tracing storage
 
 [options="header"]
 [cols="l, a, a, a"]
@@ -19,7 +19,7 @@ You configure storage for the Collector, Ingester, Distributor, and Query servic
     type:
 |Type of storage to use for the deployment.
 |`memory` or `elasticsearch`.
-Memory storage is only appropriate for development, testing, demonstrations, and proof of concept environments as the data does not persist if the pod is shut down. For production environments {TempoShortName} supports Elasticsearch for persistent storage.
+Memory storage is only appropriate for development, testing, demonstrations, and proof of concept environments because the data does not persist when the pod is shut down. For production environments, the {TempoShortName} supports Elasticsearch for persistent storage.
 |`memory`
 
 |storage:
@@ -59,31 +59,32 @@ Memory storage is only appropriate for development, testing, demonstrations, and
     schedule:
 |Defines the schedule for how often to clean the Elasticsearch index.
 |Cron expression
-|"55 23 * * *"
+|`"55 23 * * *"`
 |===
 
 [id="distributed-tracing-config-auto-provisioning-es_{context}"]
 == Auto-provisioning an Elasticsearch instance
 
-When you deploy a Tempo custom resource, the {TempoName} Operator uses the OpenShift Elasticsearch Operator to create an Elasticsearch cluster based on the configuration provided in the `storage` section of the custom resource file. The {TempoName} Operator will provision Elasticsearch if the following configurations are set:
+When you deploy a Tempo custom resource, the {TempoOperator} uses the OpenShift Elasticsearch Operator to create an Elasticsearch cluster based on the configuration provided in the `storage` section of the custom resource file. The {TempoOperator} provisions Elasticsearch if the following configurations are set:
 
 * `spec.storage:type` is set to `elasticsearch`
-* `spec.storage.elasticsearch.doNotProvision` set to `false`
-* `spec.storage.options.es.server-urls` is not defined, that is, there is no connection to an Elasticsearch instance that was not provisioned by the Red Hat Elasticsearch Operator.
+* `spec.storage.elasticsearch.doNotProvision` is set to `false`
+* `spec.storage.options.es.server-urls` is not defined, which means there is no connection to an Elasticsearch instance that was not provisioned by the Red Hat Elasticsearch Operator.
 
-When provisioning Elasticsearch, the {TempoName} Operator sets the Elasticsearch custom resource `name` to the value of `spec.storage.elasticsearch.name` from the Tempo custom resource.  If you do not specify a value for `spec.storage.elasticsearch.name`, the Operator uses `elasticsearch`.
+When provisioning Elasticsearch, the {TempoOperator} sets the Elasticsearch custom resource `name` to the value of `spec.storage.elasticsearch.name` from the Tempo custom resource.  If you do not specify a value for `spec.storage.elasticsearch.name`, the Operator uses `elasticsearch`.
 
-.Restrictions
-
+[IMPORTANT]
+====
 * You can have only one {TempoShortName} with self-provisioned Elasticsearch instance per namespace. The Elasticsearch cluster is meant to be dedicated for a single {TempoShortName} instance.
 * There can be only one Elasticsearch per namespace.
+====
 
 [NOTE]
 ====
-If you already have installed Elasticsearch as part of OpenShift Logging, the {TempoName} Operator can use the installed OpenShift Elasticsearch Operator to provision storage.
+If you have Elasticsearch installed as part of OpenShift Logging, the {TempoOperator} can use the installed OpenShift Elasticsearch Operator to provision storage.
 ====
 
-The following configuration parameters are for a _self-provisioned_ Elasticsearch instance, that is an instance created by the {TempoName} Operator using the OpenShift Elasticsearch Operator. You specify configuration options for self-provisioned Elasticsearch under `spec:storage:elasticsearch` in your configuration file.
+The following configuration parameters are for a _self-provisioned_ Elasticsearch instance that is created by the {TempoOperator} by using the OpenShift Elasticsearch Operator. You specify configuration options for self-provisioned Elasticsearch under `spec:storage:elasticsearch` in your configuration file.
 
 .Elasticsearch resource configuration parameters
 [options="header"]
@@ -93,22 +94,21 @@ The following configuration parameters are for a _self-provisioned_ Elasticsearc
 |elasticsearch:
   properties:
     doNotProvision:
-|Use to specify whether or not an Elasticsearch instance should be provisioned by the {TempoName} Operator.
+|Use this to specify whether or not an Elasticsearch instance must be provisioned by the {TempoOperator}.
 |`true`/`false`
 |`true`
 
 |elasticsearch:
   properties:
     name:
-|Name of the Elasticsearch instance. The {TempoName} Operator uses the Elasticsearch instance specified in this parameter to connect to Elasticsearch.
+|Name of the Elasticsearch instance. The {TempoOperator} uses the Elasticsearch instance specified in this parameter to connect to Elasticsearch.
 |string
 |`elasticsearch`
 
 |elasticsearch:
   nodeCount:
-|Number of Elasticsearch nodes. For high availability use at least 3 nodes. Do not use 2 nodes as “split brain” problem can happen.
-|Integer value. For example, Proof of concept = 1,
-Minimum deployment =3
+|Number of Elasticsearch nodes. For high availability, use at least 3 nodes. Do not use 2 nodes to avoid the split-brain problem.
+|Integer value. For example, Proof of concept = 1, Minimum deployment = 3
 |3
 
 |elasticsearch:
@@ -116,8 +116,7 @@ Minimum deployment =3
     requests:
       cpu:
 |Number of central processing units for requests, based on your environment's configuration.
-|Specified in cores or millicores, for example, 200m, 0.5, 1. For example, Proof of concept = 500m,
-Minimum deployment =1
+|Specified in cores or millicores, for example, 200m, 0.5, or 1. For example, Proof of concept = 500m, Minimum deployment =1.
 |1
 
 |elasticsearch:
@@ -125,8 +124,7 @@ Minimum deployment =1
     requests:
       memory:
 |Available memory for requests, based on your environment's configuration.
-|Specified in bytes, for example, 200Ki, 50Mi, 5Gi. For example, Proof of concept = 1Gi,
-Minimum deployment = 16Gi*
+|Specified in bytes, for example, 200Ki, 50Mi, 5Gi. For example, Proof of concept = 1Gi, Minimum deployment = 16Gi*
 |16Gi
 
 |elasticsearch:
@@ -149,21 +147,22 @@ Minimum deployment = 16Gi*
 
 |elasticsearch:
   redundancyPolicy:
-|Data replication policy defines how Elasticsearch shards are replicated across data nodes in the cluster. If not specified, the {TempoName} Operator automatically determines the most appropriate replication based on number of nodes.
+|Data replication policy defines how Elasticsearch shards are replicated across data nodes in the cluster. If not specified, the {TempoOperator} automatically determines the most appropriate replication based on number of nodes.
 |`ZeroRedundancy`(no replica shards), `SingleRedundancy`(one replica shard), `MultipleRedundancy`(each index is spread over half of the Data nodes), `FullRedundancy` (each index is fully replicated on every Data node in the cluster).
 |
 
 |elasticsearch:
   useCertManagement:
-|Use to specify whether or not {TempoShortName} should use the certificate management feature of the Red Hat Elasticsearch Operator.  This feature was added to {logging-title} 5.2 in {product-title} 4.7 and is the preferred setting for new Tempo deployments.
+|Use to specify whether or not the {TempoShortName} must use the certificate management feature of the Red Hat Elasticsearch Operator.  This feature was added to {logging-title} 5.2 in {product-title} 4.7 and is the preferred setting for new Tempo deployments.
 |`true`/`false`
 |`true`
 
 |
-3+|*Each Elasticsearch node can operate with a lower memory setting though this is NOT recommended for production deployments. For production use, you should have no less than 16Gi allocated to each pod by default, but preferably allocate as much as you can, up to 64Gi per pod.
+3+|*Each Elasticsearch node can operate with a lower memory setting, but this must NOT be used for production deployments. For production use, you must have no less than 16Gi allocated to each pod by default and allocate as much as you can, up to 64Gi per pod.
 |===
 
-.Production storage example
+.Production storage
+====
 [source,yaml]
 ----
 apiVersion: tempotracing.io/v1
@@ -183,9 +182,11 @@ spec:
         limits:
           memory: 16Gi
 ----
+====
 
-.Storage example with persistent storage:
+.Storage with persistent storage
 [source,yaml]
+====
 ----
 apiVersion: tempotracing.io/v1
 kind: Tempo
@@ -208,35 +209,35 @@ spec:
           memory: 4Gi
       redundancyPolicy: ZeroRedundancy
 ----
-
-<1> Persistent storage configuration. In this case AWS `gp2` with `5Gi` size. When no value is specified, {TempoShortName} uses `emptyDir`. The OpenShift Elasticsearch Operator provisions `PersistentVolumeClaim` and `PersistentVolume` which are not removed with {TempoShortName} instance. You can mount the same volumes if you create a {TempoShortName} instance with the same name and namespace.
-
+<1> Persistent storage configuration. In this case, Amazon S3 `gp2` with `5Gi` size. When no value is specified, the {TempoShortName} uses `emptyDir`. The OpenShift Elasticsearch Operator provisions the `PersistentVolumeClaim` and `PersistentVolume` that will not be removed along with the TempoStack instance. You can mount the same volumes if you create a TempoStack instance with the same name and namespace.
+====
 
 [id="distributed-tracing-config-external-es_{context}"]
 == Connecting to an existing Elasticsearch instance
 
-You can use an existing Elasticsearch cluster for storage with {DTShortName}. An existing Elasticsearch cluster, also known as an _external_ Elasticsearch instance, is an instance that was not installed by the {TempoName} Operator or by the Red Hat Elasticsearch Operator.
+You can use an existing Elasticsearch cluster for storage with the {DTShortName}. An existing Elasticsearch cluster, also known as an _external_ Elasticsearch instance, is an instance that was not installed by the {TempoOperator} or by the Red Hat Elasticsearch Operator.
 
-When you deploy a Tempo custom resource, the {TempoName} Operator will not provision Elasticsearch if the following configurations are set:
+When you deploy a Tempo custom resource, the {TempoOperator} does not provision Elasticsearch if the following configurations are set:
 
-* `spec.storage.elasticsearch.doNotProvision` set to `true`
+* `spec.storage.elasticsearch.doNotProvision` is set to `true`
 * `spec.storage.options.es.server-urls` has a value
-* `spec.storage.elasticsearch.name` has a value, or if the Elasticsearch instance name is `elasticsearch`.
+* `spec.storage.elasticsearch.name` has a value or the Elasticsearch instance name is `elasticsearch`
 
-The {TempoName} Operator uses the Elasticsearch instance specified in `spec.storage.elasticsearch.name` to connect to Elasticsearch.
+The {TempoOperator} uses the Elasticsearch instance specified in `spec.storage.elasticsearch.name` to connect to Elasticsearch.
 
-.Restrictions
-
-* You cannot share or reuse a {product-title} logging Elasticsearch instance with {TempoShortName}. The Elasticsearch cluster is meant to be dedicated for a single {TempoShortName} instance.
+[IMPORTANT]
+====
+You must not share or reuse a {product-title} logging Elasticsearch instance with the {TempoShortName}. The Elasticsearch cluster is meant to be dedicated for a single {TempoShortName} instance.
+====
 
 [NOTE]
 ====
-Red Hat does not provide support for your external Elasticsearch instance. You can review the tested integrations matrix on the link:https://access.redhat.com/articles/5381021[Customer Portal].
+Red Hat does not provide support for your external Elasticsearch instance. You can review the tested integrations matrix on the link:https://access.redhat.com/articles/5381021[Red Hat Customer Portal].
 ====
 
 The following configuration parameters are for an already existing Elasticsearch instance, also known as an _external_ Elasticsearch instance. In this case, you specify configuration options for Elasticsearch under `spec:storage:options:es` in your custom resource file.
 
-.General ES configuration parameters
+.General Elasticsearch configuration parameters
 [options="header"]
 [cols="l, a, a, a"]
 |===
@@ -249,13 +250,13 @@ The following configuration parameters are for an already existing Elasticsearch
 
 |es:
   max-doc-count:
-|The maximum document count to return from an Elasticsearch query. This will also apply to aggregations. If you set both `es.max-doc-count` and `es.max-num-spans`, Elasticsearch will use the smaller value of the two.
+|The maximum document count to return from an Elasticsearch query. This also applies to aggregations. If you set both `es.max-doc-count` and `es.max-num-spans`, Elasticsearch will use the smaller value of the two.
 |
 |10000
 
 |es:
   max-num-spans:
-|[*Deprecated* - Will be removed in a future release, use `es.max-doc-count` instead.] The maximum number of spans to fetch at a time, per query, in Elasticsearch. If you set both `es.max-num-spans` and `es.max-doc-count`, Elasticsearch will use the smaller value of the two.
+|*Deprecated* and will be removed in a future release. Use `es.max-doc-count` instead. The maximum number of spans to fetch at a time, per query, in Elasticsearch. If you set both `es.max-num-spans` and `es.max-doc-count`, Elasticsearch will use the smaller value of the two.
 |
 |10000
 
@@ -273,13 +274,13 @@ The following configuration parameters are for an already existing Elasticsearch
 
 |es:
   sniffer-tls-enabled:
-|Option to enable TLS when sniffing an Elasticsearch Cluster. The client uses the sniffing process to find all nodes automatically. Disabled by default
+|The option to enable TLS when sniffing an Elasticsearch Cluster. The client uses the sniffing process to find all nodes automatically. Disabled by default.
 |`true`/ `false`
 |`false`
 
 |es:
   timeout:
-|Timeout used for queries. When set to zero there is no timeout.
+|The timeout used for queries. When set to zero, there is no timeout.
 |
 |0s
 
@@ -291,7 +292,7 @@ The following configuration parameters are for an already existing Elasticsearch
 
 |es:
   password:
-|The password required by Elasticsearch. See also, `es.username`.
+|The password required by Elasticsearch. See also `es.username`.
 |
 |
 
@@ -302,7 +303,7 @@ The following configuration parameters are for an already existing Elasticsearch
 |0
 |===
 
-.ES data replication parameters
+.Elasticsearch data replication parameters
 [options="header"]
 [cols="l, a, a, a"]
 |===
@@ -320,25 +321,25 @@ The following configuration parameters are for an already existing Elasticsearch
 |5
 |===
 
-.ES index configuration parameters
+.Elasticsearch index configuration parameters
 [options="header"]
 [cols="l, a, a, a"]
 |===
 |Parameter |Description |Values |Default value
 |es:
   create-index-templates:
-|Automatically create index templates at application startup when set to `true`. When templates are installed manually, set to `false`.
+|When set to `true`, automatically creates index templates at application startup. When set to `false`, templates must be installed manually.
 |`true`/ `false`
 |`true`
 
 |es:
   index-prefix:
-|Optional prefix for {TempoShortName} indices. For example, setting this to "production" creates indices named "production-tracing-*".
+|Optional prefix for {TempoShortName} indices. For example, when set to `"production"`, creates `"production-tracing-*"` indices.
 |
 |
 |===
 
-.ES bulk processor configuration parameters
+.Elasticsearch bulk processor configuration parameters
 [options="header"]
 [cols="l, a, a, a"]
 |===
@@ -354,14 +355,14 @@ The following configuration parameters are for an already existing Elasticsearch
 |es:
   bulk:
     flush-interval:
-|A `time.Duration` after which bulk requests are committed, regardless of other thresholds. To disable the bulk processor flush interval, set this to zero.
+|A `time.Duration` after which bulk requests are committed regardless of other thresholds. To disable the bulk processor flush interval, set this to zero.
 |
 |200ms
 
 |es:
   bulk:
     size:
-|The number of bytes that the bulk requests can take up before the bulk processor decides to commit updates to disk.
+|The number of bytes that the bulk requests can take up before the bulk processor commits updates to disk.
 |
 |5000000
 
@@ -373,7 +374,7 @@ The following configuration parameters are for an already existing Elasticsearch
 |1
 |===
 
-.ES TLS configuration parameters
+.Elasticsearch TLS configuration parameters
 [options="header"]
 [cols="l, a, a, a"]
 |===
@@ -383,7 +384,7 @@ The following configuration parameters are for an already existing Elasticsearch
     ca:
 |Path to a TLS Certification Authority (CA) file used to verify the remote servers.
 |
-|Will use the system truststore by default.
+|Uses the system truststore by default.
 
 |es:
   tls:
@@ -395,7 +396,7 @@ The following configuration parameters are for an already existing Elasticsearch
 |es:
   tls:
     enabled:
-|Enable transport layer security (TLS) when talking to the remote servers. Disabled by default.
+|Enables transport layer security (TLS) when talking to the remote servers. Disabled by default.
 |`true`/ `false`
 |`false`
 
@@ -409,7 +410,7 @@ The following configuration parameters are for an already existing Elasticsearch
 |es:
   tls:
     server-name:
-|Override the expected TLS server name in the certificate of the remote servers.
+|Overrides the expected TLS server name in the certificate of the remote servers.
 |
 |
 //Clarification of "if specified" for `token-file` and `username`, does that mean if this is set? Or that it only loads the CA if one is specified (that is, if es.tls.ca has a value?)
@@ -420,7 +421,7 @@ The following configuration parameters are for an already existing Elasticsearch
 |
 |===
 
-.ES archive configuration parameters
+.Elasticsearch archive configuration parameters
 [options="header"]
 [cols="l, a, a, a"]
 |===
@@ -456,7 +457,7 @@ The following configuration parameters are for an already existing Elasticsearch
 
 |es-archive:
   create-index-templates:
-|Automatically create index templates at application startup when set to `true`. When templates are installed manually, set to `false`.
+|Automatically creates index templates at application startup when set to `true`. When set to `false`, templates must be installed manually.
 |`true`/ `false`
 |`false`
 
@@ -468,7 +469,7 @@ The following configuration parameters are for an already existing Elasticsearch
 
 |es-archive:
   index-prefix:
-|Optional prefix for {TempoShortName} indices. For example, setting this to "production" creates indices named "production-tracing-*".
+|Optional prefix for {TempoShortName} indices. For example, when set to `"production"`, creates `"production-tracing-*"` indices.
 |
 |
 
@@ -480,7 +481,7 @@ The following configuration parameters are for an already existing Elasticsearch
 
 |es-archive:
   max-num-spans:
-|[*Deprecated* - Will be removed in a future release, use `es-archive.max-doc-count` instead.] The maximum number of spans to fetch at a time, per query, in Elasticsearch.
+|*Deprecated* and will be removed in a future release. Use `es-archive.max-doc-count` instead. The maximum number of spans to fetch at a time, per query, in Elasticsearch.
 |
 |0
 
@@ -504,7 +505,7 @@ The following configuration parameters are for an already existing Elasticsearch
 
 |es-archive:
   password:
-|The password required by Elasticsearch. See also, `es.username`.
+|The password required by Elasticsearch. See also `es.username`.
 |
 |
 
@@ -528,7 +529,7 @@ The following configuration parameters are for an already existing Elasticsearch
 
 |es-archive:
   timeout:
-|Timeout used for queries. When set to zero there is no timeout.
+|Timeout used for queries. When set to zero, there is no timeout.
 |
 |0s
 
@@ -563,7 +564,7 @@ The following configuration parameters are for an already existing Elasticsearch
 |es-archive:
   tls:
     server-name:
-|Override the expected TLS server name in the certificate of the remote servers.
+|Overrides the expected TLS server name in the certificate of the remote servers.
 |
 |
 
@@ -582,13 +583,14 @@ The following configuration parameters are for an already existing Elasticsearch
 
 |es-archive:
   version:
-|The major Elasticsearch version. If not specified, the value will be auto-detected from Elasticsearch.
+|The major Elasticsearch version. If not specified, the value is auto-detected from Elasticsearch.
 |
 |0
 |===
 
 
-.Storage example with volume mounts
+.Storage with volume mounts
+====
 [source,yaml]
 ----
 apiVersion: tempotracing.io/v1
@@ -615,10 +617,11 @@ spec:
       secret:
         secretName: quickstart-es-http-certs-public
 ----
+====
 
-The following example shows a Tempo CR using an external Elasticsearch cluster with TLS CA certificate mounted from a volume and user/password stored in a secret.
-
-.External Elasticsearch example:
+.External Elasticsearch
+====
+The following is a Tempo CR that uses an external Elasticsearch cluster with a TLS CA certificate mounted from a volume:
 [source,yaml]
 ----
 apiVersion: tempotracing.io/v1
@@ -631,12 +634,12 @@ spec:
     type: elasticsearch
     options:
       es:
-        server-urls: https://quickstart-es-http.default.svc:9200 # <1>
+        server-urls: https://quickstart-es-http.default.svc:9200 <1>
         index-prefix: my-prefix
-        tls: # <2>
+        tls: <2>
           ca: /es/certificates/ca.crt
-    secretName: tracing-secret # <3>
-  volumeMounts: # <4>
+    secretName: tracing-secret <3>
+  volumeMounts: <4>
     - name: certificates
       mountPath: /es/certificates/
       readOnly: true
@@ -646,27 +649,34 @@ spec:
         secretName: quickstart-es-http-certs-public
 ----
 <1> URL to Elasticsearch service running in default namespace.
-<2> TLS configuration. In this case only CA certificate, but it can also contain es.tls.key and es.tls.cert when using mutual TLS.
-<3> Secret which defines environment variables ES_PASSWORD and ES_USERNAME. Created by kubectl create secret generic tracing-secret --from-literal=ES_PASSWORD=changeme --from-literal=ES_USERNAME=elastic
+<2> TLS configuration. In this example, there is only the CA certificate, but there can also be a `es.tls.key` and `es.tls.cert` when using mutual TLS.
+<3> Secret which defines environment variables `ES_PASSWORD` and `ES_USERNAME` that has been created by running `$ kubectl create secret generic tracing-secret --from-literal=ES_PASSWORD=changeme --from-literal=ES_USERNAME=elastic`.
 <4> Volume mounts and volumes which are mounted into all storage components.
+====
 
-[id="distr-tracing-manage-es-certificates_{context}"]
-= Managing certificates with Elasticsearch
+[id="elasticsearch-for-certificate-management_{context}"]
+= Elasticsearch for certificate management
 
-You can create and manage certificates using the Red Hat Elasticsearch Operator. Managing certificates using the Red Hat Elasticsearch Operator also lets you use a single Elasticsearch cluster with multiple Tempo Collectors.
+You can use the Red Hat Elasticsearch Operator to create and manage certificates. You can use a single Elasticsearch cluster with multiple Tempo Collectors.
 
 :FeatureName: Managing certificates with Elasticsearch
 include::snippets/technology-preview.adoc[leveloffset=+1]
 
-Starting with version 2.4, the {TempoName} Operator delegates certificate creation to the Red Hat Elasticsearch Operator by using the following annotations in the Elasticsearch custom resource:
+[IMPORTANT]
+====
+* The Elasticsearch node and the Tempo instances must be deployed in the same namespace, for example, `tracing-system`.
+
+For installation of the Red Hat Elasticsearch Operator, see xref:../logging/cluster-logging-deploying.adoc#cluster-logging-deploying[Installing the {logging-title}].
+====
+
+Starting with version 2.4, the {TempoOperator} delegates certificate creation to the Red Hat Elasticsearch Operator by using the following annotations in the Elasticsearch custom resource:
 
 * `logging.openshift.io/elasticsearch-cert-management: "true"`
-* `logging.openshift.io/elasticsearch-cert.tempo-<shared-es-node-name>: "user.tempo"`
-* `logging.openshift.io/elasticsearch-cert.curator-<shared-es-node-name>: "system.logging.curator"`
+* `logging.openshift.io/elasticsearch-cert.tempo-<shared_elasticsearch_node_name>: "user.tempo"`
+* `logging.openshift.io/elasticsearch-cert.curator-<shared_elasticsearch_node_name>: "system.logging.curator"`
 
-Where the `<shared-es-node-name>` is the name of the Elasticsearch node. For example, if you create an Elasticsearch node named `custom-es`, your custom resource might look like the following example.
-
-.Example Elasticsearch CR showing annotations
+.Elasticsearch CR with annotations
+====
 [source,yaml]
 ----
 apiVersion: logging.openshift.io/v1
@@ -676,7 +686,7 @@ metadata:
     logging.openshift.io/elasticsearch-cert-management: "true"
     logging.openshift.io/elasticsearch-cert.tempo-custom-es: "user.tempo"
     logging.openshift.io/elasticsearch-cert.curator-custom-es: "system.logging.curator"
-  name: custom-es
+  name: custom-es <1>
 spec:
   managementState: Managed
   nodeSpec:
@@ -697,16 +707,11 @@ spec:
       storage: {}
   redundancyPolicy: ZeroRedundancy
 ----
+<1> Name of the Elasticsearch node.
+====
 
-.Prerequisites
-
-* {product-title} 4.7
-* {logging-title} 5.2
-* The Elasticsearch node and the Tempo instances must be deployed in the same namespace.  For example, `tracing-system`.
-
-You enable certificate management by setting `spec.storage.elasticsearch.useCertManagement` to `true` in the Tempo custom resource.
-
-.Example showing `useCertManagement`
+.TempoStack CR with `useCertManagement` set to `true`
+====
 [source,yaml]
 ----
 apiVersion: tempotracing.io/v1
@@ -722,7 +727,9 @@ spec:
       doNotProvision: true
       useCertManagement: true
 ----
+<1> Enables certificate management by setting `spec.storage.elasticsearch.useCertManagement` to `true` .
+====
 
-The {TempoName} Operator sets the Elasticsearch custom resource `name` to the value of `spec.storage.elasticsearch.name` from the Tempo custom resource when provisioning Elasticsearch.
+The {TempoOperator} sets the Elasticsearch custom resource `name` to the value of `spec.storage.elasticsearch.name` from the Tempo custom resource when provisioning Elasticsearch.
 
-The certificates are provisioned by the Red Hat Elasticsearch Operator and the {TempoName} Operator injects the certificates.
+The certificates are provisioned by the Red Hat Elasticsearch Operator and the {TempoOperator} injects the certificates.

@@ -10,7 +10,7 @@ The custom resource definition (CRD) defines the configuration used when you dep
 
 .Prerequisites
 
-* The {TempoName} Operator has been installed.
+* The {TempoOperator} has been installed.
 * You have reviewed the instructions for how to customize the deployment.
 * You have access to the cluster as a user with the `cluster-admin` role.
 * Supported Object Store (AWS S3, Google Cloud Storage, Azure, Minio, OpenShift Data Foundation)
@@ -33,7 +33,7 @@ The custom resource definition (CRD) defines the configuration used when you dep
 
 . If necessary, select `tracing-system` from the *Project* menu. You may have to wait a few moments for the Operators to be copied to the new project.
 
-. Click the {TempoName} Operator. On the *Details* tab, under *Provided APIs*, the Operator provides a single link.
+. Click the {TempoOperator}. On the *Details* tab, under *Provided APIs*, the Operator provides a single link.
 
 . Under *Tempo*, click *Create Instance*.
 

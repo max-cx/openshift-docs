@@ -8,7 +8,7 @@
 
 Query is a service that retrieves traces from storage and hosts the user interface to display them.
 
-.Parameters used by the {TempoName} Operator to define Query
+.Parameters used by the {TempoOperator} to define Query
 [options="header"]
 [cols="l, a, a, a"]
 |===
@@ -18,7 +18,7 @@ Query is a service that retrieves traces from storage and hosts the user interfa
   query:
     replicas:
 |Specifies the number of Query replicas to create.
-|Integer, for example, `2`
+|Positive integer
 |
 |===
 
@@ -39,18 +39,19 @@ Query is a service that retrieves traces from storage and hosts the user interfa
 |options:
   log-level:
 |Logging level for Query.
-|Possible values: `debug`, `info`, `warn`, `error`, `fatal`, `panic`.
+|`debug`, `info`, `warn`, `error`, `fatal`, `panic`
 |
 
 |options:
   query:
     base-path:
-|The base path for all tempo-query HTTP routes can be set to a non-root value, for example, `/tempo` would cause all UI URLs to start with `/tempo`. This can be useful when running tempo-query behind a reverse proxy.
+|You can set the base path for all tempo-query HTTP routes to a non-root value: for example, `/tempo` will cause all UI URLs to start with `/tempo`. This can be useful when running `tempo-query` behind a reverse proxy.
 |/<path>
 |
 |===
 
 .Sample Query configuration
+====
 [source,yaml]
 ----
 apiVersion: tempotracing.io/v1
@@ -65,3 +66,4 @@ spec:
       query:
         base-path: /tempo
 ----
+====

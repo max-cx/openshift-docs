@@ -6,7 +6,7 @@
 [id="distr-tracing-removing-tempo-instance_{context}"]
 = Removing a TempoStack instance by using the OpenShift web console
 
-You can remove a TempoStack instance in the OpenShift web console.
+You can remove a TempoStack instance in the *Administrator* view of the OpenShift web console.
 
 .Prerequisites
 
@@ -21,6 +21,6 @@ You can remove a TempoStack instance in the OpenShift web console.
 You can use the *Project:* drop-down list to select the relevant OpenShift project.
 ====
 
-. For the TempoStack instance to be deleted, go to {kebab} -> *Delete TempoStack* -> *Delete*.
+. Remove the TempoStack instance: go to {kebab} -> *Delete TempoStack* -> *Delete*.
 
 . Optional: Remove the {TempoOperator}.

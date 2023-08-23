@@ -6,7 +6,7 @@ include::_attributes/common-attributes.adoc[]
 
 toc::[]
 
-The {TempoName} Operator uses a custom resource definition (CRD) file that defines the architecture and configuration settings to be used when creating and deploying the {TempoShortName} resources. You can either install the default configuration or modify the file to better suit your business requirements.
+The {TempoOperator} uses a custom resource definition (CRD) file that defines the architecture and configuration settings to be used when creating and deploying the {TempoShortName} resources. You can either install the default configuration or modify the file to better suit your business requirements.
 
 The {TempoName} has predefined deployment strategies. You specify a deployment strategy in the custom resource file. When you create a TempoStack instance, the Operator uses this configuration file to create the objects necessary for the deployment.
 
