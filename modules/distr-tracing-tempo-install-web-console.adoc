@@ -131,8 +131,6 @@ The stack deployed in this example is configured to receive Jaeger Thrift over H
 
 . Go to *Workloads* -> *Pods* to verify that all the TempoStack component pods are running.
 
-. Go to *Networking* -> *Route* to get the Route for the TempoStack query UI.
-
 . Access the Tempo console:
 
 .. Go to *Networking* -> *Routes* and kbd:[Ctrl+F] to search for `tempo`.
