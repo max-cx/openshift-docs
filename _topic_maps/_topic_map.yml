@@ -3571,6 +3571,8 @@ Topics:
       File: distr-tracing-otel-temp
     - Name: Migration
       File: distr-tracing-otel-migrating
+    - Name: Removal
+      File: distr-tracing-otel-removing
 ---
 Name: Virtualization
 Dir: virt

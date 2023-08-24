@@ -20,7 +20,7 @@ You can remove a TempoStack instance on the command line.
 +
 [source,terminal]
 ----
-$ oc login --username=<your_username> 
+$ oc login --username=<your_username>
 ----
 ====
 
