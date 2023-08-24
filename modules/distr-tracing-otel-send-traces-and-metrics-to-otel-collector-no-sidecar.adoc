@@ -4,18 +4,34 @@
 
 :_content-type: PROCEDURE
 [id="distr-tracing-otel-send-traces-and-metrics-to-otel-collector-no-sidecar_{context}"]
-= Sending traces and metrics to the OpenTelemetry collector without the sidecar injection
+= Sending traces and metrics to the OpenTelemetry collector without sidecar injection
+
+You can set up sending telemetry data to an OpenTelemetryCollector instance without sidecar injection.
+
+.Prerequisites
+
+* You have access to the cluster through the OpenShift web console or the OpenShift CLI (`oc`):
+
+** You are logged in to the OpenShift web console as a cluster administrator with the `cluster-admin` role. For {product-dedicated}, you must have an account with the `dedicated-admin` role.
+
+** An active OpenShift CLI (`oc`) session by a cluster administrator with the `cluster-admin` role.
++
+[TIP]
+====
+* Ensure that your OpenShift CLI (`oc`) version is up to date and matches your {product-title} version.
+
+* Run `oc login`:
++
+[source,terminal]
+----
+$ oc login --username=<your_username>
+----
+====
 
 .Procedure
 
-In this case, it is needed to configure manually the environment variables needed
-to send telemetry data to an OpenTelemetry Collector instance.
-
-
-First we need to create a Project where our OpenTelemtry Collector will be deployed.
-
-Create a Project where our workloads will be deployed.
-
+. Create an OpenShift project for the OpenTelemtry Collector.
++
 [source,yaml]
 ----
 apiVersion: project.openshift.io/v1
@@ -23,10 +39,9 @@ kind: Project
 metadata:
   name: observability
 ----
-====
 
-Create a ServiceAccount.
-
+. Create a ServiceAccount.
++
 [source,yaml]
 ----
 apiVersion: v1
@@ -36,9 +51,8 @@ metadata:
   namespace: observability
 ----
 
-Grant permissions to the ServiceAccount for the k8sattributes and
-resourcedetection processors.
-
+. Grant permissions to the ServiceAccount for the `k8sattributes` and `resourcedetection` processors.
++
 [source,yaml]
 ----
 apiVersion: rbac.authorization.k8s.io/v1
@@ -64,8 +78,8 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ----
 
-Deploy the OpenTelemetry Collector as deployment
-
+. Deploy the OpenTelemetryCollector instance.
++
 [source,yaml]
 ----
 apiVersion: opentelemetry.io/v1alpha1
@@ -111,12 +125,10 @@ spec:
           processors: [memory_limiter, k8sattributes, resourcedetection, batch]
           exporters: [otlp]
 ----
-<1> This points to the Gateway of a Tempo instance deployed by using the `<example>` Tempo Operator.
+<1> This points to the Gateway of a TempoStack instance deployed by using the `<example>` {TempoOperator}.
 
-
-After that, you will need to set the following environment variables in the container
-with your instrumented application.
-
+. Set the following environment variables in the container with your instrumented application:
++
 [options="header"]
 [cols="l, a, a"]
 |===

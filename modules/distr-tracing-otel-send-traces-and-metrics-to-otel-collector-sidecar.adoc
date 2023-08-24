@@ -4,22 +4,36 @@
 
 :_content-type: PROCEDURE
 [id="distr-tracing-otel-send-traces-and-metrics-to-otel-collector_{context}"]
-= Sending traces and metrics to the OpenTelemetry collector
+= Sending traces and metrics to the OpenTelemetry collector with sidecar injection
 
+You can set up sending telemetry data to an OpenTelemetryCollector instance with sidecar injection.
+
+The {OTELOperator} allows sidecar injection into Deployment workloads, automatically configuring your instrumentation to send telemetry data to the OpenTelemetry Collector.
 
 .Prerequisites
 
-* {OTELName} is installed.
+* You have access to the cluster through the OpenShift web console or the OpenShift CLI (`oc`):
 
-= Sending traces and metrics to the OpenTelemetry collector using the sidecar injection
+** You are logged in to the OpenShift web console as a cluster administrator with the `cluster-admin` role. For {product-dedicated}, you must have an account with the `dedicated-admin` role.
+
+** An active OpenShift CLI (`oc`) session by a cluster administrator with the `cluster-admin` role.
++
+[TIP]
+====
+* Ensure that your OpenShift CLI (`oc`) version is up to date and matches your {product-title} version.
+
+* Run `oc login`:
++
+[source,terminal]
+----
+$ oc login --username=<your_username>
+----
+====
 
 .Procedure
 
-The {OTELName} Operator allows the sidecar injection into Deployment workloads. This configures
-automatically your instrumentation to send telemetry data to the OpenTelemetry Collector.
-
-Create a Project where our workloads will be deployed.
-====
+. Create an OpenShift project for the OpenTelemtry Collector.
++
 [source,yaml]
 ----
 apiVersion: project.openshift.io/v1
@@ -27,10 +41,9 @@ kind: Project
 metadata:
   name: observability
 ----
-====
 
-Create a ServiceAccount.
-====
+. Create a ServiceAccount.
++
 [source,yaml]
 ----
 apiVersion: v1
@@ -39,11 +52,9 @@ metadata:
   name: otel-collector-sidecar
   namespace: observability
 ----
-====
 
-The next step is to grant permissions to the ServiceAccount for the k8sattributes and
-resourcedetection processors.
-====
+. Grant permissions to the ServiceAccount for the `k8sattributes` and `resourcedetection` processors.
++
 [source,yaml]
 ----
 apiVersion: rbac.authorization.k8s.io/v1
@@ -68,10 +79,9 @@ roleRef:
   name: otel-collector
   apiGroup: rbac.authorization.k8s.io
 ----
-====
 
-Deploy the OpenTelemetry Collector as a sidecar.
-====
+. Deploy the OpenTelemetry Collector as a sidecar.
++
 [source,yaml]
 ----
 apiVersion: opentelemetry.io/v1alpha1
@@ -110,10 +120,6 @@ spec:
 ----
 <1> This points to the Gateway of a Tempo instance deployed by using the `<example>` Tempo Operator.
 
+. Create your Deployment using the `otel-collector-sidecar` ServiceAccount.
 
-Now, you need to create your Deployment using the "otel-collector-sidecar"
-ServiceAccount.
-
-Add the 'sidecar.opentelemetry.io/inject: "true"' annotation to your deployment.
-This will inject all the needed environment variables to send data from your
-workloads to the OpenTelemetryCollector instance.
+. Add the `sidecar.opentelemetry.io/inject: "true"` annotation to your deployment. This will inject all the needed environment variables to send data from your workloads to the OpenTelemetryCollector instance.
