@@ -30,6 +30,35 @@ $ oc login --username=<your_username>
 
 . Install the {TempoOperator}:
 
+.. Create an OpenShift project for the {TempoOperator}.
++
+[source,terminal]
+----
+$ oc apply -f - << EOF
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  labels:
+    kubernetes.io/metadata.name: openshift-tempo-operator
+    openshift.io/cluster-monitoring: "true"
+  name: openshift-tempo-operator
+EOF
+----
+
+.. Create an Operator group.
++
+[source,terminal]
+----
+$ oc apply -f - << EOF
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: openshift-tempo-operator
+  namespace: openshift-tempo-operator
+spec:
+  upgradeStrategy: Default
+----
+
 .. Create a subscription.
 +
 [source,yaml]
