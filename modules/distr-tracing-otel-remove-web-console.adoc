@@ -4,9 +4,9 @@
 
 :_content-type: PROCEDURE
 [id="distr-tracing-removing-otel-instance_{context}"]
-= Removing an OpenTelemetryCollector instance by using the OpenShift web console
+= Removing a {OTELShortName} instance by using the OpenShift web console
 
-You can remove an OpenTelemetryCollector instance in the *Administrator* view of the OpenShift web console.
+You can remove a {OTELShortName} instance in the *Administrator* view of the OpenShift web console.
 
 .Prerequisites
 
@@ -14,13 +14,13 @@ You can remove an OpenTelemetryCollector instance in the *Administrator* view of
 
 .Procedure
 
-. Go to *Operators* -> *Installed Operators* -> *{OTELOperator}* -> *OpenTelemetryCollector*.
+. Go to *Operators* -> *Installed Operators* -> *{OTELOperator}* -> *OpenTelemetryInstrumentation* or *OpenTelemetryCollector*.
 +
 [TIP]
 ====
 You can use the *Project:* drop-down list to select the relevant OpenShift project.
 ====
 
-. Remove the OpenTelemetryCollector instance: go to {kebab} -> *Delete OpenTelemetryCollector* -> *Delete*.
+. Remove the relevant instance: go to {kebab} -> *Delete* ... -> *Delete*.
 
 . Optional: Remove the {OTELOperator}.

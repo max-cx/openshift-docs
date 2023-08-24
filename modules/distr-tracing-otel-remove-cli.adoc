@@ -4,9 +4,9 @@
 
 :_content-type: PROCEDURE
 [id="distr-tracing-removing-otel-instance-cli_{context}"]
-= Removing an OpenTelemetryCollector instance by using the CLI
+= Removing a {OTELShortName} instance by using the CLI
 
-You can remove an OpenTelemetryCollector instance on the command line.
+You can remove a {OTELShortName} instance on the command line.
 
 .Prerequisites
 
@@ -26,27 +26,27 @@ $ oc login --username=<your_username>
 
 .Procedure
 
-. Get the name of the OpenTelemetryCollector instance:
+. Get the name of the {OTELShortName} instance:
 +
 [source,terminal,attributes]
 ----
-$ oc get deployments -n <openshift_project_of_OpenTelemetryCollector_instance>
+$ oc get deployments -n <openshift_project_of_opentelemetry_instance>
 ----
 
-. Remove the OpenTelemetryCollector instance:
+. Remove the {OTELShortName} instance:
 +
 [source,terminal,attributes]
 ----
-$ oc delete otel??? <OpenTelemetryCollector_instance_name> -n <openshift_project_of_OpenTelemetryCollector_instance>
+$ oc delete otel??? <opentelemetry_instance_name> -n <openshift_project_of_opentelemetry_instance>
 ----
 
 . Optional: Remove the {OTELOperator}.
 
 .Verification
 
-. To verify successful removal of the OpenTelemetryCollector instance, run `oc get deployments` again:
+. To verify successful removal of the {OTELShortName} instance, run `oc get deployments` again:
 +
 [source,terminal]
 ----
-$ oc get deployments -n <openshift_project_of_OpenTelemetryCollector_instance>
+$ oc get deployments -n <openshift_project_of_opentelemetry_instance>
 ----
