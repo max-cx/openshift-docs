@@ -61,7 +61,7 @@ spec:
 
 .. Create a subscription.
 +
-[source,yaml]
+[source,terminal]
 ----
 $ oc apply -f - << EOF
 apiVersion: operators.coreos.com/v1alpha1
