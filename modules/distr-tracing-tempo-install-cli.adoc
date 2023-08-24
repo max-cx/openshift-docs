@@ -57,6 +57,7 @@ metadata:
   namespace: openshift-tempo-operator
 spec:
   upgradeStrategy: Default
+EOF
 ----
 
 .. Create a subscription.
