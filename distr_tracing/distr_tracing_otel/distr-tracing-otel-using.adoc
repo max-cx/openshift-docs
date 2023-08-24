@@ -9,9 +9,9 @@ toc::[]
 include::modules/distr-tracing-otel-forwarding.adoc[leveloffset=+1]
 
 [id="distr-tracing-otel-send-traces-and-metrics-to-otel-collector_{context}"]
-== Sending traces and metrics to the OpenTelemetry collector
+== Sending traces and metrics to the OpenTelemetry Collector
 
-Sending tracing and metrics to the OpenTelemetry collector is possible with or without sidecar injection.
+Sending tracing and metrics to the OpenTelemetry Collector is possible with or without sidecar injection.
 
 include::modules/distr-tracing-otel-send-traces-and-metrics-to-otel-collector-with-sidecar.adoc[leveloffset=+2]
 

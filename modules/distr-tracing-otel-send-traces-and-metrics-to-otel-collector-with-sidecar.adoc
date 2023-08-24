@@ -4,11 +4,11 @@
 
 :_content-type: PROCEDURE
 [id="distr-tracing-otel-send-traces-and-metrics-to-otel-collector-with-sidecar_{context}"]
-= Sending traces and metrics to the OpenTelemetry collector with sidecar injection
+= Sending traces and metrics to the OpenTelemetry Collector with sidecar injection
 
 You can set up sending telemetry data to an OpenTelemetryCollector instance with sidecar injection.
 
-The {OTELOperator} allows sidecar injection into Deployment workloads, automatically configuring your instrumentation to send telemetry data to the OpenTelemetry Collector.
+The {OTELOperator} allows sidecar injection into Deployment workloads and automatic configuration of your instrumentation to send telemetry data to the OpenTelemetry Collector.
 
 .Prerequisites
 
