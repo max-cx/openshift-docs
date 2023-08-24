@@ -1,6 +1,6 @@
 :_content-type: PROCEDURE
 [id="distr-tracing-otel-temp"]
-= Temp
+= Using 
 include::_attributes/common-attributes.adoc[]
 :context: distr-tracing-otel-temp
 

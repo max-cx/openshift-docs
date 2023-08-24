@@ -1,6 +1,6 @@
 :_content-type: ASSEMBLY
 [id="distr-tracing-tempo-configuring"]
-= Configuring and deploying {TempoShortName}
+= Configuring and deploying the {TempoShortName}
 include::_attributes/common-attributes.adoc[]
 :context: distr-tracing-tempo-configuring
 
