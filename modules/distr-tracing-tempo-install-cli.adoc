@@ -85,26 +85,31 @@ EOF
 $ oc get csv -n openshift-tempo-operator
 ----
 
-. Run `oc apply -f` to create a Secret for your object storage bucket.
+. Run `oc apply -f` for a YAML file or standard input to create a Secret for your object storage bucket:
+
+.. {empty}
 +
-[TIP]
-====
 [source,terminal]
 ----
 $ oc apply -f <secret_file>.yaml
 ----
 
+.. {empty}
++
 [source,terminal]
 ----
 $ oc apply -f - << EOF
 <object_storage_secret>
 EOF
 ----
-====
+
+.. {empty}
 +
 --
 include::snippets/distr-tracing-tempo-required-secret-parameters.adoc[]
 --
+
+.. {empty}
 +
 --
 include::snippets/distr-tracing-tempo-secret-example.adoc[]
