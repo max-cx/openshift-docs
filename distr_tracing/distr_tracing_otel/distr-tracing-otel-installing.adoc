@@ -1,6 +1,6 @@
 :_content-type: ASSEMBLY
 [id="dist-tracing-otel-installing"]
-= Installing distributed tracing data collection OpenTelemetry
+= Installing the {OTELShortName}
 include::_attributes/common-attributes.adoc[]
 :context: install-distributed-tracing-otel
 
@@ -8,7 +8,7 @@ toc::[]
 
 == Prerequisites
 
-Before you can install {DTProductName}, review the installation activities, and ensure that you meet the prerequisites:
+Before you can install {OTELShortName}, review the installation activities, and ensure that you meet the prerequisites:
 
 * Possess an active {product-title} subscription on your Red Hat account. If you do not have a subscription, contact your sales representative for more information.
 

@@ -1,6 +1,6 @@
 :_content-type: PROCEDURE
 [id="distr-tracing-otel-temp"]
-= Using 
+= Using the {OTELShortName}
 include::_attributes/common-attributes.adoc[]
 :context: distr-tracing-otel-temp
 
@@ -9,4 +9,5 @@ toc::[]
 include::modules/distr-tracing-otel-forwarding.adoc[leveloffset=+1]
 
 include::modules/distr-tracing-otel-send-traces-and-metrics-to-otel-collector-sidecar.adoc[leveloffset=+1]
+
 include::modules/distr-tracing-otel-send-traces-and-metrics-to-otel-collector-no-sidecar.adoc[leveloffset=+1]

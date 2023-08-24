@@ -1,12 +1,12 @@
 :_content-type: ASSEMBLY
 [id="dist-tracing-otel-removing"]
-= Removing the {OTELName}
+= Removing the {OTELShortName}
 include::_attributes/common-attributes.adoc[]
 :context: dist-tracing-otel-removing
 
 toc::[]
 
-The steps for removing the {OTELName} from an {product-title} cluster are as follows:
+The steps for removing the {OTELShortName} from an {product-title} cluster are as follows:
 
 . Shut down all {OTELShortName} pods.
 . Remove any OpenTelemetryCollector instances.

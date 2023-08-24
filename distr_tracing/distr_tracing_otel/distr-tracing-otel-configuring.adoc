@@ -1,12 +1,12 @@
 :_content-type: ASSEMBLY
 [id="distr-tracing-otel-configuring"]
-= Configuring and deploying distributed tracing data collection OpenTelemetry
+= Configuring and deploying the {OTELShortName}
 include::_attributes/common-attributes.adoc[]
 :context: distr-tracing-otel-configuring
 
 toc::[]
 
-The {OTELName} Operator uses a custom resource definition (CRD) file that defines the architecture and configuration settings to be used when creating and deploying the {OTELName} resources. You can either install the default configuration or modify the file to better suit your business requirements.
+The {OTELName} Operator uses a custom resource definition (CRD) file that defines the architecture and configuration settings to be used when creating and deploying the {OTELShortName} resources. You can either install the default configuration or modify the file to better suit your business requirements.
 
 include::modules/distr-tracing-config-otel-collector.adoc[leveloffset=+1]
 
