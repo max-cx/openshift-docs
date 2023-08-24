@@ -11,7 +11,7 @@
 
 * {OTELName} is installed.
 
-== Sending traces and metrics to the OpenTelemetry collector using the sidecar injection
+= Sending traces and metrics to the OpenTelemetry collector using the sidecar injection
 
 .Procedure
 

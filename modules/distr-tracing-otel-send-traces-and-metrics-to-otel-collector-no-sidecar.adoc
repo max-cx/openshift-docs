@@ -4,8 +4,7 @@
 
 :_content-type: PROCEDURE
 [id="distr-tracing-otel-send-traces-and-metrics-to-otel-collector-no-sidecar_{context}"]
-
-== Sending traces and metrics to the OpenTelemetry collector without the sidecar injection
+= Sending traces and metrics to the OpenTelemetry collector without the sidecar injection
 
 .Procedure
 
