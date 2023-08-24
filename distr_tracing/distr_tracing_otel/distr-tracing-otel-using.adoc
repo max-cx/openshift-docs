@@ -9,7 +9,7 @@ toc::[]
 include::modules/distr-tracing-otel-forwarding.adoc[leveloffset=+1]
 
 [id="distr-tracing-otel-send-traces-and-metrics-to-otel-collector_{context}"]
-= Sending traces and metrics to the OpenTelemetry collector
+== Sending traces and metrics to the OpenTelemetry collector
 
 include::modules/distr-tracing-otel-send-traces-and-metrics-to-otel-collector-with-sidecar.adoc[leveloffset=+2]
 
