@@ -1,5 +1,5 @@
 :_content-type: ASSEMBLY
-[id="dist-tracing-tempo-removing"]
+[id="dist-tracing-otel-removing"]
 = Removing the {OTELName}
 include::_attributes/common-attributes.adoc[]
 :context: dist-tracing-otel-removing
