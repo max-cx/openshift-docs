@@ -96,9 +96,6 @@ $ oc apply -f - << EOF
 apiVersion: project.openshift.io/v1
 kind: Project
 metadata:
-  labels:
-    kubernetes.io/metadata.name: <openshift_project_of_tempostack_instance>
-    openshift.io/cluster-monitoring: "true"
   name: <openshift_project_of_tempostack_instance>
 EOF
 ----
