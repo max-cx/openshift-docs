@@ -1,14 +1,14 @@
 :_content-type: ASSEMBLY
 [id="dist-tracing-tempo-removing"]
-= Removing the {TempoShortName}
+= Removing the {TempoName}
 include::_attributes/common-attributes.adoc[]
 :context: dist-tracing-tempo-removing
 
 toc::[]
 
-The steps for removing the {DTProductName} from an {product-title} cluster are as follows:
+The steps for removing the {TempoName} from an {product-title} cluster are as follows:
 
-. Shut down all {DTProductName} pods.
+. Shut down all {TempoShortName} pods.
 . Remove any TempoStack instances.
 . Remove the {TempoOperator}.
 
