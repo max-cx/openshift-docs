@@ -17,18 +17,6 @@ The {OTELOperator} allows sidecar injection into Deployment workloads and automa
 ** You are logged in to the OpenShift web console as a cluster administrator with the `cluster-admin` role. For {product-dedicated}, you must have an account with the `dedicated-admin` role.
 
 ** An active OpenShift CLI (`oc`) session by a cluster administrator with the `cluster-admin` role.
-+
-[TIP]
-====
-* Ensure that your OpenShift CLI (`oc`) version is up to date and matches your {product-title} version.
-
-* Run `oc login`:
-+
-[source,terminal]
-----
-$ oc login --username=<your_username>
-----
-====
 
 .Procedure
 
@@ -42,7 +30,7 @@ metadata:
   name: observability
 ----
 
-. Create a ServiceAccount.
+. Create a service account.
 +
 [source,yaml]
 ----
@@ -53,7 +41,7 @@ metadata:
   namespace: observability
 ----
 
-. Grant permissions to the ServiceAccount for the `k8sattributes` and `resourcedetection` processors.
+. Grant permissions to the service account for the `k8sattributes` and `resourcedetection` processors.
 +
 [source,yaml]
 ----
@@ -118,8 +106,8 @@ spec:
           processors: [memory_limiter, resourcedetection, batch]
           exporters: [otlp]
 ----
-<1> This points to the Gateway of a Tempo instance deployed by using the `<example>` Tempo Operator.
+<1> This points to the Gateway of the TempoStack instance deployed by using the `<example>` Tempo Operator.
 
-. Create your Deployment using the `otel-collector-sidecar` ServiceAccount.
+. Create your Deployment using the `otel-collector-sidecar` service account.
 
-. Add the `sidecar.opentelemetry.io/inject: "true"` annotation to your deployment. This will inject all the needed environment variables to send data from your workloads to the OpenTelemetryCollector instance.
+. Add the `sidecar.opentelemetry.io/inject: "true"` annotation to your Deployment. This will inject all the needed environment variables to send data from your workloads to the OpenTelemetryCollector instance.

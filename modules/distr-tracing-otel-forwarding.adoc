@@ -125,7 +125,7 @@ spec:
 
 [TIP]
 ====
-You can deploy the `tracegen` as a test:
+You can deploy `tracegen` as a test:
 [source,yaml]
 ----
 apiVersion: batch/v1
