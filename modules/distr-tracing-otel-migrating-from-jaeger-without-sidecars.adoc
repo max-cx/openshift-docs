@@ -4,13 +4,13 @@
 
 :_content-type: PROCEDURE
 [id="distr-tracing-otel-migrating-from-jaeger-without-sidecars_{context}"]
-= Migrating from the {JaegerName} to the {OTELName} without sidecars
+= Migrating from the {JaegerShortName} to the {OTELShortName} without sidecars
 
-You can migrate from the {JaegerName} to the {OTELName} without sidecar deployment.
+You can migrate from the {JaegerShortName} to the {OTELShortName} without sidecar deployment.
 
 .Prerequisites
 
-* Existing instrumentation of applications uses {JaegerName} for tracing.
+* The {JaegerName} is used on the cluster.
 * The {OTELName} is installed.
 
 .Procedure
@@ -27,7 +27,7 @@ metadata:
   name: observability
 ----
 
-. Create a Service Account for running the OpenTelemetry Collector instance.
+. Create a service account for running the OpenTelemetry Collector instance.
 +
 [source,yaml]
 ----
@@ -38,7 +38,7 @@ metadata:
   namespace: observability
 ----
 
-. Create a ClusterRole for setting the required permissions for the processors.
+. Create a cluster role for setting the required permissions for the processors.
 +
 [source,yaml]
 ----
@@ -54,7 +54,7 @@ rules:
   verbs: ["get", "watch", "list"]
 ----
 
-. Create a ClusterRoleBinding to set the permissions for the Service Account.
+. Create a `ClusterRoleBinding` to set the permissions for the service account.
 +
 [source,yaml]
 ----
@@ -74,7 +74,7 @@ roleRef:
 
 . Create the OpenTelemetry Collector instance.
 +
-NOTE: This collector will be exporting traces to a Tempo instance. You must create your Tempo instance using the Red Hat Tempo Operator and place here the correct endpoint.
+NOTE: This collector will be exporting traces to a TempoStack instance. You must create your TempoStack instance using the Red Hat Tempo Operator and place here the correct endpoint.
 +
 ----
 apiVersion: opentelemetry.io/v1alpha1
@@ -117,12 +117,13 @@ spec:
 
 . Point your tracing endpoint to the OpenTelemetry Operator.
 
-. If you are exporting your traces directly from your application to Jaeger, you will need to change the API endpoint from the Jaeger endpoint to the OpenTelemetry Collector endpoint.
+. If you are exporting your traces directly from your application to Jaeger, change the API endpoint from the Jaeger endpoint to the OpenTelemetry Collector endpoint.
 +
-For example, if you are using Golang and exporting your traces using the jaegerexporter, you can be using something like this:
-+
+.Exporting traces by using the `jaegerexporter` with Golang
+====
+[source,golang]
 ----
-exp, err := jaeger.New(jaeger.WithCollectorEndpoint(jaeger.WithEndpoint(url)))
+exp, err := jaeger.New(jaeger.WithCollectorEndpoint(jaeger.WithEndpoint(url))) <1>
 ----
-+
-The URL must point to the OpenTelemetry Collector API endpoint.
+<1> The URL points to the OpenTelemetry Collector API endpoint.
+====

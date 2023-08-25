@@ -4,9 +4,9 @@
 
 :_content-type: PROCEDURE
 [id="distr-tracing-otel-migrating-from-jaeger-with-sidecars_{context}"]
-= Migrating from the {JaegerName} to the {OTELName} with sidecars
+= Migrating from the {JaegerShortName} to the {OTELShortName} with sidecars
 
-The {OTELName} Operator supports sidecar injection into Deployment workloads, so you can migrate from a {JaegerName} sidecar to a {OTELName} sidecar.
+The {OTELShortName} Operator supports sidecar injection into Deployment workloads, so you can migrate from a {JaegerShortName} sidecar to a {OTELShortName} sidecar.
 
 .Prerequisites
 
@@ -57,7 +57,7 @@ spec:
 ----
 <1> This endpoint points to the Gateway of a TempoStack instance deployed by using the `<example>` {TempoOperator}.
 
-. Create a Service Account for running your application.
+. Create a service account for running your application.
 +
 [source,yaml]
 ----
@@ -67,7 +67,7 @@ metadata:
   name: otel-collector-sidecar
 ----
 
-. Create a ClusterRole for the permissions needed by some processors.
+. Create a cluster role for the permissions needed by some processors.
 +
 [source,yaml]
 ----
@@ -83,7 +83,7 @@ rules:
 ----
 <1> The `resourcedetectionprocessor` requires permissions for infrastructures and infrastructures/status.
 
-. Create a ClusterRoleBinding to set the permissions for the Service Account.
+. Create a `ClusterRoleBinding` to set the permissions for the service account.
 +
 [source,yaml]
 ----
@@ -143,14 +143,8 @@ spec:
           exporters: [otlp]
 ----
 
-. Remove the injected Jaeger Agent from your application.
-+
-To remove the automatic sidecar injection from the Jaeger Operator, you need to remove the `"sidecar.jaegertracing.io/inject": "true"` annotation from your Deployment.
+. Remove the injected Jaeger Agent from your application by removing the `"sidecar.jaegertracing.io/inject": "true"` annotation from your Deployment.
 
-. Enable automatic injection of the OpenTelemetry sidecar.
-+
-To enable automatic injection of the OpenTelemetry sidecar, add the sidecar.opentelemetry.io/inject: "true" annotation to the .spec.template.metadata.annotations field of your Deployment.
+. Enable automatic injection of the OpenTelemetry sidecar by adding the `sidecar.opentelemetry.io/inject: "true"` annotation to the `.spec.template.metadata.annotations` field of your Deployment.
 
-. Use the created Service Account for your deployment
-+
-Use the Service Account we created before (otel-collector-sidecar) for the deployment of your application. This will allow the processors to get the correct information and add it to your traces.
+. Use the created service account for the Deployment of your application to allow the processors to get the correct information and add it to your traces.

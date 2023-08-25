@@ -12,6 +12,8 @@ The {OTELOperator} allows sidecar injection into Deployment workloads and automa
 
 .Prerequisites
 
+* The {TempoName} is installed and a TempoStack instance is deployed.
+
 * You have access to the cluster through the OpenShift web console or the OpenShift CLI (`oc`):
 
 ** You are logged in to the OpenShift web console as a cluster administrator with the `cluster-admin` role.
@@ -108,7 +110,7 @@ spec:
           processors: [memory_limiter, resourcedetection, batch]
           exporters: [otlp]
 ----
-<1> This points to the Gateway of the TempoStack instance deployed by using the `<example>` Tempo Operator.
+<1> This points to the Gateway of the TempoStack instance deployed by using the `<example>` {TempoOperator}.
 
 . Create your Deployment using the `otel-collector-sidecar` service account.
 
