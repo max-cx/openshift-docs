@@ -12,9 +12,11 @@ You can set up sending telemetry data to an OpenTelemetryCollector instance with
 
 * You have access to the cluster through the OpenShift web console or the OpenShift CLI (`oc`):
 
-** You are logged in to the OpenShift web console as a cluster administrator with the `cluster-admin` role. For {product-dedicated}, you must have an account with the `dedicated-admin` role.
+** You are logged in to the OpenShift web console as a cluster administrator with the `cluster-admin` role.
 
 ** An active OpenShift CLI (`oc`) session by a cluster administrator with the `cluster-admin` role.
+
+** For {product-dedicated}, you must have an account with the `dedicated-admin` role.
 
 .Procedure
 
