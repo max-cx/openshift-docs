@@ -11,15 +11,16 @@ include::snippets/technology-preview.adoc[leveloffset=+1]
 
 The OpenTelemetry Collector consists of three components that access telemetry data:
 
-* *Receivers* - A receiver, which can be push or pull based, is how data gets into the Collector. Generally, a receiver accepts data in a specified format, translates it into the internal format and passes it to processors and exporters defined in the applicable pipelines. By default, no receivers are configured. One or more receivers must be configured. Receivers may support one or more data sources.
+* *Receivers* - A receiver, which can be push or pull based, is how data gets into the Collector. Generally, a receiver accepts data in a specified format, translates it into the internal format, and passes it to processors and exporters defined in the applicable pipelines. By default, no receivers are configured. One or more receivers must be configured. Receivers may support one or more data sources.
 
-* *Processors* - (Optional) Processors are run on data between being received and being exported. By default, no processors are enabled. Processors must be enabled for every data source. Not all processors support all data sources. Depending on the data source, it may be recommended that multiple processors be enabled. In addition, it is important to note that the order of processors matters.
+* *Processors* - (Optional) Processors run through the data between it is received and exported. By default, no processors are enabled. Processors must be enabled for every data source. Not all processors support all data sources. Depending on the data source, multiple processors might be enabled. In addition, it is important to note that the order of processors matters.
 
-* *Exporters* - An exporter, which can be push or pull based, is how you send data to one or more backends/destinations. By default, no exporters are configured. One or more exporters must be configured. Exporters may support one or more data sources. Exporters may come with default settings, but many require configuration to specify at least the destination and security settings.
+* *Exporters* - An exporter, which can be push or pull based, is how you send data to one or more back ends or destinations. By default, no exporters are configured. One or more exporters must be configured. Exporters can support one or more data sources. Exporters might be used with their default settings, but many exporters require configuration to specify at least the destination and security settings.
 
-You can define multiple instances of components in a custom resource YAML file. Once configured, these components must be enabled through pipelines defined in the `spec.config.service` section of the YAML file. As a best practice you should only enable the components that you need.
+You can define multiple instances of components in a custom resource YAML file. When configured, these components must be enabled through pipelines defined in the `spec.config.service` section of the YAML file. As a best practice, only enable the components that you need.
 
-.sample OpenTelemetry collector custom resource file
+.OpenTelemetry collector custom resource file
+====
 [source,yaml]
 ----
 apiVersion: opentelemetry.io/v1alpha1
@@ -49,7 +50,7 @@ spec:
         endpoint: 0.0.0.0:8889
         resource_to_telemetry_conversion:
           enabled: true # by default resource attributes are dropped
-    service:
+    service: <1>
       pipelines:
         traces:
           receivers: [otlp]
@@ -60,10 +61,7 @@ spec:
           processors: []
           exporters: [prometheus]
 ----
-
-[NOTE]
-====
-If a component is configured, but not defined within the `service` section then it is not enabled.
+<1> If a component is configured but not defined in the `service` section, the component is not enabled.
 ====
 
 .Parameters used by the Operator to define the OpenTelemetry Collector
@@ -77,12 +75,12 @@ If a component is configured, but not defined within the `service` section then 
 |None
 
 |processors:
-|Processors run on data between being received and being exported. By default, no processors are enabled.
+|Processors run through the data between it is received and exported. By default, no processors are enabled.
 |
 |None
 
 |exporters:
-|An exporter sends data to one or more backends/destinations. By default, no exporters are configured. There must be at least one enabled exporter for a configuration to be considered valid. Exporters are enabled by being added to a pipeline. Exporters may come with default settings, but many require configuration to specify at least the destination and security settings.
+|An exporter sends data to one or more back ends or destinations. By default, no exporters are configured. There must be at least one enabled exporter for a configuration to be considered valid. Exporters are enabled by being added to a pipeline. Exporters might be used with their default settings, but many require configuration to specify at least the destination and security settings.
 |`otlp`, `otlphttp`, `jaeger`, `logging`, `prometheus`
 |None
 
@@ -147,12 +145,12 @@ If a component is configured, but not defined within the `service` section then 
 
 ==== OTLP Receiver
 
-OTLP receiver ingests data using the OpenTelemetry protocol (OTLP).
+The OTLP receiver ingests data using the OpenTelemetry protocol (OTLP).
 
 * Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
 * Supported signals: traces, metrics
 
-.OpenTelemetry collector custom resource with enabled OTLP receiver
+.OpenTelemetry collector custom resource with an enabled OTLP receiver
 [source,yaml]
 ----
   config: |
@@ -175,18 +173,18 @@ OTLP receiver ingests data using the OpenTelemetry protocol (OTLP).
         metrics:
           receivers: [otlp]
 ----
-<1> The OTLP gRPC endpoint. If omitted the default `+0.0.0.0:4317+` is used.
-<2> The OTLP HTTP endpoint . If omitted the default `+0.0.0.0:4318+` is used.
+<1> The OTLP gRPC endpoint. If omitted, the default `+0.0.0.0:4317+` is used.
+<2> The OTLP HTTP endpoint. If omitted, the default `+0.0.0.0:4318+` is used.
 <3> The TLS server side configuration. Defines paths to TLS certificates. If omitted TLS is disabled.
 
 ==== Jaeger Receiver
 
-Jaeger receiver ingests data in Jaeger formats.
+The Jaeger receiver ingests data in Jaeger formats.
 
 * Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
 * Supported signals: traces
 
-.OpenTelemetry collector custom resource with enabled Jaeger receiver
+.OpenTelemetry collector custom resource with an enabled Jaeger receiver
 [source,yaml]
 ----
   config: |
@@ -208,15 +206,15 @@ Jaeger receiver ingests data in Jaeger formats.
         traces:
           receivers: [jaeger]
 ----
-<1> The Jaeger gRPC endpoint. If omitted the default `+0.0.0.0:14250+` is used.
-<2> The Jaeger Thrift HTTP endpoint. If omitted the default `+0.0.0.0:14268+` is used.
-<3> The Jaeger Thrift Compact endpoint. If omitted the default `+0.0.0.0:6831+` is used.
-<4> The Jaeger Thrift Binary endpoint. If omitted the default `+0.0.0.0:6832+` is used.
+<1> The Jaeger gRPC endpoint. If omitted, the default `+0.0.0.0:14250+` is used.
+<2> The Jaeger Thrift HTTP endpoint. If omitted, the default `+0.0.0.0:14268+` is used.
+<3> The Jaeger Thrift Compact endpoint. If omitted, the default `+0.0.0.0:6831+` is used.
+<4> The Jaeger Thrift Binary endpoint. If omitted, the default `+0.0.0.0:6832+` is used.
 <5> The TLS server side configuration. See the OTLP receiver configuration section for more details.
 
 ==== Zipkin Receiver
 
-Zipkin receiver ingests data in the Zipkin V1 and V2 formats.
+The Zipkin receiver ingests data in the Zipkin v1 and v2 formats.
 
 * Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
 * Supported signals: traces
@@ -235,7 +233,7 @@ Zipkin receiver ingests data in the Zipkin V1 and V2 formats.
         traces:
           receivers: [zipkin]
 ----
-<1> The Zipkin HTTP endpoint. If omitted the default `+0.0.0.0:9411+` is used.
+<1> The Zipkin HTTP endpoint. If omitted, the default `+0.0.0.0:9411+` is used.
 <2> The TLS server side configuration. See the OTLP receiver configuration section for more details.
 
 
@@ -243,10 +241,12 @@ Zipkin receiver ingests data in the Zipkin V1 and V2 formats.
 
 ==== Resource Detection Processor.
 
-Resource Detection processor is designed to identify host resource details in alignment with OpenTelemetry's resource semantic standards.
-It can then either add or replace the resource values in telemetry data using this detected information.
+The Resource Detection processor is designed to identify host resource details in alignment with OpenTelemetry's resource semantic standards. Using this detected information, it can add or replace the resource values in telemetry data.
 
-.Needed permissions to use the Resource Detection Processor in OpenShift.
+* Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
+* Supported signals: traces, metrics
+
+.OpenShift permissions required for the Resource Detection Processor
 [source,yaml]
 ----
 kind: ClusterRole
@@ -258,10 +258,7 @@ rules:
   verbs: ["get", "watch", "list"]
 ----
 
-* Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
-* Supported signals: traces, metrics
-
-.OpenTelemetry collector using the resource detection processor.
+.OpenTelemetry collector using the resource detection processor
 [source,yaml]
 ----
   config: |
@@ -280,12 +277,12 @@ rules:
 
 ==== OTLP Exporter
 
-OTLP gRPC exporter exports data using the OpenTelemetry protocol (OTLP).
+The OTLP gRPC exporter exports data using the OpenTelemetry protocol (OTLP).
 
 * Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
 * Supported signals: traces, metrics
 
-.OpenTelemetry collector custom resource with enabled OTLP exporter
+.OpenTelemetry collector custom resource with an enabled OTLP exporter
 [source,yaml]
 ----
   config: |
@@ -305,18 +302,18 @@ OTLP gRPC exporter exports data using the OpenTelemetry protocol (OTLP).
         metrics:
           expoters: [otlp]
 ----
-<1> The OTLP gRPC endpoint. If `+https://+` scheme is used then client transport security is enabled and overrides `+insecure+` setting in `+tls+`.
+<1> The OTLP gRPC endpoint. If the `+https://+` scheme is used, then client transport security is enabled and overrides the `+insecure+` setting in the `+tls+`.
 <2> The client side TLS configuration. Defines paths to TLS certificates.
 <3> Headers are sent for every RPC performed during an established connection.
 
 ==== OTLP HTTP Exporter
 
-OTLP HTTP exporter exports data using the OpenTelemetry protocol (OTLP).
+The OTLP HTTP exporter exports data using the OpenTelemetry protocol (OTLP).
 
 * Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
 * Supported signals: traces, metrics
 
-.OpenTelemetry collector custom resource with enabled OTLP exporter
+.OpenTelemetry collector custom resource with an enabled OTLP exporter
 [source,yaml]
 ----
   config: |
@@ -337,13 +334,13 @@ OTLP HTTP exporter exports data using the OpenTelemetry protocol (OTLP).
         metrics:
           expoters: [otlphttp]
 ----
-<1> The OTLP HTTP endpoint. If `+https://+` scheme is used then client transport security is enabled and overrides `+insecure+` setting in `+tls+`.
+<1> The OTLP HTTP endpoint. If the `+https://+` scheme is used, then client transport security is enabled and overrides the `+insecure+` setting in the `+tls+`.
 <2> The client side TLS configuration. Defines paths to TLS certificates.
 <3> Headers are sent in every HTTP request.
 
 ==== Jaeger Exporter
 
-Jaeger exporter exports data using the Jaeger proto format through gRPC.
+The Jaeger exporter exports data using the Jaeger proto format through gRPC.
 
 * Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
 * Supported signals: traces
@@ -369,12 +366,12 @@ Jaeger exporter exports data using the Jaeger proto format through gRPC.
 
 ==== Logging exporter
 
-Logging exporter prints data to the standard output.
+The Logging exporter prints data to the standard output.
 
 * Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
 * Supported signals: traces, metrics
 
-.OpenTelemetry collector custom resource with enabled Logging exporter
+.OpenTelemetry collector custom resource with an enabled Logging exporter
 [source,yaml]
 ----
   config: |
@@ -388,4 +385,4 @@ Logging exporter prints data to the standard output.
         metrics:
           exporters: [logging]
 ----
-<1> The verbosity of the logging export (`+detailed+`|`+normal+`|`+basic+`). When set to detailed, pipeline data is verbosely logged. Defaults to `+normal+`.
+<1> The verbosity of the logging export: `+detailed+` or `+normal+` or `+basic+`. When set to `detailed`, pipeline data is verbosely logged. Defaults to `+normal+`.
