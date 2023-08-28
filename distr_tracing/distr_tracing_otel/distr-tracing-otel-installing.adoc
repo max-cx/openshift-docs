@@ -6,21 +6,23 @@ include::_attributes/common-attributes.adoc[]
 
 toc::[]
 
-== Prerequisites
+:FeatureName: The {OTELOperator}
+include::snippets/technology-preview.adoc[leveloffset=+1]
 
-Before you can install {OTELShortName}, review the installation activities, and ensure that you meet the prerequisites:
+Installing the {TempoShortName} involves the following steps:
 
-* Possess an active {product-title} subscription on your Red Hat account. If you do not have a subscription, contact your sales representative for more information.
+* Installing the {OTELOperator}.
+* Creating a namespace for a XXXX instance.
+* Creating a TempoStack custom resource to deploy at least one TempoStack instance.
 
-* Review the xref:../../architecture/architecture-installation.adoc#installation-overview_architecture-installation[{product-title} {product-version} overview].
-* Install {product-title} {product-version}.
+include::modules/distr-tracing-otel-install-web-console.adoc[leveloffset=+1]
 
-** xref:../../installing/installing_aws/installing-aws-account.adoc#installing-aws-account[Install {product-title} {product-version} on AWS]
-** xref:../../installing/installing_aws/installing-aws-user-infra.adoc#installing-aws-user-infra[Install {product-title} {product-version} on user-provisioned AWS]
-** xref:../../installing/installing_bare_metal/installing-bare-metal.adoc#installing-bare-metal[Install {product-title} {product-version} on bare metal]
-** xref:../../installing/installing_vsphere/installing-vsphere.adoc#installing-vsphere[Install {product-title} {product-version} on vSphere]
-* Install the version of the OpenShift CLI (`oc`) that matches your {product-title} version and add it to your path.
-
-* An account with the `cluster-admin` role.
-
-include::modules/distr-tracing-install-otel-operator.adoc[leveloffset=+1]
+[role="_additional-resources"]
+[id="additional-resources_dist-tracing-tempo-installing"]
+== Additional resources
+* xref:../../post_installation_configuration/preparing-for-users.adoc#creating-cluster-admin_post-install-preparing-for-users[Creating a cluster admin]
+* link:https://operatorhub.io/[OperatorHub.io]
+* xref:../../web_console/web-console.adoc#web-console[Accessing the web console]
+* xref:../../operators/admin/olm-adding-operators-to-cluster.adoc#olm-installing-from-operatorhub-using-web-console_olm-adding-operators-to-a-cluster[Installing from OperatorHub using the web console]
+* xref:../../operators/user/olm-creating-apps-from-installed-operators.adoc#olm-creating-apps-from-installed-operators[Creating applications from installed Operators]
+* xref:../../cli_reference/openshift_cli/getting-started-cli.adoc#getting-started-cli[Getting started with the OpenShift CLI]

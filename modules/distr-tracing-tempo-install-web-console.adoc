@@ -10,7 +10,7 @@ You can install the {TempoShortName} by using the *Administrator* view of the Op
 
 .Prerequisites
 
-* You are logged in to the OpenShift web console as a cluster administrator with the `cluster-admin` role. For {product-dedicated}, you must have an account with the `dedicated-admin` role.
+* You are logged in to the OpenShift web console as a cluster administrator with the `cluster-admin` role. For {product-dedicated}, you must be logged in using an account with the `dedicated-admin` role.
 
 * You are using a supported provider of object storage: link:https://www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation[Red Hat OpenShift Data Foundation], link:https://min.io/[MinIO], link:https://aws.amazon.com/s3/[Amazon S3], link:https://azure.microsoft.com/en-us/products/storage/blobs/[Azure Blob Storage], link:https://cloud.google.com/storage/[Google Cloud Storage].
 
@@ -20,7 +20,7 @@ You can install the {TempoShortName} by using the *Administrator* view of the Op
 
 .. Go to *Operators* -> *OperatorHub* and search for `{TempoOperator}`.
 
-.. Select *{TempoOperator}* that is *OpenShift Operator for Tempo* -> *Install* -> *Install* -> *View Operator*.
+.. Select the *{TempoOperator}* that is *OpenShift Operator for Tempo* -> *Install* -> *Install* -> *View Operator*.
 +
 [IMPORTANT]
 ====

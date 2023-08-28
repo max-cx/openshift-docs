@@ -20,7 +20,7 @@ You can install the {TempoShortName} on the command line.
 +
 [source,terminal]
 ----
-$ oc login --username=<your_username> 
+$ oc login --username=<your_username>
 ----
 ====
 
