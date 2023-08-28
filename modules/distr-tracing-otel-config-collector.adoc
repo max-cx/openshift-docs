@@ -239,14 +239,14 @@ The Zipkin receiver ingests data in the Zipkin v1 and v2 formats.
 
 === Processors
 
-==== Resource Detection Processor.
+==== Resource Detection processor
 
 The Resource Detection processor is designed to identify host resource details in alignment with OpenTelemetry's resource semantic standards. Using this detected information, it can add or replace the resource values in telemetry data.
 
 * Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
 * Supported signals: traces, metrics
 
-.OpenShift permissions required for the Resource Detection Processor
+.OpenShift permissions required for the Resource Detection processor
 [source,yaml]
 ----
 kind: ClusterRole
@@ -258,7 +258,7 @@ rules:
   verbs: ["get", "watch", "list"]
 ----
 
-.OpenTelemetry collector using the resource detection processor
+.OpenTelemetry collector using the Resource Detection processor
 [source,yaml]
 ----
   config: |
@@ -275,7 +275,7 @@ rules:
 
 === Exporters
 
-==== OTLP Exporter
+==== OTLP exporter
 
 The OTLP gRPC exporter exports data using the OpenTelemetry protocol (OTLP).
 
@@ -306,7 +306,7 @@ The OTLP gRPC exporter exports data using the OpenTelemetry protocol (OTLP).
 <2> The client side TLS configuration. Defines paths to TLS certificates.
 <3> Headers are sent for every RPC performed during an established connection.
 
-==== OTLP HTTP Exporter
+==== OTLP HTTP exporter
 
 The OTLP HTTP exporter exports data using the OpenTelemetry protocol (OTLP).
 
@@ -338,7 +338,7 @@ The OTLP HTTP exporter exports data using the OpenTelemetry protocol (OTLP).
 <2> The client side TLS configuration. Defines paths to TLS certificates.
 <3> Headers are sent in every HTTP request.
 
-==== Jaeger Exporter
+==== Jaeger exporter
 
 The Jaeger exporter exports data using the Jaeger proto format through gRPC.
 
