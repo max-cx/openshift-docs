@@ -15,7 +15,7 @@ Installing the {TempoShortName} involves the following steps:
 * Installing the {TempoOperator}.
 * Creating a Secret for the object storage credentials.
 * Creating a namespace for a TempoStack instance.
-* Creating a TempoStack custom resource to deploy at least one TempoStack instance.
+* Creating a `TempoStack` custom resource to deploy at least one TempoStack instance.
 
 include::modules/distr-tracing-tempo-install-web-console.adoc[leveloffset=+1]
 
