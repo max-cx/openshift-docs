@@ -28,16 +28,16 @@ $ oc login --username=<your_username>
 
 . Get the name of the {OTELShortName} instance:
 +
-[source,terminal,attributes]
+[source,terminal]
 ----
 $ oc get deployments -n <openshift_project_of_opentelemetry_instance>
 ----
 
 . Remove the {OTELShortName} instance:
 +
-[source,terminal,attributes]
+[source,terminal]
 ----
-$ oc delete otel??? <opentelemetry_instance_name> -n <openshift_project_of_opentelemetry_instance>
+$ oc delete opentelemetrycollectors <opentelemetry_instance_name> -n <openshift_project_of_opentelemetry_instance>
 ----
 
 . Optional: Remove the {OTELOperator}.
