@@ -19,7 +19,7 @@ The OpenTelemetry Collector consists of three components that access telemetry d
 
 You can define multiple instances of components in a custom resource YAML file. When configured, these components must be enabled through pipelines defined in the `spec.config.service` section of the YAML file. As a best practice, only enable the components that you need.
 
-.OpenTelemetry collector custom resource file
+.OpenTelemetry Collector custom resource file
 ====
 [source,yaml]
 ----
@@ -150,7 +150,7 @@ The OTLP receiver ingests data using the OpenTelemetry protocol (OTLP).
 * Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
 * Supported signals: traces, metrics
 
-.OpenTelemetry collector custom resource with an enabled OTLP receiver
+.OpenTelemetry Collector custom resource with an enabled OTLP receiver
 [source,yaml]
 ----
   config: |
@@ -184,7 +184,7 @@ The Jaeger receiver ingests data in Jaeger formats.
 * Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
 * Supported signals: traces
 
-.OpenTelemetry collector custom resource with an enabled Jaeger receiver
+.OpenTelemetry Collector custom resource with an enabled Jaeger receiver
 [source,yaml]
 ----
   config: |
@@ -219,7 +219,7 @@ The Zipkin receiver ingests data in the Zipkin v1 and v2 formats.
 * Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
 * Supported signals: traces
 
-.OpenTelemetry collector custom resource with enabled Zipkin receiver
+.OpenTelemetry Collector custom resource with enabled Zipkin receiver
 [source,yaml]
 ----
   config: |
@@ -258,7 +258,7 @@ rules:
   verbs: ["get", "watch", "list"]
 ----
 
-.OpenTelemetry collector using the Resource Detection processor
+.OpenTelemetry Collector using the Resource Detection processor
 [source,yaml]
 ----
   config: |
@@ -282,7 +282,7 @@ The OTLP gRPC exporter exports data using the OpenTelemetry protocol (OTLP).
 * Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
 * Supported signals: traces, metrics
 
-.OpenTelemetry collector custom resource with an enabled OTLP exporter
+.OpenTelemetry Collector custom resource with an enabled OTLP exporter
 [source,yaml]
 ----
   config: |
@@ -302,7 +302,7 @@ The OTLP gRPC exporter exports data using the OpenTelemetry protocol (OTLP).
         metrics:
           expoters: [otlp]
 ----
-<1> The OTLP gRPC endpoint. If the `+https://+` scheme is used, then client transport security is enabled and overrides the `+insecure+` setting in the `+tls+`.
+<1> The OTLP gRPC endpoint. If the `+https://+` scheme is used, then client transport security is enabled and overrides the `insecure` setting in the `tls`.
 <2> The client side TLS configuration. Defines paths to TLS certificates.
 <3> Headers are sent for every RPC performed during an established connection.
 
@@ -313,7 +313,7 @@ The OTLP HTTP exporter exports data using the OpenTelemetry protocol (OTLP).
 * Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
 * Supported signals: traces, metrics
 
-.OpenTelemetry collector custom resource with an enabled OTLP exporter
+.OpenTelemetry Collector custom resource with an enabled OTLP exporter
 [source,yaml]
 ----
   config: |
@@ -334,7 +334,7 @@ The OTLP HTTP exporter exports data using the OpenTelemetry protocol (OTLP).
         metrics:
           expoters: [otlphttp]
 ----
-<1> The OTLP HTTP endpoint. If the `+https://+` scheme is used, then client transport security is enabled and overrides the `+insecure+` setting in the `+tls+`.
+<1> The OTLP HTTP endpoint. If the `+https://+` scheme is used, then client transport security is enabled and overrides the `insecure` setting in the `tls`.
 <2> The client side TLS configuration. Defines paths to TLS certificates.
 <3> Headers are sent in every HTTP request.
 
@@ -345,7 +345,7 @@ The Jaeger exporter exports data using the Jaeger proto format through gRPC.
 * Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
 * Supported signals: traces
 
-.OpenTelemetry collector custom resource with enabled Jaeger exporter
+.OpenTelemetry Collector custom resource with enabled Jaeger exporter
 [source,yaml]
 ----
   config: |
@@ -371,7 +371,7 @@ The Logging exporter prints data to the standard output.
 * Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
 * Supported signals: traces, metrics
 
-.OpenTelemetry collector custom resource with an enabled Logging exporter
+.OpenTelemetry Collector custom resource with an enabled Logging exporter
 [source,yaml]
 ----
   config: |
@@ -385,4 +385,4 @@ The Logging exporter prints data to the standard output.
         metrics:
           exporters: [logging]
 ----
-<1> The verbosity of the logging export: `+detailed+` or `+normal+` or `+basic+`. When set to `detailed`, pipeline data is verbosely logged. Defaults to `+normal+`.
+<1> Verbosity of the logging export: `detailed` or `normal` or `basic`. When set to `detailed`, pipeline data is verbosely logged. Defaults to `normal`.
