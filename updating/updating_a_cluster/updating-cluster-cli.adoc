@@ -29,7 +29,7 @@ See xref:../../authentication/using-rbac.adoc#using-rbac[Using RBAC to define an
 * Ensure that all machine config pools (MCPs) are running and not paused. Nodes associated with a paused MCP are skipped during the update process. You can pause the MCPs if you are performing a canary rollout update strategy.
 * If your cluster uses manually maintained credentials, update the cloud provider resources for the new release. For more information, including how to determine if this is a requirement for your cluster, see xref:../../updating/preparing_for_updates/preparing-manual-creds-update.adoc#preparing-manual-creds-update[Preparing to update a cluster with manually maintained credentials].
 * Ensure that you address all `Upgradeable=False` conditions so the cluster allows an update to the next minor version. An alert displays at the top of the *Cluster Settings* page when you have one or more cluster Operators that cannot be updated. You can still update to the next available patch update for the minor release you are currently on.
-* Review the list of APIs that were removed in Kubernetes 1.26, migrate any affected components to use the new API version, and provide the administrator acknowledgment. For more information, see xref:../../updating/preparing_for_updates/updating-cluster-prepare.adoc#updating-cluster-prepare[Preparing to update to {product-title} 4.13].
+* Review the list of APIs that were removed in Kubernetes 1.27, migrate any affected components to use the new API version, and provide the administrator acknowledgment. For more information, see xref:../../updating/preparing_for_updates/updating-cluster-prepare.adoc#updating-cluster-prepare[Preparing to update to {product-title} 4.14].
 * If you run an Operator or you have configured any application with the pod disruption budget, you might experience an interruption during the update process. If `minAvailable` is set to 1 in `PodDisruptionBudget`, the nodes are drained to apply pending machine configs which might block the eviction process. If several nodes are rebooted, all the pods might run on only one node, and the `PodDisruptionBudget` field can prevent the node drain.
 
 [IMPORTANT]
@@ -42,8 +42,10 @@ See xref:../../authentication/using-rbac.adoc#using-rbac[Using RBAC to define an
 .Additional resources
 * xref:../../architecture/architecture-installation.adoc#unmanaged-operators_architecture-installation[Support policy for unmanaged Operators]
 
+// Pausing a MachineHealthCheck resource
 include::modules/machine-health-checks-pausing.adoc[leveloffset=+1]
 
+// About updating single node {product-title}
 include::modules/updating-sno.adoc[leveloffset=+1]
 
 [role="_additional-resources"]
@@ -51,6 +53,7 @@ include::modules/updating-sno.adoc[leveloffset=+1]
 
 * For information on which machine configuration changes require a reboot, see the note in xref:../../architecture/control-plane.adoc#about-machine-config-operator_control-plane[About the Machine Config Operator].
 
+// Updating a cluster by using the CLI
 include::modules/update-upgrading-cli.adoc[leveloffset=+1]
 
 [role="_additional-resources"]
@@ -59,6 +62,7 @@ include::modules/update-upgrading-cli.adoc[leveloffset=+1]
 * xref:../../updating/updating_a_cluster/eus-eus-update.adoc#eus-eus-update[Performing an EUS-to-EUS update]
 * xref:../../updating/understanding_updates/understanding-update-channels-release.adoc#understanding-update-channels-releases[Understanding update channels and releases]
 
+// Updating along a conditional update path
 include::modules/update-conditional-updates.adoc[leveloffset=+1]
 
 // OKD removed the section that this link points to.
@@ -72,4 +76,5 @@ ifndef::openshift-origin[]
 
 endif::openshift-origin[]
 
+// Changing the update server by using the CLI
 include::modules/update-changing-update-server-cli.adoc[leveloffset=+1]

@@ -1,9 +1,5 @@
 // Module included in the following assemblies:
 //
-// * installing/installing_alibaba/installing-alibaba-default.adoc
-// * installing/installing_aws/installing-alibaba-customizations.adoc
-// * installing/installing_alibaba/installing-alibaba-network-customizations.adoc
-// * installing/installing_alibaba_installing-alibaba-vpc.adoc
 // * installing/installing_aws/installing-aws-china.adoc
 // * installing/installing_aws/installing-aws-customizations.adoc
 // * installing/installing_aws/installing-aws-government-region.adoc
@@ -18,23 +14,10 @@
 // * installing/installing_azure/installing-azure-network-customizations.adoc
 // * installing/installing_azure/installing-azure-private.adoc
 // * installing/installing_azure/installing-azure-vnet.adoc
-// * installing/installing_bare_metal/installing-bare-metal-network-customizations.adoc
-// * installing/installing_bare_metal/installing-bare-metal.adoc
-// * installing/installing_bare_metal/installing-restricted-networks-bare-metal.adoc
-// * installing/installing_ibm_cloud_public/installing-ibm-cloud-customizations.adoc
-// * installing/installing_ibm_cloud_public/installing-ibm-cloud-network-customizations.adoc
-// * installing/installing_ibm_cloud_public/installing-ibm-cloud-vpc.adoc
-// * installing/installing_ibm_cloud_public/intalling-ibm-cloud-private.adoc
-// * installing/installing_ibm_power/installing-ibm-power.adoc
-// * installing/installing_ibm_power/installing-restricted-networks-ibm-power.adoc
 // * installing/installing_ibm_powervs/installing-ibm-power-vs-customizations.adoc
 // * installing/installing_ibm_powervs/installing-ibm-power-vs-private-cluster.adoc
 // * installing/installing_ibm_powervs/installing-restricted-networks-ibm-power-vs.adoc
 // * installing/installing_ibm_powervs/installing-ibm-powervs-vpc.adoc
-// * installing/installing_ibm_z/installing-ibm-z-kvm.adoc
-// * installing/installing_ibm_z/installing-ibm-z.adoc
-// * installing/installing_ibm_z/installing-restricted-networks-ibm-z-kvm.adoc
-// * installing/installing_ibm_z/installing-restricted-networks-ibm-z.adoc
 // * installing/installing_openstack/installing-openstack-installer-custom.adoc
 // * installing/installing_openstack/installing-openstack-installer-kuryr.adoc
 // * installing/installing_openstack/installing-openstack-installer-restricted.adoc
@@ -52,19 +35,18 @@
 // * installing/installing_vsphere/installing-restricted-networks-installer-provisioned-vsphere.adoc
 // * installing/installing_vsphere/installing-vsphere-installer-provisioned-customizations.adoc
 // * installing/installing_vsphere/installing-vsphere-installer-provisioned-network-customizations.adoc
-// * installing/installing_azure_stack_hub/installing-azure-stack-hub-default.adoc
-// * installing/installing_azure_stack_hub/installing-azure-stack-hub-customizations.adoc
 // * installing/installing_nutanix/installing-nutanix-installer-provisioned.adoc
 // * installing/installing-restricted-networks-nutanix-installer-provisioned.adoc
 // * installing/installing_vsphere/installation-config-parameters-vsphere.adoc
 // * installing/installing_gcp/installation-config-parameters-gcp.adoc
+// * installing/installing_ibm_z/installation-config-parameters-ibm-z.adoc
+// * installing/installing_ibm_z/installation-config-parameters-ibm-z-kvm.adoc
+// * installing/installing_ibm_power/installation-config-parameters-ibm-power.adoc
+// * installing/installing_azure_stack_hub/installation-config-parameters-ash.adoc
+// * installing/installing_bare_metal/installation-config-parameters-bare-metal.adoc
+// * installing/installing_ibm_cloud_public/installation-config-parameters-ibm-cloud-vps.adoc
+// * installing/installing_alibaba/installation-config-parameters-alibaba.adoc
 
-ifeval::["{context}" == "installing-alibaba-customizations"]
-:alibabacloud:
-endif::[]
-ifeval::["{context}" == "installing-alibaba-vpc"]
-:alibabacloud:
-endif::[]
 ifeval::["{context}" == "installing-aws-customizations"]
 :aws:
 endif::[]
@@ -106,31 +88,8 @@ endif::[]
 ifeval::["{context}" == "installing-azure-vnet"]
 :azure:
 endif::[]
-ifeval::["{context}" == "installing-bare-metal"]
-:bare:
-endif::[]
-ifeval::["{context}" == "installing-bare-metal-network-customizations"]
-:bare:
-endif::[]
-ifeval::["{context}" == "installing-restricted-networks-bare-metal"]
-:bare:
-endif::[]
 ifeval::["{context}" == "installing-aws-customizations"]
 :aws:
-endif::[]
-ifeval::["{context}" == "installing-ibm-cloud-customizations"]
-:ibm-cloud:
-endif::[]
-ifeval::["{context}" == "installing-ibm-cloud-network-customizations"]
-:ibm-cloud:
-endif::[]
-ifeval::["{context}" == "installing-ibm-cloud-vpc"]
-:ibm-cloud:
-:ibm-cloud-vpc:
-endif::[]
-ifeval::["{context}" == "installing-ibm-cloud-private"]
-:ibm-cloud:
-:ibm-cloud-vpc:
 endif::[]
 ifeval::["{context}" == "installing-openstack-installer-custom"]
 :osp:
@@ -184,24 +143,6 @@ ifeval::["{context}" == "installing-openstack-installer-restricted"]
 :osp:
 :osp-custom:
 endif::[]
-ifeval::["{context}" == "installing-ibm-z"]
-:ibm-z:
-endif::[]
-ifeval::["{context}" == "installing-ibm-z-kvm"]
-:ibm-z:
-endif::[]
-ifeval::["{context}" == "installing-restricted-networks-ibm-z"]
-:ibm-z:
-endif::[]
-ifeval::["{context}" == "installing-restricted-networks-ibm-z-kvm"]
-:ibm-z:
-endif::[]
-ifeval::["{context}" == "installing-ibm-power"]
-:ibm-power:
-endif::[]
-ifeval::["{context}" == "installing-restricted-networks-ibm-power"]
-:ibm-power:
-endif::[]
 ifeval::["{context}" == "installing-ibm-power-vs-customizations"]
 :ibm-power-vs:
 endif::[]
@@ -213,12 +154,6 @@ ifeval::["{context}" == "installing-restricted-networks-ibm-power-vs"]
 endif::[]
 ifeval::["{context}" == "installing-ibm-powervs-vpc"]
 :ibm-power-vs:
-endif::[]
-ifeval::["{context}" == "installing-azure-stack-hub-default"]
-:ash:
-endif::[]
-ifeval::["{context}" == "installing-azure-stack-hub-network-customizations"]
-:ash:
 endif::[]
 ifeval::["{context}" == "installing-nutanix-installer-provisioned"]
 :nutanix:
@@ -232,55 +167,76 @@ endif::[]
 ifeval::["{context}" == "installation-config-parameters-gcp"]
 :gcp:
 endif::[]
+ifeval::["{context}" == "installation-config-parameters-ibm-z"]
+:ibm-z:
+endif::[]
+ifeval::["{context}" == "installation-config-parameters-ibm-z-kvm"]
+:ibm-z:
+endif::[]
+ifeval::["{context}" == "installation-config-parameters-ibm-power"]
+:ibm-power:
+endif::[]
+ifeval::["{context}" == "installation-config-parameters-ash"]
+:ash:
+endif::[]
+ifeval::["{context}" == "installation-config-parameters-bare-metal"]
+:bare:
+endif::[]
+ifeval::["{context}" == "installation-config-parameters-ibm-cloud-vpc"]
+:ibm-cloud:
+endif::[]
+ifeval::["{context}" == "installation-config-parameters-alibaba"]
+:alibaba-cloud:
+endif::[]
 
 
 :_content-type: CONCEPT
 [id="installation-configuration-parameters_{context}"]
-ifndef::vsphere,gcp[]
+ifndef::vsphere,gcp,ibm-z,ibm-power,ash,bare,ibm-cloud,alibaba-cloud[]
 = Installation configuration parameters
-endif::vsphere,gcp[]
+endif::vsphere,gcp,ibm-z,ibm-power,ash,bare,ibm-cloud,alibaba-cloud[]
 
 // Managing headings is required as part of the effort for https://issues.redhat.com/browse/OSDOCS-6493.
 // This accommodates the existing IA of the installation assemblies, while the improvement is implemented.
 // As part of the updates for the last provider, the conditions can be removed and the following heading can be used.
-ifdef::vsphere,gcp[]
+ifdef::vsphere,gcp,ibm-z,ibm-power,ash,bare,ibm-cloud,alibaba-cloud[]
 = Available installation configuration parameters for {platform}
-endif::vsphere,gcp[]
+endif::vsphere,gcp,ibm-z,ibm-power,ash,bare,ibm-cloud,alibaba-cloud[]
 
 // If install-config.yaml is generated by openshift-install
 // The addition of providers beyond bare,ibm-power,ibm-z,ash is necessary as part of the effort for https://issues.redhat.com/browse/OSDOCS-6493
 // This accommodates the existing IA of the installation assemblies, while the improvement is implemented.
 // As part of the updates for the last provider, content between lines 277-292 can be completely removed.
-ifndef::bare,ibm-power,ibm-z,ash,vsphere,gcp[]
+ifndef::bare,ibm-power,ibm-z,ash,vsphere,gcp,ibm-cloud,alibaba-cloud[]
 Before you deploy an {product-title} cluster, you provide parameter values to describe your account on the cloud platform that hosts your cluster and optionally customize your cluster's platform. When you create the `install-config.yaml` installation configuration file, you provide values for the required parameters through the command line. If you customize your cluster, you can modify the `install-config.yaml` file to provide more details about the platform.
-endif::bare,ibm-power,ibm-z,ash,vsphere,gcp[]
+endif::bare,ibm-power,ibm-z,ash,vsphere,gcp,ibm-cloud,alibaba-cloud[]
 
 // If the user manually creates install-config.yaml
-ifdef::bare,ibm-power,ibm-power-vs,ibm-z,ash[]
+ifdef::ibm-power-vs[]
 Before you deploy an {product-title} cluster, you provide a customized `install-config.yaml` installation configuration file that describes the details for your environment.
-endif::bare,ibm-power,ibm-power-vs,ibm-z,ash[]
+endif::ibm-power-vs[]
 
 // A condition for this note is required as part of the effort for https://issues.redhat.com/browse/OSDOCS-6493.
 // This accommodates the existing content for installation assemblies, while the improvement is implemented.
-// As part of the updates for the last provider, this note can be removed from the module
-ifndef::vsphere,gcp[]
+// As part of the updates for the last provider, this note can be removed from the module.
+ifndef::vsphere,gcp,ibm-z,ibm-power,ash,bare,ibm-cloud,alibaba-cloud[]
 [NOTE]
 ====
 After installation, you cannot modify these parameters in the `install-config.yaml` file.
 ====
-endif::vsphere,gcp[]
+endif::vsphere,gcp,ibm-z,ibm-power,ash,bare,ibm-cloud,alibaba-cloud[]
 
 // This condition is required as part of the effort for https://issues.redhat.com/browse/OSDOCS-6493.
 // As part of the update for each provider, this content applies to the net new provider-specific installation configuration parameter assembly.
 // As part of the updates for the last provider, the conditions can be completely removed.
-ifdef::vsphere,gcp[]
+ifdef::vsphere,gcp,ibm-z,ibm-power,ash,bare,ibm-cloud,alibaba-cloud[]
 The following tables specify the required, optional, and {platform}-specific installation configuration parameters that you can set as part of the installation process.
 
 [NOTE]
 ====
 After installation, you cannot modify these parameters in the `install-config.yaml` file.
 ====
-endif::vsphere,gcp[]
+endif::vsphere,gcp,ibm-z,ibm-power,ash,bare,ibm-cloud,alibaba-cloud[]
 
 [id="installation-configuration-parameters-required_{context}"]
 == Required configuration parameters
@@ -548,9 +504,9 @@ networking:
 |`networking.machineNetwork.cidr`
 |
 Required if you use `networking.machineNetwork`. An IP address block. The default value is `10.0.0.0/16` for all platforms other than libvirt and {ibmpowerProductName} Virtual Server. For libvirt, the default value is `192.168.126.0/24`. For {ibmpowerProductName} Virtual Server, the default value is `192.168.0.0/24`.
-ifdef::ibm-cloud-vpc[]
-The CIDR must contain the subnets defined in `platform.ibmcloud.controlPlaneSubnets` and `platform.ibmcloud.computeSubnets`.
-endif::ibm-cloud-vpc[]
+ifdef::ibm-cloud[]
+If you are deploying the cluster to an existing Virtual Private Cloud (VPC), the CIDR must contain the subnets defined in `platform.ibmcloud.controlPlaneSubnets` and `platform.ibmcloud.computeSubnets`.
+endif::ibm-cloud[]
 |
 An IP network block in CIDR notation.
 
@@ -933,6 +889,10 @@ For a private cluster, specify a private subnet for each availability zone.
 For clusters that use AWS Local Zones, you must add AWS Local Zone subnets to this list to ensure edge machine pool creation.
 |Valid subnet IDs.
 
+|`PreserveBootstrapIgnition`
+|Prevents the S3 bucket from being deleted after completion of bootstrapping.
+|`true` or `false`. The default value is `false`, which results in the S3 bucket being deleted.
+
 |====
 endif::aws,aws-govcloud,aws-secret[]
 
@@ -1100,95 +1060,19 @@ If you deploy to a custom subnet, you cannot specify an external DNS server to t
 
 |A UUID as a string. For example, `fa806b2f-ac49-4bce-b9db-124bc64209bf`.
 |====
-
-[id="installation-configuration-parameters-failure-domains-osp_{context}"]
-== {rh-openstack} parameters for failure domains
-
-:FeatureName: {rh-openstack} failure domains
-[IMPORTANT]
-====
-[subs="attributes+"]
-{FeatureName} is a Technology Preview feature only. Technology Preview features
-are not supported with Red Hat production service level agreements (SLAs) and
-might not be functionally complete. Red Hat does not recommend using them
-in production. These features provide early access to upcoming product
-features, enabling customers to test functionality and provide feedback during
-the development process.
-
-For more information about the support scope of Red Hat Technology Preview features, see link:https://access.redhat.com/support/offerings/techpreview/[Technology Preview Features Support Scope].
-====
-// Undefine {FeatureName} attribute, so that any mistakes are easily spotted
-:!FeatureName:
-
-{rh-openstack-first} deployments do not have a single implementation of failure domains. Instead, availability zones are defined individually for each service, such as the compute service, Nova; the networking service, Neutron; and the storage service, Cinder.
-
-Beginning with {product-title} 4.13, there is a unified definition of failure domains for {rh-openstack} deployments that covers all supported availability zone types. You can use failure domains to control related aspects of Nova, Neutron, and Cinder configurations from a single place.
-
-In {rh-openstack}, a port describes a network connection and maps to an interface inside a compute machine. A port also:
-
-* Is defined by a network or by one more or subnets
-* Connects a machine to one or more subnets
-
-Failure domains group the services of your deployment by using ports. If you use failure domains, each machine connects to:
-
-* The `portTarget` object with the ID `control-plane` while that object exists.
-* All non-control-plane `portTarget` objects within its own failure domain.
-* All networks in the machine pool's `additionalNetworkIDs` list.
-
-To configure failure domains for a machine pool, edit availability zone and port target parameters under `controlPlane.platform.openstack.failureDomains`.
-
-.{rh-openstack} parameters for failure domains
-[cols=".^2,.^3a,.^3a",options="header"]
-|====
-|Parameter|Description|Values
-
-|`platform.openstack.failuredomains.computeAvailabilityZone`
-|An availability zone for the server. If not specified, the cluster default is used.
-|The name of the availability zone. For example, `nova-1`.
-
-|`platform.openstack.failuredomains.storageAvailabilityZone`
-|An availability zone for the root volume. If not specified, the cluster default is used.
-|The name of the availability zone. For example, `cinder-1`.
-
-|`platform.openstack.failuredomains.portTargets`
-|A list of `portTarget` objects,  each of which defines a network connection to attach to machines within a failure domain.
-|A list of `portTarget` objects.
-
-|`platform.openstack.failuredomains.portTargets.portTarget.id`
-|The ID of an individual port target. To select that port target as the first network for machines, set the value of this parameter to `control-plane`. If this parameter has a different value, it is ignored.
-|`control-plane` or an arbitrary string.
-
-|`platform.openstack.failuredomains.portTargets.portTarget.network`
-|Required. The name or ID of the network to attach to machines in the failure domain.
-a|A `network` object that contains either a name or UUID. For example:
-
-[source,yaml]
-----
-network:
-  id: 8db6a48e-375b-4caa-b20b-5b9a7218bfe6
-----
-
-or:
-
-[source,yaml]
-----
-network:
-  name: my-network-1
-----
-
-|`platform.openstack.failuredomains.portTargets.portTarget.fixedIPs`
-|Subnets to allocate fixed IP addresses to. These subnets must exist within the same network as the port.
-|A list of `subnet` objects.
-|====
-
-NOTE: You cannot combine zone fields and failure domains. If you want to use failure domains, the `controlPlane.zone` and `controlPlane.rootVolume.zone` fields must be left unset.
 endif::osp[]
 
 ifdef::azure[]
 [id="installation-configuration-parameters-additional-azure_{context}"]
 == Additional Azure configuration parameters
 
-Additional Azure configuration parameters are described in the following table:
+Additional Azure configuration parameters are described in the following table.
+
+[NOTE]
+====
+By default, if you specify availability zones in the `install-config.yaml` file, the installation program distributes the control plane machines and the compute machines across link:https://azure.microsoft.com/en-us/global-infrastructure/availability-zones/[these availability zones]
+within link:https://azure.microsoft.com/en-us/global-infrastructure/regions[a region]. To ensure high availability for your cluster, select a region with at least three availability zones. If your region contains fewer than three availability zones, the installation program places more than one control plane machine in the available zones.
+====
 
 .Additional Azure parameters
 [cols=".^2,.^3a,.^3a",options="header"]
@@ -1383,6 +1267,22 @@ Additional GCP configuration parameters are described in the following table:
 |====
 |Parameter|Description|Values
 
+|`controlPlane.platform.gcp.osImage.project`
+|Optional. By default, the installation program downloads and installs the {op-system-first} image that is used to boot control plane machines. You can override the default behavior by specifying the location of a custom {op-system} image that the installation program is to use for control plane machines only.
+|String. The name of GCP project where the image is located.
+
+|`controlPlane.platform.gcp.osImage.name`
+|The name of the custom {op-system} image that the installation program is to use to boot control plane machines. If you use `controlPlane.platform.gcp.osImage.project`, this field is required.
+|String. The name of the {op-system} image.
+
+|`compute.platform.gcp.osImage.project`
+|Optional. By default, the installation program downloads and installs the {op-system} image that is used to boot compute machines. You can override the default behavior by specifying the location of a custom {op-system} image that the installation program is to use for compute machines only.
+|String. The name of GCP project where the image is located.
+
+|`compute.platform.gcp.osImage.name`
+|The name of the custom {op-system} image that the installation program is to use to boot compute machines. If you use `compute.platform.gcp.osImage.project`, this field is required.
+|String. The name of the {op-system} image.
+
 |`platform.gcp.network`
 |The name of the existing Virtual Private Cloud (VPC) where you want to deploy your cluster. If you want to deploy your cluster into a shared VPC, you must set `platform.gcp.networkProjectID` with the name of the GCP project that contains the shared VPC.
 |String.
@@ -1427,6 +1327,14 @@ link:https://yaml.org/spec/1.2/spec.html#sequence//[YAML sequence].
 |`platform.gcp.defaultMachinePlatform.osDisk.diskType`
 |The link:https://cloud.google.com/compute/docs/disks#disk-types[GCP disk type].
 |Either the default `pd-ssd` or the `pd-standard` disk type. The control plane nodes must be the `pd-ssd` disk type. Compute nodes can be either type.
+
+|`platform.gcp.defaultMachinePlatform.osImage.project`
+|Optional. By default, the installation program downloads and installs the {op-system} image that is used to boot control plane and compute machines. You can override the default behavior by specifying the location of a custom {op-system} image that the installation program is to use for both types of machines.
+|String. The name of GCP project where the image is located.
+
+|`platform.gcp.defaultMachinePlatform.osImage.name`
+|The name of the custom {op-system} image that the installation program is to use to boot control plane and compute machines. If you use `platform.gcp.defaultMachinePlatform.osImage.project`, this field is required.
+|String. The name of the RHCOS image.
 
 |`platform.gcp.defaultMachinePlatform.tags`
 |Optional. Additional network tags to add to the control plane and compute machines.
@@ -1965,7 +1873,7 @@ configuring user-defined routing.
 |====
 endif::ash[]
 
-ifdef::alibabacloud[]
+ifdef::alibaba-cloud[]
 //From: https://github.com/openshift/installer/blob/master/data/data/install.openshift.io_installconfigs.yaml#L20; https://github.com/openshift/openshift-docs/pull/40651/files#r792388476
 
 [id="installation-configuration-parameters-additional-alibaba_{context}"]
@@ -2071,7 +1979,7 @@ If defined, the parameters `compute.platform.alibabacloud` and `controlPlane.pla
 
 |====
 
-endif::alibabacloud[]
+endif::alibaba-cloud[]
 
 ifdef::nutanix[]
 [id="installation-configuration-parameters-additional-vsphere_{context}"]
@@ -2191,15 +2099,6 @@ Additional Nutanix configuration parameters are described in the following table
 --
 endif::nutanix[]
 
-ifdef::bare[]
-:!bare:
-endif::bare[]
-ifeval::["{context}" == "installing-alibaba-customizations"]
-:!alibabacloud:
-endif::[]
-ifeval::["{context}" == "installing-alibaba-vpc"]
-:!alibabacloud:
-endif::[]
 ifeval::["{context}" == "installing-aws-customizations"]
 :!aws:
 endif::[]
@@ -2241,20 +2140,6 @@ ifeval::["{context}" == "installing-azure-vnet"]
 endif::[]
 ifeval::["{context}" == "installing-aws-customizations"]
 :!aws:
-endif::[]
-ifeval::["{context}" == "installing-ibm-cloud-customizations"]
-:!ibm-cloud:
-endif::[]
-ifeval::["{context}" == "installing-ibm-cloud-network-customizations"]
-:!ibm-cloud:
-endif::[]
-ifeval::["{context}" == "installing-ibm-cloud-vpc"]
-:!ibm-cloud:
-:!ibm-cloud-vpc:
-endif::[]
-ifeval::["{context}" == "installing-ibm-cloud-private"]
-:!ibm-cloud:
-:!ibm-cloud-vpc:
 endif::[]
 ifeval::["{context}" == "installing-openstack-installer-custom"]
 :!osp:
@@ -2299,24 +2184,6 @@ ifeval::["{context}" == "installing-openstack-installer-restricted"]
 :!osp:
 :!osp-custom:
 endif::[]
-ifeval::["{context}" == "installing-ibm-z"]
-:!ibm-z:
-endif::[]
-ifeval::["{context}" == "installing-ibm-z-kvm"]
-:!ibm-z:
-endif::[]
-ifeval::["{context}" == "installing-restricted-networks-ibm-z"]
-:!ibm-z:
-endif::[]
-ifeval::["{context}" == "installing-restricted-networks-ibm-z-kvm"]
-:!ibm-z:
-endif::[]
-ifeval::["{context}" == "installing-ibm-power"]
-:!ibm-power:
-endif::[]
-ifeval::["{context}" == "installing-restricted-networks-ibm-power"]
-:!ibm-power:
-endif::[]
 ifeval::["{context}" == "installing-ibm-power-vs-customizations"]
 :!ibm-power-vs:
 endif::[]
@@ -2329,12 +2196,6 @@ endif::[]
 ifeval::["{context}" == "installing-ibm-powervs-vpc"]
 :!ibm-power-vs:
 endif::[]
-ifeval::["{context}" == "installing-azure-stack-hub-default"]
-:!ash:
-endif::[]
-ifeval::["{context}" == "installing-azure-stack-hub-network-customizations"]
-:!ash:
-endif::[]
 ifeval::["{context}" == "installing-nutanix-installer-provisioned"]
 :!nutanix:
 endif::[]
@@ -2346,5 +2207,26 @@ ifeval::["{context}" == "installation-config-parameters-vsphere"]
 endif::[]
 ifeval::["{context}" == "installation-config-parameters-gcp"]
 :!gcp:
+endif::[]
+ifeval::["{context}" == "installation-config-parameters-ibm-z"]
+:!ibm-z:
+endif::[]
+ifeval::["{context}" == "installation-config-parameters-ibm-z-kvm"]
+:!ibm-z:
+endif::[]
+ifeval::["{context}" == "installation-config-parameters-ibm-z-kvm"]
+:!ibm-power:
+endif::[]
+ifeval::["{context}" == "installation-config-parameters-ash"]
+:!ash:
+endif::[]
+ifeval::["{context}" == "installation-config-parameters-bare-metal"]
+:!bare:
+endif::[]
+ifeval::["{context}" == "installation-config-parameters-ibm-cloud-vpc"]
+:!ibm-cloud:
+endif::[]
+ifeval::["{context}" == "installation-config-parameters-alibaba"]
+:!alibaba-cloud:
 endif::[]
 :!platform:

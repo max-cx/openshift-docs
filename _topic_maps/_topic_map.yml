@@ -144,6 +144,8 @@ Topics:
       File: installing-alibaba-network-customizations
     - Name: Installing a cluster on Alibaba Cloud into an existing VPC
       File: installing-alibaba-vpc
+    - Name: Installation configuration parameters for Alibaba Cloud
+      File: installation-config-parameters-alibaba
     - Name: Uninstalling a cluster on Alibaba Cloud
       File: uninstall-cluster-alibaba
 - Name: Installing on AWS
@@ -232,6 +234,8 @@ Topics:
     File: installing-azure-stack-hub-network-customizations
   - Name: Installing a cluster on Azure Stack Hub using ARM templates
     File: installing-azure-stack-hub-user-infra
+  - Name: Installation configuration parameters for Azure Stack Hub
+    File: installation-config-parameters-ash
   - Name: Uninstalling a cluster on Azure Stack Hub
     File: uninstalling-cluster-azure-stack-hub
 - Name: Installing on GCP
@@ -288,6 +292,8 @@ Topics:
     File: installing-ibm-cloud-vpc
   - Name: Installing a private cluster on IBM Cloud VPC
     File: installing-ibm-cloud-private
+  - Name: Installation configuration parameters for IBM Cloud VPC
+    File: installation-config-parameters-ibm-cloud-vpc
   - Name: Uninstalling a cluster on IBM Cloud VPC
     File: uninstalling-cluster-ibm-cloud
 - Name: Installing on Nutanix
@@ -318,6 +324,8 @@ Topics:
     File: installing-restricted-networks-bare-metal
   - Name: Scaling a user-provisioned installation with the bare metal operator
     File: scaling-a-user-provisioned-cluster-with-the-bare-metal-operator
+  - Name: Installation configuration parameters for bare metal
+    File: installation-config-parameters-bare-metal
 - Name: Installing on-premise with Assisted Installer
   Dir: installing_on_prem_assisted
   Distros: openshift-enterprise
@@ -378,6 +386,8 @@ Topics:
     File: installing-ibm-z
   - Name: Restricted network IBM Z installation with z/VM
     File: installing-restricted-networks-ibm-z
+  - Name: Installation configuration parameters for IBM Z and IBM LinuxONE with z/VM
+    File: installation-config-parameters-ibm-z
 - Name: Installing with RHEL KVM on IBM Z and IBM LinuxONE
   Dir: installing_ibm_z
   Distros: openshift-enterprise
@@ -388,6 +398,8 @@ Topics:
     File: installing-ibm-z-kvm
   - Name: Restricted network IBM Z installation with RHEL KVM
     File: installing-restricted-networks-ibm-z-kvm
+  - Name: Installation configuration parameters for IBM Z and IBM LinuxONE with RHEL KVM
+    File: installation-config-parameters-ibm-z-kvm
 - Name: Installing on IBM Power
   Dir: installing_ibm_power
   Distros: openshift-enterprise
@@ -398,6 +410,8 @@ Topics:
     File: installing-ibm-power
   - Name: Restricted network IBM Power installation
     File: installing-restricted-networks-ibm-power
+  - Name: Installation configuration parameters for IBM Power
+    File: installation-config-parameters-ibm-power
 - Name: Installing on IBM Power Virtual Server
   Dir: installing_ibm_powervs
   Distros: openshift-enterprise
@@ -513,8 +527,19 @@ Topics:
 - Name: Bare metal configuration
   File: bare-metal-configuration
 - Name: Configuring multi-architecture compute machines on an OpenShift cluster
+  Dir: configuring-multi-arch-compute-machines
   Distros: openshift-enterprise
-  File: multi-architecture-configuration
+  Topics:
+  - Name: About clusters with multi-architecture compute machines
+    File: multi-architecture-configuration
+  - Name: Creating a cluster with multi-architecture compute machines on Azure
+    File: creating-multi-arch-compute-nodes-azure
+  - Name: Creating a cluster with multi-architecture compute machines on AWS
+    File: creating-multi-arch-compute-nodes-aws
+  - Name: Creating a cluster with multi-architecture compute machines on bare metal
+    File: creating-multi-arch-compute-nodes-bare-metal
+  - Name: Managing your cluster with multi-architecture compute machines
+    File: multi-architecture-compute-managing
 - Name: Enabling encryption on a vSphere cluster
   File: vsphere-post-installation-encryption
 - Name: Machine configuration tasks
@@ -570,10 +595,10 @@ Topics:
 - Name: Preparing to update a cluster
   Dir: preparing_for_updates
   Topics:
-  - Name: Preparing to update to OpenShift Container Platform 4.13
+  - Name: Preparing to update to OpenShift Container Platform 4.14
     File: updating-cluster-prepare
     Distros: openshift-enterprise
-  - Name: Preparing to update to OKD 4.13
+  - Name: Preparing to update to OKD 4.14
     File: updating-cluster-prepare
     Distros: openshift-origin
   - Name: Preparing to update a cluster with manually maintained credentials
@@ -1524,6 +1549,8 @@ Topics:
       File: persistent-storage-hostpath
     - Name: Persistent storage using LVM Storage
       File: persistent-storage-using-lvms
+    - Name: Troubleshooting local persistent storage using LVMS
+      File: troubleshooting-local-persistent-storage-using-lvms
 - Name: Using Container Storage Interface (CSI)
   Dir: container_storage_interface
   Distros: openshift-enterprise,openshift-origin
@@ -1612,6 +1639,9 @@ Topics:
     File: configuring-registry-storage-vsphere
   - Name: Configuring the registry for OpenShift Data Foundation
     File: configuring-registry-storage-rhodf
+    Distros: openshift-enterprise,openshift-origin
+  - Name: Configuring the registry for Nutanix
+    File: configuring-registry-storage-nutanix
     Distros: openshift-enterprise,openshift-origin
 - Name: Accessing the registry
   File: accessing-the-registry
@@ -1919,12 +1949,18 @@ Topics:
     File: uninstalling-openshift-gitops
   - Name: Setting up a new Argo CD instance
     File: setting-up-argocd-instance
+  - Name: Monitoring Argo CD instances
+    File: monitoring-argo-cd-instances
+  - Name: Using Argo Rollouts for progressive deployment delivery
+    File: using-argo-rollouts-for-progressive-deployment-delivery
   - Name: Configuring an OpenShift cluster by deploying an application with cluster configurations
     File: configuring-an-openshift-cluster-by-deploying-an-application-with-cluster-configurations
   - Name: Deploying a Spring Boot application with Argo CD
     File: deploying-a-spring-boot-application-with-argo-cd
   - Name: Argo CD custom resource properties
     File: argo-cd-custom-resource-properties
+  - Name: Configuring secure communication with Redis
+    File: configuring-secure-communication-with-redis
   - Name: Monitoring application health status
     File: health-information-for-resources-deployment
   - Name: Configuring SSO for Argo CD using Dex
@@ -1937,6 +1973,8 @@ Topics:
     File: configuring-resource-quota
   - Name: Monitoring Argo CD custom resource workloads
     File: monitoring-argo-cd-custom-resource-workloads
+  - Name: Viewing Argo CD logs
+    File: viewing-argo-cd-logs
   - Name: Running Control Plane Workloads on Infra nodes
     File: run-gitops-control-plane-workload-on-infra-nodes
   - Name: Sizing requirements for GitOps Operator
@@ -2075,7 +2113,7 @@ Topics:
 - Name: Deployments
   Dir: deployments
   Topics:
-  - Name: Understanding Deployments and DeploymentConfigs
+  - Name: Understanding deployments
     File: what-deployments-are
   - Name: Managing deployment processes
     File: managing-deployment-processes
@@ -2114,6 +2152,16 @@ Topics:
 - Name: Using the Red Hat Marketplace
   File: red-hat-marketplace
   Distros: openshift-origin,openshift-enterprise
+---
+Name: Serverless
+Dir: serverless
+Distros: openshift-enterprise
+Topics:
+- Name: About Serverless
+  Dir: about
+  Topics:
+  - Name: Serverless overview
+    File: about-serverless
 ---
 Name: Machine management
 Dir: machine_management
@@ -2392,6 +2440,9 @@ Topics:
     File: nodes-containers-events
   - Name: Analyzing cluster resource levels
     File: nodes-cluster-resource-levels
+    Distros: openshift-enterprise,openshift-origin
+  - Name: Configuring a cluster for pods
+    File: nodes-cluster-pods-configuring
     Distros: openshift-enterprise,openshift-origin
   - Name: Setting limit ranges
     File: nodes-cluster-limit-ranges
@@ -3079,6 +3130,10 @@ Topics:
     File: alertmanager-monitoring-coreos-com-v1
   - Name: 'AlertmanagerConfig [monitoring.coreos.com/v1beta1]'
     File: alertmanagerconfig-monitoring-coreos-com-v1beta1
+  - Name: 'AlertRelabelConfig [monitoring.openshift.io/v1]'
+    File: alertrelabelconfig-monitoring-openshift-io-v1
+  - Name: 'AlertingRule [monitoring.openshift.io/v1]'
+    File: alertingrule-monitoring-openshift-io-v1
   - Name: 'PodMonitor [monitoring.coreos.com/v1]'
     File: podmonitor-monitoring-coreos-com-v1
   - Name: 'Probe [monitoring.coreos.com/v1]'
@@ -3096,6 +3151,8 @@ Topics:
   Topics:
   - Name: About Network APIs
     File: network-apis-index
+  - Name: 'AdminPolicyBasedExternalRoute [k8s.ovn.org/v1]'
+    File: adminpolicybasedexternalroute-k8s-ovn-org-v1
   - Name: 'CloudPrivateIPConfig [cloud.network.openshift.io/v1]'
     File: cloudprivateipconfig-cloud-network-openshift-io-v1
   - Name: 'EgressFirewall [k8s.ovn.org/v1]'
@@ -3314,14 +3371,14 @@ Topics:
     File: appliedclusterresourcequota-quota-openshift-io-v1
   - Name: 'ClusterResourceQuota [quota.openshift.io/v1]'
     File: clusterresourcequota-quota-openshift-io-v1
-  - Name: 'FlowSchema [flowcontrol.apiserver.k8s.io/v1beta1]'
-    File: flowschema-flowcontrol-apiserver-k8s-io-v1beta1
+  - Name: 'FlowSchema [flowcontrol.apiserver.k8s.io/v1beta3]'
+    File: flowschema-flowcontrol-apiserver-k8s-io-v1beta3
   - Name: 'LimitRange [undefined/v1]'
     File: limitrange-v1
   - Name: 'PriorityClass [scheduling.k8s.io/v1]'
     File: priorityclass-scheduling-k8s-io-v1
-  - Name: 'PriorityLevelConfiguration [flowcontrol.apiserver.k8s.io/v1beta1]'
-    File: prioritylevelconfiguration-flowcontrol-apiserver-k8s-io-v1beta1
+  - Name: 'PriorityLevelConfiguration [flowcontrol.apiserver.k8s.io/v1beta3]'
+    File: prioritylevelconfiguration-flowcontrol-apiserver-k8s-io-v1beta3
   - Name: 'ResourceQuota [undefined/v1]'
     File: resourcequota-v1
 - Name: Security APIs
@@ -3463,7 +3520,7 @@ Topics:
     File: installing-ossm
   - Name: Creating the ServiceMeshControlPlane
     File: ossm-create-smcp
-  - Name: Adding workloads to a service mesh
+  - Name: Adding services to a service mesh
     File: ossm-create-mesh
   - Name: Enabling sidecar injection
     File: prepare-to-deploy-applications-ossm
@@ -3626,18 +3683,23 @@ Topics:
   - Name: Installing OKD Virtualization
     File: installing-virt
     Distros: openshift-origin
-  - Name: Specifying nodes for OpenShift Virtualization components
-    File: virt-specifying-nodes-for-virtualization-components
-    Distros: openshift-enterprise
-  - Name: Specifying nodes for OKD Virtualization components
-    File: virt-specifying-nodes-for-virtualization-components
-    Distros: openshift-origin
   - Name: Uninstalling OpenShift Virtualization
     File: uninstalling-virt
     Distros: openshift-enterprise
   - Name: Uninstalling OKD Virtualization
     File: uninstalling-virt
     Distros: openshift-origin
+- Name: Post-installation configuration
+  Dir: post_installation_configuration
+  Topics:
+  - Name: Post-installation configuration
+    File: virt-post-install-config
+  - Name: Node placement rules
+    File: virt-node-placement-virt-components
+  - Name: Network configuration
+    File: virt-post-install-network-config
+  - Name: Storage configuration
+    File: virt-post-install-storage-config
 - Name: Updating
   Dir: updating
   Topics:
@@ -3652,7 +3714,7 @@ Topics:
   Topics:
 ###VIRTUAL MACHINE CHESS SALAD (silly name to highlight that the commented out assemblies need to be checked against merged filenams)
   - Name: Creating virtual machines
-    File: virt-create-vms
+    File: virt-creating-vms
   - Name: Connecting to VM consoles
     File: virt-accessing-vm-consoles
   - Name: Configuring SSH access to VMs
@@ -3679,6 +3741,10 @@ Topics:
     File: virt-using-vtpm-devices
   - Name: Managing virtual machines with OpenShift Pipelines
     File: virt-managing-vms-openshift-pipelines
+  - Name: Managing automatic boot source updates
+    File: virt-automatic-bootsource-updates
+  - Name: Creating custom boot sources
+    File: virt-creating-and-using-boot-sources
   - Name: Advanced virtual machine management
     Dir: advanced_vm_management
     Topics:
@@ -3711,6 +3777,8 @@ Topics:
       File: virt-enabling-descheduler-evictions
     - Name: About high availability for virtual machines
       File: virt-high-availability-for-vms
+    - Name: Control plane tuning
+      File: virt-vm-control-plane-tuning
 # Importing virtual machines
   - Name: Importing virtual machines
     Dir: importing_vms
@@ -3730,33 +3798,7 @@ Topics:
     - Name: Cloning a virtual machine by using a data volume template
       File: virt-cloning-vm-using-datavolumetemplate
     - Name: Cloning a virtual machine disk into a new block storage persistent volume claim
-      File: virt-cloning-vm-disk-into-new-block-storage-pvc
-# Virtual machine networking
-  - Name: Virtual machine networking
-    Dir: vm_networking
-    Topics:
-    - Name: Configuring a virtual machine for the default pod network
-      File: virt-using-the-default-pod-network-with-virt
-      Distros: openshift-enterprise
-    - Name: Configuring a virtual machine for the default pod network with OKD Virtualization
-      File: virt-using-the-default-pod-network-with-virt
-      Distros: openshift-origin
-    - Name: Creating a service to expose a virtual machine
-      File: virt-creating-service-vm
-    - Name: Connecting a virtual machine to a Linux bridge network
-      File: virt-attaching-vm-multiple-networks
-    - Name: Connecting a virtual machine to an SR-IOV network
-      File: virt-attaching-vm-to-sriov-network
-    - Name: Connecting a virtual machine to a service mesh
-      File: virt-connecting-vm-to-service-mesh
-    - Name: Configuring IP addresses for virtual machines
-      File: virt-configuring-ip-for-vms
-    - Name: Viewing the IP address of NICs on a virtual machine
-      File: virt-viewing-ip-of-vm-nic
-    - Name: Accessing a virtual machine on a secondary network by using the cluster domain name
-      File: virt-accessing-vm-secondary-network-fqdn
-    - Name: Using a MAC address pool for virtual machines
-      File: virt-using-mac-address-pool-for-vms
+      File: virt-cloning-vm-disk-to-new-block-storage-pvc
 #A BETTER NAME THAN 'STORAGE 4 U'
   - Name: Virtual machine disks
     Dir: virtual_disks
@@ -3797,25 +3839,31 @@ Topics:
       File: virt-reusing-statically-provisioned-persistent-volumes
     - Name: Expanding a virtual machine disk
       File: virt-expanding-vm-disk
-# Templates
-- Name: Virtual machine templates
-  Dir: vm_templates
+- Name: Networking
+  Dir: vm_networking
   Topics:
-  - Name: Creating virtual machine templates
-    File: virt-creating-vm-template
-  - Name: Editing virtual machine templates
-    File: virt-editing-vm-template
-  - Name: Enabling dedicated resources for a virtual machine template
-    File: virt-dedicated-resources-vm-template
-  - Name: Deploying a virtual machine template to a custom namespace
-    File: virt-deploying-vm-template-to-custom-namespace
-  - Name: Deleting a virtual machine template
-    File: virt-deleting-vm-template
-  - Name: Creating and using boot sources
-    File: virt-creating-and-using-boot-sources
-  - Name: Managing automatic boot source updates
-    File: virt-automatic-bootsource-updates
-    Distros: openshift-enterprise
+  - Name: Connecting a VM to the default pod network
+    File: virt-connecting-vm-to-default-pod-network
+  - Name: Exposing a VM by using a service
+    File: virt-exposing-vm-with-service
+  - Name: Connecting a VM to a Linux bridge network
+    File: virt-connecting-vm-to-linux-bridge
+  - Name: Connecting a VM to an SR-IOV network
+    File: virt-connecting-vm-to-sriov
+  - Name: Using DPDK with SR-IOV
+    File: virt-using-dpdk-with-sriov
+  - Name: Hot plugging secondary network interfaces
+    File: virt-hot-plugging-network-interfaces
+  - Name: Connecting a VM to a service mesh
+    File: virt-connecting-vm-to-service-mesh
+  - Name: Configuring a dedicated network for live migration
+    File: virt-dedicated-network-live-migration
+  - Name: Configuring and viewing IP addresses
+    File: virt-configuring-viewing-ips-for-vms
+  - Name: Accessing a VM by using the cluster FQDN
+    File: virt-accessing-vm-secondary-network-fqdn
+  - Name: Managing MAC address pools for network interfaces
+    File: virt-using-mac-address-pool-for-vms
 # Virtual machine live migration
 - Name: Live migration
   Dir: live_migration
@@ -3826,8 +3874,6 @@ Topics:
     File: virt-live-migration-limits
   - Name: Migrating a virtual machine instance to another node
     File: virt-migrate-vmi
-  - Name: Migrating a virtual machine over a dedicated additional network
-    File: virt-migrating-vm-on-secondary-network
   - Name: Cancelling the live migration of a virtual machine instance
     File: virt-cancel-vmi-migration
   - Name: Configuring virtual machine eviction strategy
@@ -3835,13 +3881,11 @@ Topics:
   - Name: Configuring live migration policies
     File: virt-configuring-live-migration-policies
 # Node maintenance mode
-- Name: Node maintenance
-  Dir: node_maintenance
+- Name: Nodes
+  Dir: nodes
   Topics:
   - Name: About node maintenance
     File: virt-about-node-maintenance
-  - Name: Automatic renewal of TLS certificates
-    File: virt-automatic-certificates
   - Name: Managing node labeling for obsolete CPU models
     File: virt-managing-node-labeling-obsolete-cpu-models
   - Name: Preventing node reconciliation
@@ -3853,7 +3897,7 @@ Topics:
   Topics:
   - Name: Monitoring overview
     File: virt-monitoring-overview
-  - Name: OpenShift cluster checkup framework
+  - Name: Cluster checkup framework
     File: virt-running-cluster-checkups
   - Name: Prometheus queries for virtual resources
     File: virt-prometheus-queries
@@ -3887,13 +3931,3 @@ Topics:
 #  - Name: Collecting OKD Virtualization data for community report
 #    File: virt-collecting-virt-data
 #    Distros: openshift-origin
----
-Name: Serverless
-Dir: serverless
-Distros: openshift-enterprise
-Topics:
-- Name: About Serverless
-  Dir: about
-  Topics:
-  - Name: Serverless overview
-    File: about-serverless

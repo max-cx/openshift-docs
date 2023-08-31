@@ -83,7 +83,7 @@ endif::[]
 //pipelines
 :pipelines-title: Red Hat OpenShift Pipelines
 :pipelines-shortname: OpenShift Pipelines
-:pipelines-ver: pipelines-1.9
+:pipelines-ver: pipelines-1.11
 :tekton-chains: Tekton Chains
 :tekton-hub: Tekton Hub
 :artifact-hub: Artifact Hub
@@ -140,9 +140,10 @@ endif::[]
 :FunctionsProductName: OpenShift Serverless Functions
 //service mesh v2
 :product-dedicated: Red Hat OpenShift Dedicated
+:product-rosa: Red Hat OpenShift Service on AWS
 :SMProductName: Red Hat OpenShift Service Mesh
 :SMProductShortName: Service Mesh
-:SMProductVersion: 2.4.1
+:SMProductVersion: 2.4.2
 :MaistraVersion: 2.4
 //Service Mesh v1
 :SMProductVersion1x: 1.1.18.2
