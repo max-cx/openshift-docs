@@ -32,7 +32,7 @@ This installs the Operator with the default presets:
 * *Update approval* -> *Automatic*
 ====
 
-.. In the *Details* tab of the installed Operator page, under *ClusterServiceVersion details*, verify that the installation *Status* is *Succeeded*.
+.. In the *Details* tab of the page of the installed Operator, under *ClusterServiceVersion details*, verify that the installation *Status* is *Succeeded*.
 
 . Create a Secret for your object storage bucket: go to *Workloads* -> *Secrets* -> *Create* -> *From YAML*.
 +
@@ -49,8 +49,6 @@ include::snippets/distr-tracing-tempo-secret-example.adoc[]
 . Create a *TempoStack* instance.
 +
 NOTE: You can create multiple *TempoStack* instances in separate projects on the same cluster.
-+
-You can create a *TempoStack* instance as follows:
 
 .. Go to *Operators* -> *Installed Operators*.
 +
@@ -127,9 +125,9 @@ The stack deployed in this example is configured to receive Jaeger Thrift over H
 
 . Use the *Project:* dropdown list to select the OpenShift project of the *TempoStack* instance.
 
-. Go to *Operators* -> *Installed Operators* to verify that the *Status* of the TempoStack is *Condition: Ready*.
+. Go to *Operators* -> *Installed Operators* to verify that the *Status* of the *TempoStack* instance is *Condition: Ready*.
 
-. Go to *Workloads* -> *Pods* to verify that all the TempoStack component pods are running.
+. Go to *Workloads* -> *Pods* to verify that all the component Pods of the *TempoStack* instance are running.
 
 . Access the Tempo console:
 
