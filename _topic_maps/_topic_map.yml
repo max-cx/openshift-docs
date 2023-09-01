@@ -3589,7 +3589,7 @@ Dir: distr_tracing
 Distros: openshift-enterprise
 Topics:
 - Name: Distributed tracing release notes
-  Dir: distributed-tracing-rn
+  Dir: distr-tracing-rn
   Topics:
   - Name: 2.9
   - File: distr-tracing-rn-2.9.adoc
