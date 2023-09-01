@@ -1,8 +1,8 @@
 :_content-type: ASSEMBLY
-[id="distributed-tracing-rn-2.8"]
+[id="distributed-tracing-rn-2-8"]
 = Release notes for {DTProductName} 2.8
 include::_attributes/common-attributes.adoc[]
-:context: distributed-tracing-rn-2.8
+:context: distributed-tracing-rn-2-8
 
 toc::[]
 
