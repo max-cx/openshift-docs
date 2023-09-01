@@ -59,8 +59,6 @@ endif::openshift-rosa[]
 
 == {TempoName}
 
-IMPORTANT: The {TempoName} is currently a link:https://access.redhat.com/support/offerings/techpreview/[Technology Preview].
-
 :FeatureName: The {TempoName}
 include::snippets/technology-preview.adoc[leveloffset=+1]
 
@@ -143,8 +141,6 @@ $ oc rollout restart deployment.apps/tempo-operator-controller -n openshift-temp
 // link:https://issues.redhat.com/browse/TRACING-3510[TRACING-3510]
 
 == {OTELName}
-
-IMPORTANT: The {OTELName} is currently a link:https://access.redhat.com/support/offerings/techpreview/[Technology Preview].
 
 :FeatureName: The {OTELName}
 include::snippets/technology-preview.adoc[leveloffset=+1]
