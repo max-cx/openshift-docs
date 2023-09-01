@@ -6,7 +6,7 @@
 [id="distr-tracing-tempo-config-storage_{context}"]
 = Distributed tracing storage configuration options
 
-You configure storage for the Collector, Ingester, Distributor, and Query services under `spec.storage`. Multiple instances of each of these components can be provisioned as required for performance and resilience purposes.
+You can configure tempo storage options under `spec.storage`. Different storage options could be provided depending on the object storage backend used.
 
 .General storage parameters used by the {TempoOperator} to define distributed tracing storage
 [options="header"]
@@ -15,20 +15,22 @@ You configure storage for the Collector, Ingester, Distributor, and Query servic
 |Parameter |Description |Values |Default value
 |spec:
   storage:
-    type:
+    secret
+      type:
 |Type of storage to use for the deployment.
 |`memory`. Memory storage is only appropriate for development, testing, demonstrations, and proof of concept environments because the data does not persist when the pod is shut down.
 |`memory`
 
 |storage:
   secretname:
-|Name of the secret, for example `tracing-secret`.
+|Name of the secret that contains the credentials for the set object storage type.
 |
 |N/A
 
 |storage:
-  options: {}
-|Configuration options that define the storage.
+  tls:
+    caName:
+|CA is the name of a ConfigMap containing a CA certificate.
 |
 |
 |===
