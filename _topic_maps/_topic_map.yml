@@ -3592,25 +3592,25 @@ Topics:
   Dir: distr_tracing_rn
   Topics:
   - Name: 2.9
-    File: distr-tracing-rn-2.9.adoc
+    File: distr-tracing-rn-2.9
   - Name: 2.8
-    File: distr-tracing-rn-2.8.adoc
+    File: distr-tracing-rn-2.8
   - Name: 2.7
-    File: distr-tracing-rn-2.7.adoc
+    File: distr-tracing-rn-2.7
   - Name: 2.6
-    File: distr-tracing-rn-2.6.adoc
+    File: distr-tracing-rn-2.6
   - Name: 2.5
-    File: distr-tracing-rn-2.5.adoc
+    File: distr-tracing-rn-2.5
   - Name: 2.4
-    File: distr-tracing-rn-2.4.adoc
+    File: distr-tracing-rn-2.4
   - Name: 2.3
-    File: distr-tracing-rn-2.3.adoc
+    File: distr-tracing-rn-2.3
   - Name: 2.2
-    File: distr-tracing-rn-2.2.adoc
+    File: distr-tracing-rn-2.2
   - Name: 2.1
-    File: distr-tracing-rn-2.1.adoc
+    File: distr-tracing-rn-2.1
   - Name: 2.0
-    File: distr-tracing-rn-2.0.adoc
+    File: distr-tracing-rn-2.0
 - Name: Distributed tracing architecture
   Dir: distr_tracing_arch
   Topics:
