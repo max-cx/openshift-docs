@@ -1,12 +1,13 @@
+
 // Module included in the following assemblies:
 //
 // * distr_tracing_tempo/distr-tracing-tempo-configuring.adoc
 
 :_content-type: REFERENCE
 [id="distr-tracing-tempo-config-storage_{context}"]
-= Distributed tracing storage configuration options
+= The {TempoShortName} storage configuration
 
-You can configure tempo storage options under `spec.storage`. Different storage options could be provided depending on the object storage backend used.
+You can configure object storage for the {TempoShortName} in the `TempoStack` custom resource under `spec.storage`. You can choose from among several storage providers that are supported.
 
 .General storage parameters used by the {TempoOperator} to define distributed tracing storage
 [options="header"]
@@ -34,3 +35,5 @@ You can configure tempo storage options under `spec.storage`. Different storage 
 |
 |
 |===
+
+include::snippets/distr-tracing-tempo-required-secret-parameters.adoc[]
