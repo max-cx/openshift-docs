@@ -85,6 +85,7 @@ spec:
   serviceAccount: otel-collector-sidecar
   mode: sidecar
   config: |
+    serviceAccount: otel-collector-sidecar
     receivers:
       otlp:
         protocols:
