@@ -82,6 +82,7 @@ metadata:
   name: otel
   namespace: observability
 spec:
+  serviceAccount: otel-collector-sidecar
   mode: sidecar
   config: |
     receivers:
@@ -100,7 +101,7 @@ spec:
         timeout: 2s
     exporters:
       otlp:
-        endpoint: "tempo-<example>-gateway:8090" <1>
+        endpoint: "tempo-<example>-gateway:8090" 
         tls:
           insecure: true
     service:
@@ -109,7 +110,6 @@ spec:
           receivers: [jaeger]
           processors: [memory_limiter, resourcedetection, batch]
           exporters: [otlp]
-----
 <1> This points to the Gateway of the TempoStack instance deployed by using the `<example>` {TempoOperator}.
 
 . Create your Deployment using the `otel-collector-sidecar` service account.
