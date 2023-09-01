@@ -37,17 +37,13 @@ include::modules/distr-tracing-product-overview.adoc[leveloffset=+1]
 
 === Bug fixes
 
-* Before this update, connection was refused due to a missing gRPC port on the `jaeger-query` deployment. This issue was causing the following error: *transport: Error while dialing: dial tcp :16685: connect: connection refused*. With this update, the Jaeger Query gRPC port (16685) is successfully exposed on the Jaeger Query service.
-// link:https://issues.redhat.com/browse/TRACING-3322[TRACING-3322]
+* Before this update, connection was refused due to a missing gRPC port on the `jaeger-query` deployment. This issue was causing the following error: *transport: Error while dialing: dial tcp :16685: connect: connection refused*. With this update, the Jaeger Query gRPC port (16685) is successfully exposed on the Jaeger Query service. (link:https://issues.redhat.com/browse/TRACING-3322[TRACING-3322])
 
-* Before this update, the wrong port was exposed for `jaeger-production-query`, resulting in refused connection. With this update, the issue is fixed by exposing the Jaeger Query gRPC port (16685) on the Jaeger Query deployment.
-// link:https://issues.redhat.com/browse/TRACING-2968[TRACING-2968]
+* Before this update, the wrong port was exposed for `jaeger-production-query`, resulting in refused connection. With this update, the issue is fixed by exposing the Jaeger Query gRPC port (16685) on the Jaeger Query deployment. (link:https://issues.redhat.com/browse/TRACING-2968[TRACING-2968])
 
-* Before this update, when deploying Service Mesh on single-node OpenShift clusters in disconnected environments, the Jaeger Pod frequently went into the Pending state. With this update, the issue is fixed.
-// link:https://issues.redhat.com/browse/TRACING-3312[TRACING-3312]
+* Before this update, when deploying Service Mesh on single-node OpenShift clusters in disconnected environments, the Jaeger Pod frequently went into the Pending state. With this update, the issue is fixed. (link:https://issues.redhat.com/browse/TRACING-3312[TRACING-3312])
 
-* Before this update, the Jaeger Operator Pod was restarting with the default memory value due to the *OOMKilled* error. With this update, this issue is fixed by removing the resource limits.
-// link:https://issues.redhat.com/browse/TRACING-3173[TRACING-3173]
+* Before this update, the Jaeger Operator Pod was restarting with the default memory value due to the *OOMKilled* error. With this update, this issue is fixed by removing the resource limits. (link:https://issues.redhat.com/browse/TRACING-3173[TRACING-3173])
 
 === Known issues
 
@@ -83,27 +79,21 @@ This release introduces the following noteworthy enhancements for the {TempoShor
 
 === Bug fixes
 
-* Before this update, the {TempoOperator} was not compatible with disconnected environments. With this update, the {TempoOperator} supports disconnected environments.
-// link:https://issues.redhat.com/browse/TRACING-3145[TRACING-3145]
+* Before this update, the {TempoOperator} was not compatible with disconnected environments. With this update, the {TempoOperator} supports disconnected environments. (link:https://issues.redhat.com/browse/TRACING-3145[TRACING-3145])
 
-* Before this update, the {TempoOperator) with TLS failed to start on {product-title}. With this update, the mTLS communication is enabled between Tempo components, the Operand starts successfully, and the Jaeger UI is accessible.
-// link:https://issues.redhat.com/browse/TRACING-3091[TRACING-3091]
+* Before this update, the {TempoOperator) with TLS failed to start on {product-title}. With this update, the mTLS communication is enabled between Tempo components, the Operand starts successfully, and the Jaeger UI is accessible. (link:https://issues.redhat.com/browse/TRACING-3091[TRACING-3091])
 
-* Before this update, the resource limits from the {TempoOperator} caused errors such as *OOMKilled*. With this update, the resource limits for the {TempoOperator} are removed to avoid such errors.
-// link:https://issues.redhat.com/browse/TRACING-3204[TRACING-3204]
+* Before this update, the resource limits from the {TempoOperator} caused errors such as *OOMKilled*. With this update, the resource limits for the {TempoOperator} are removed to avoid such errors. (link:https://issues.redhat.com/browse/TRACING-3204[TRACING-3204])
 
 === Known issues
 
-* Currently, the custom TLS CA option is not implemented for connecting to object storage.
-// link:https://issues.redhat.com/browse/TRACING-3462[TRACING-3462]
+* Currently, the custom TLS CA option is not implemented for connecting to object storage. (link:https://issues.redhat.com/browse/TRACING-3462[TRACING-3462])
 
-* Currently, when used with the {TempoOperator}, the Jaeger UI only displays services that have sent traces in the last 15 minutes. For services that did not send traces in the last 15 minutes, traces are still stored but not displayed in the Jaeger UI.
-// link:https://issues.redhat.com/browse/TRACING-3139[TRACING-3139]
+* Currently, when used with the {TempoOperator}, the Jaeger UI only displays services that have sent traces in the last 15 minutes. For services that did not send traces in the last 15 minutes, traces are still stored but not displayed in the Jaeger UI. (link:https://issues.redhat.com/browse/TRACING-3139[TRACING-3139])
 
-* Currently, the {TempoShortName} fails on the IBM Z (`s390x`) architecture.
-// link:https://issues.redhat.com/browse/TRACING-3545[TRACING-3545]
+* Currently, the {TempoShortName} fails on the IBM Z (`s390x`) architecture. (link:https://issues.redhat.com/browse/TRACING-3545[TRACING-3545])
 
-* Currently, the Tempo query frontend service must not use internal mTLS when Gateway is not deployed. This issue does not affect the Jaeger Query API. The workaround is to disable mTLS.
+* Currently, the Tempo query frontend service must not use internal mTLS when Gateway is not deployed. This issue does not affect the Jaeger Query API. The workaround is to disable mTLS. (link:https://issues.redhat.com/browse/TRACING-3510[TRACING-3510])
 +
 .Workaround
 :!example-caption:
@@ -138,7 +128,6 @@ data:
 $ oc rollout restart deployment.apps/tempo-operator-controller -n openshift-tempo-operator
 ----
 ====
-// link:https://issues.redhat.com/browse/TRACING-3510[TRACING-3510]
 
 == {OTELName}
 
@@ -164,13 +153,11 @@ This release introduces the following noteworthy enhancements for the {OTELShort
 
 === Bug fixes
 
-* Before this update, the {OTELOperator} was crashlooping after receiving `opentelemetry-operator.v0.74.0-5`. With this update, the issue is fixed by configuring the autoscaler.
-// link:https://issues.redhat.com/browse/TRACING-3190[TRACING-3190]
+* Before this update, the {OTELOperator} was crashlooping after receiving `opentelemetry-operator.v0.74.0-5`. With this update, the issue is fixed by configuring the autoscaler. (link:https://issues.redhat.com/browse/TRACING-3190[TRACING-3190])
 
 === Known issues
 
-* Currently, you must manually set the link:https://operatorframework.io/operator-capabilities/[operator maturity] to Level IV, Deep Insights.
-// link:https://issues.redhat.com/browse/TRACING-3431[TRACING-3431]
+* Currently, you must manually set the link:https://operatorframework.io/operator-capabilities/[operator maturity] to Level IV, Deep Insights. (link:https://issues.redhat.com/browse/TRACING-3431[TRACING-3431])
 
 include::modules/support.adoc[leveloffset=+1]
 
