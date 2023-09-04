@@ -10,7 +10,7 @@ include::modules/distr-tracing-product-overview.adoc[leveloffset=+1]
 
 == Technology Preview features
 
-Unsupported OpenTelemetry Collector components included in the 2.1 release have been removed.
+* The unsupported OpenTelemetry Collector components included in the 2.1 release are removed.
 
 == Bug fixes
 
