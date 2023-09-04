@@ -1,0 +1,9 @@
+:_content-type: CONCEPT
+[id="distr-tracing-rn-test"]
+= Configuring and deploying the {OTELShortName}
+include::_attributes/common-attributes.adoc[]
+:context: distr-tracing-rn-test
+
+toc::[]
+
+Test.
