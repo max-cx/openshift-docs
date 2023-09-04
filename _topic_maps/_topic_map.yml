@@ -87,6 +87,9 @@ Topics:
 - Name: Control plane architecture
   File: control-plane
   Distros: openshift-enterprise,openshift-origin,openshift-online
+- Name: NVIDIA GPU architecture overview
+  File: nvidia-gpu-architecture-overview
+  Distros: openshift-enterprise
 - Name: Understanding OpenShift development
   File: understanding-development
   Distros: openshift-enterprise
@@ -432,6 +435,8 @@ Topics:
     File: installing-restricted-networks-ibm-power-vs
   - Name: Uninstalling a cluster on IBM Power Virtual Server
     File: uninstalling-cluster-ibm-power-vs
+  - Name: Installation configuration parameters for IBM Power Virtual Server
+    File: installation-config-parameters-ibm-power-vs
 - Name: Installing on OpenStack
   Dir: installing_openstack
   Distros: openshift-origin,openshift-enterprise
@@ -2256,6 +2261,8 @@ Topics:
   File: hcp-managing
 - Name: Backup, restore, and disaster recovery for hosted control planes
   File: hcp-backup-restore-dr
+- Name: Troubleshooting worker node issues
+  File: hcp-debugging-nodes
 ---
 Name: Nodes
 Dir: nodes
@@ -2524,6 +2531,8 @@ Distros: openshift-enterprise,openshift-origin
 Topics:
 - Name: Release notes
   File: cluster-logging-release-notes
+- Name: Support
+  File: cluster-logging-support
 - Name: Logging 5.7
   Dir: v5_7
   Distros: openshift-enterprise,openshift-origin
@@ -2601,7 +2610,7 @@ Topics:
     File: cluster-logging-systemd
   - Name: Maintenance and support
     File: cluster-logging-maintenance-support
-- Name: Logging with the LokiStack
+- Name: Logging using LokiStack
   File: cluster-logging-loki
 - Name: Viewing logs for a specific resource
   File: viewing-resource-logs
@@ -2726,9 +2735,6 @@ Topics:
   File: cnf-performing-platform-verification-latency-tests
 - Name: Improving cluster stability in high latency environments using worker latency profiles
   File: scaling-worker-latency-profiles
-- Name: Topology Aware Lifecycle Manager for cluster updates
-  File: cnf-talm-for-cluster-upgrades
-  Distros: openshift-origin,openshift-enterprise
 - Name: Creating a performance profile
   File: cnf-create-performance-profiles
   Distros: openshift-origin,openshift-enterprise
@@ -2761,6 +2767,9 @@ Topics:
     - Name: Advanced managed cluster configuration with PolicyGenTemplate resources
       File: ztp-advanced-policy-config
     - Name: Updating managed clusters with the Topology Aware Lifecycle Manager
+      File: cnf-talm-for-cluster-upgrades
+      Distros: openshift-origin,openshift-enterprise
+    - Name: Updating managed clusters in a disconnected environment with the Topology Aware Lifecycle Manager
       File: ztp-talm-updating-managed-policies
     - Name: Updating GitOps ZTP
       File: ztp-updating-gitops
@@ -3688,7 +3697,7 @@ Topics:
   - Name: Getting started with OKD Virtualization
     File: virt-getting-started
     Distros: openshift-origin
-  - Name: Using the virtctl and libguestfs CLI tools
+  - Name: virtctl and libguestfs
     File: virt-using-the-cli-tools
   - Name: Web console overview
     File: virt-web-console-overview
