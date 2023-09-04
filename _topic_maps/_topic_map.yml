@@ -3592,7 +3592,7 @@ Topics:
   Dir: distr_tracing_rn
   Topics:
   - Name: "2.9"
-    File: distr-tracing-rn-text
+    File: distr-tracing-rn-2-9
 - Name: Distributed tracing architecture
   Dir: distr_tracing_arch
   Topics:
