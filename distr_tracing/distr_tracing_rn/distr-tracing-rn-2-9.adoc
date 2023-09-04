@@ -157,7 +157,7 @@ This release introduces the following noteworthy enhancements for the {OTELShort
 
 === Known issues
 
-* Currently, you must manually set the link:https://operatorframework.io/operator-capabilities/[operator maturity] to Level IV, Deep Insights. (link:https://issues.redhat.com/browse/TRACING-3431[TRACING-3431])
+* Currently, you must manually set link:https://operatorframework.io/operator-capabilities/[operator maturity] to Level IV, Deep Insights. (link:https://issues.redhat.com/browse/TRACING-3431[TRACING-3431])
 
 include::modules/support.adoc[leveloffset=+1]
 
