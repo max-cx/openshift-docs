@@ -88,14 +88,14 @@ $ oc get csv -n openshift-tempo-operator
 
 . Run `oc apply -f` for a YAML file or standard input to create a Secret for your object storage bucket:
 
-.. {empty}
+** {empty}
 +
 [source,terminal]
 ----
 $ oc apply -f <secret_file>.yaml
 ----
 
-.. {empty}
+** {empty}
 +
 [source,terminal]
 ----
