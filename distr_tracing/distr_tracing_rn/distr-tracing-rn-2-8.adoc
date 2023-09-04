@@ -22,7 +22,7 @@ include::modules/distr-tracing-product-overview.adoc[leveloffset=+1]
 |0.74.0
 
 |{TempoName}
-|{TempoShortName}
+|Tempo
 |0.1.0
 |===
 
