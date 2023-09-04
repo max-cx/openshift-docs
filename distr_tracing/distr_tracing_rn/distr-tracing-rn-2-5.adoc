@@ -27,8 +27,8 @@ include::modules/distr-tracing-product-overview.adoc[leveloffset=+1]
 This release introduces support for ingesting OpenTelemetry protocol (OTLP) to the {JaegerName} Operator.
 The Operator now automatically enables the OTLP ports:
 
-* Port 4317 is used for OTLP gRPC protocol.
-* Port 4318 is used for OTLP HTTP protocol.
+* Port 4317 for the OTLP gRPC protocol.
+* Port 4318 for the OTLP HTTP protocol.
 
 This release also adds support for collecting Kubernetes resource attributes to the {OTELName} Operator.
 
