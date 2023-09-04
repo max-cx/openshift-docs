@@ -81,7 +81,7 @@ This release introduces the following noteworthy enhancements for the {TempoShor
 
 * Before this update, the {TempoOperator} was not compatible with disconnected environments. With this update, the {TempoOperator} supports disconnected environments. (link:https://issues.redhat.com/browse/TRACING-3145[TRACING-3145])
 
-* Before this update, the {TempoOperator) with TLS failed to start on {product-title}. With this update, the mTLS communication is enabled between Tempo components, the Operand starts successfully, and the Jaeger UI is accessible. (link:https://issues.redhat.com/browse/TRACING-3091[TRACING-3091])
+* Before this update, the {TempoOperator} with TLS failed to start on {product-title}. With this update, the mTLS communication is enabled between Tempo components, the Operand starts successfully, and the Jaeger UI is accessible. (link:https://issues.redhat.com/browse/TRACING-3091[TRACING-3091])
 
 * Before this update, the resource limits from the {TempoOperator} caused errors such as *OOMKilled*. With this update, the resource limits for the {TempoOperator} are removed to avoid such errors. (link:https://issues.redhat.com/browse/TRACING-3204[TRACING-3204])
 
