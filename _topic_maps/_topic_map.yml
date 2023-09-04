@@ -3591,7 +3591,7 @@ Topics:
 - Name: Distributed tracing release notes
   Dir: distr_tracing_rn
   Topics:
-  - Name: Test
+  - Name: 2.9
     File: distr-tracing-rn-text
 - Name: Distributed tracing architecture
   Dir: distr_tracing_arch
