@@ -19,9 +19,9 @@
 = Distributed tracing overview
 
 As a service owner, you can use distributed tracing to instrument your services to gather insights into your service architecture.
-You can use {DTShortName} for monitoring, network profiling, and troubleshooting the interaction between components in modern, cloud-native, microservices-based applications.
+You can use the {DTProductName} for monitoring, network profiling, and troubleshooting the interaction between components in modern, cloud-native, microservices-based applications.
 
-With {DTShortName} you can perform the following functions:
+With the {DTShortName}, you can perform the following functions:
 
 * Monitor distributed transactions
 
@@ -29,7 +29,7 @@ With {DTShortName} you can perform the following functions:
 
 * Perform root cause analysis
 
-{DTProductName} consists of three components:
+The {DTShortName} consists of three components:
 
 * *{JaegerName}*, which is based on the open source link:https://www.jaegertracing.io/[Jaeger project].
 

@@ -67,6 +67,8 @@ Topics:
     File: rosa-life-cycle
   - Name: Understanding process and security for ROSA
     File: rosa-policy-process-security
+#  - Name: SRE and service account access
+#    File: rosa-sre-access
 - Name: About IAM resources for ROSA with STS
   File: rosa-sts-about-iam-resources
 - Name: OpenID Connect Overview
@@ -476,6 +478,8 @@ Distros: openshift-rosa
 Topics:
 - Name: Release notes
   File: cluster-logging-release-notes
+- Name: Support
+  File: cluster-logging-support
 - Name: About Logging
   File: cluster-logging
 - Name: Installing Logging
@@ -507,7 +511,7 @@ Topics:
   #  File: cluster-logging-systemd
   - Name: Maintenance and support
     File: cluster-logging-maintenance-support
-- Name: Logging with the LokiStack
+- Name: Logging using LokiStack
   File: cluster-logging-loki
 - Name: Viewing logs for a specific resource
   File: viewing-resource-logs

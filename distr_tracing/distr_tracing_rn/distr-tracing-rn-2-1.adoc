@@ -24,9 +24,10 @@ include::modules/distr-tracing-product-overview.adoc[leveloffset=+1]
 
 == Technology Preview features
 
-This release introduces a breaking change to how to configure certificates in the OpenTelemetry custom resource file. In the new version, the `ca_file` moves under `tls` in the custom resource, as shown in the following examples.
-
+* This release introduces a breaking change to how to configure certificates in the OpenTelemetry custom resource file. With this update, the `ca_file` moves under `tls` in the custom resource, as shown in the following examples.
++
 .CA file configuration for OpenTelemetry version 0.33
+====
 [source,yaml]
 ----
 spec:
@@ -37,8 +38,10 @@ spec:
         endpoint: jaeger-production-collector-headless.tracing-system.svc:14250
         ca_file: "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
 ----
-
+====
++
 .CA file configuration for OpenTelemetry version 0.41.1
+====
 [source,yaml]
 ----
 spec:
@@ -50,6 +53,7 @@ spec:
         tls:
           ca_file: "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
 ----
+====
 
 == Bug fixes
 

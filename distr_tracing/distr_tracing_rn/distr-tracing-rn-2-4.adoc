@@ -26,22 +26,16 @@ include::modules/distr-tracing-product-overview.adoc[leveloffset=+1]
 
 This release adds support for auto-provisioning certificates using the Red Hat Elasticsearch Operator.
 
-* Self-provisioning, which means using the {JaegerName} Operator to call the Red Hat Elasticsearch Operator during installation.
-Self provisioning is fully supported with this release.
-* Creating the Elasticsearch instance and certificates first and then configuring the {JaegerShortName} to use the certificate is a Technology Preview for this release.
-
-[NOTE]
+* Self-provisioning by using the {JaegerName} Operator to call the Red Hat Elasticsearch Operator during installation.
++
+[IMPORTANT]
 ====
-When upgrading to the {DTProductName} 2.4, the Operator recreates the Elasticsearch instance, which might take five to ten minutes.
-Distributed tracing will be down and unavailable for that period.
+When upgrading to the {DTProductName} 2.4, the Operator recreates the Elasticsearch instance, which might take five to ten minutes. Distributed tracing will be down and unavailable for that period.
 ====
 
 == Technology Preview features
 
-This release also adds support for auto-provisioning certificates using the Red Hat Elasticsearch Operator.
-
-* Self-provisioning, which means using the {JaegerName} Operator to call the Red Hat Elasticsearch Operator during installation. Self provisioning is fully supported with this release.
-* Creating the Elasticsearch instance and certificates first and then configuring the {JaegerShortName} to use the certificate is a Technology Preview for this release.
+* Creating the Elasticsearch instance and certificates first and then configuring the {JaegerShortName} to use the certificate is a link:https://access.redhat.com/support/offerings/techpreview/[Technology Preview] for this release.
 
 == Bug fixes
 

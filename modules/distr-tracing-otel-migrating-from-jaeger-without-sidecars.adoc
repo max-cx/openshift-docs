@@ -76,6 +76,7 @@ roleRef:
 +
 NOTE: This collector will be exporting traces to a TempoStack instance. You must create your TempoStack instance using the Red Hat Tempo Operator and place here the correct endpoint.
 +
+[source,yaml]
 ----
 apiVersion: opentelemetry.io/v1alpha1
 kind: OpenTelemetryCollector

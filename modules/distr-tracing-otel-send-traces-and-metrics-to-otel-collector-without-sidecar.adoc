@@ -3,7 +3,7 @@
 // * /distr_tracing/distr_tracing_otel/distr-tracing-otel-using.adoc
 
 :_content-type: PROCEDURE
-[id="distr-tracing-otel-send-traces-and-metrics-to-otel-collector-no-sidecar_{context}"]
+[id="distr-tracing-otel-send-traces-and-metrics-to-otel-collector-without-sidecar_{context}"]
 = Sending traces and metrics to the OpenTelemetry Collector without sidecar injection
 
 You can set up sending telemetry data to an OpenTelemetryCollector instance without sidecar injection, which involves manually setting several environment variables.
