@@ -12,7 +12,7 @@ The {TempoOperator} uses a custom resource definition (CRD) file that defines th
 == Customizing your deployment
 
 ifdef::openshift-enterprise,openshift-dedicated[]
-For information about configuring the back-end storage, see xref:../../storage/understanding-persistent-storage.adoc[Understanding persistent storage] and the appropriate configuration topic for your chosen storage option.
+For information about configuring the back-end storage, see xref:../../storage/understanding-persistent-storage.adoc#understanding-persistent-storage[Understanding persistent storage] and the appropriate configuration topic for your chosen storage option.
 endif::[]
 
 include::modules/distr-tracing-tempo-config-default.adoc[leveloffset=+2]
