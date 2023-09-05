@@ -52,7 +52,33 @@ ifndef::openshift-rosa[]
 
 * The streaming deployment via AMQ/Kafka is unsupported on IBM Z and IBM Power Systems.
 endif::openshift-rosa[]
+* Missing images to run Operator in restricted network environments (link:https://issues.redhat.com/browse/TRACING-3173[TRACING-3523])
 
+In the current {TempoName} CSV, references to the images of the operand are missing. To workaround this issue you need to specifically provide the Tempo operator related images in the mirroring tool so that the images can be mirrored to the registry.   
+
+====
+[source,yaml]
+----
+kind: ImageSetConfiguration
+apiVersion: mirror.openshift.io/v1alpha2
+archiveSize: 20                                                      
+storageConfig:
+  local:
+    path: /home/user/images
+mirror:
+  operators:
+  - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.13
+    packages:
+    - name: tempo-product
+      channels:
+      - name: stable
+  additionalImages:
+  - name: registry.redhat.io/rhosdt/tempo-rhel8@sha256:e4295f837066efb05bcc5897f31eb2bdbd81684a8c59d6f9498dd3590c62c12a
+  - name: registry.redhat.io/rhosdt/tempo-gateway-rhel8@sha256:b62f5cedfeb5907b638f14ca6aaeea50f41642980a8a6f87b7061e88d90fac23
+  - name: registry.redhat.io/rhosdt/tempo-gateway-opa-rhel8@sha256:8cd134deca47d6817b26566e272e6c3f75367653d589f5c90855c59b2fab01e9
+  - name: registry.redhat.io/rhosdt/tempo-query-rhel8@sha256:0da43034f440b8258a48a0697ba643b5643d48b615cdb882ac7f4f1f80aad08e
+----
+====
 == {TempoName}
 
 :FeatureName: The {TempoName}
