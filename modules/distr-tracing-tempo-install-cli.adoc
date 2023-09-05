@@ -99,14 +99,10 @@ $ oc apply -f - << EOF
 <object_storage_secret>
 EOF
 ----
-
-** {empty}
 +
 --
 include::snippets/distr-tracing-tempo-required-secret-parameters.adoc[]
 --
-
-** {empty}
 +
 --
 include::snippets/distr-tracing-tempo-secret-example.adoc[]
