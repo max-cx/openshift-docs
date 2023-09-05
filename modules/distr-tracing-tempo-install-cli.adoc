@@ -100,13 +100,13 @@ $ oc apply -f - << EOF
 EOF
 ----
 
-//.. {empty}
+** {empty}
 +
 --
 include::snippets/distr-tracing-tempo-required-secret-parameters.adoc[]
 --
 
-//.. {empty}
+** {empty}
 +
 --
 include::snippets/distr-tracing-tempo-secret-example.adoc[]
