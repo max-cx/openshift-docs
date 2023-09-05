@@ -111,6 +111,7 @@ spec:
           receivers: [jaeger]
           processors: [memory_limiter, resourcedetection, batch]
           exporters: [otlp]
+----
 <1> This points to the Gateway of the TempoStack instance deployed by using the `<example>` {TempoOperator}.
 
 . Create your Deployment using the `otel-collector-sidecar` service account.
