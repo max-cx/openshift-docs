@@ -3,10 +3,10 @@ This module is included in the following assemblies:
 - distr_tracing_install/distributed-tracing-deploying-otel.adoc
 ////
 :_mod-docs-content-type: REFERENCE
-[id="distr-tracing-send-metrics-monitoring-stack_{context}"]
-= Sending metrics to the monitoring stack
+[id="configuration-for-sending-metrics-to-the-monitoring-stack_{context}"]
+= Configuration for sending metrics to the monitoring stack
 
-You can configure the OpenTelemetry Collector custom resource (CR) to create a Prometheus `ServiceMonitor` CR to scrape the collector's pipeline metrics and the enabled Prometheus exporters.
+The OpenTelemetry Collector custom resource (CR) can be configured to create a Prometheus `ServiceMonitor` CR for scraping the Collector's pipeline metrics and the enabled Prometheus exporters.
 
 .Example of the OpenTelemetry Collector custom resource with the Prometheus exporter
 [source,yaml]
@@ -33,10 +33,9 @@ spec:
 ----
 <1> Configures the operator to create the Prometheus `ServiceMonitor` CR to scrape the collector's internal metrics endpoint and Prometheus exporter metric endpoints. The metrics will be stored in the OpenShift monitoring stack.
 
+Alternatively, a manually created Prometheus `PodMonitor` can provide fine control, for example removing duplicated labels added during Prometheus scraping.
 
-Alternatively, the Prometheus `PodMonitor` can be created manually, which offers more fine-grained control, for instance remove duplicated labels added during Prometheus scraping.
-
-.Sample `PodMonitor` custom resource (CR) that configures the monitoring stack to scrape Collector metrics
+.Example of the `PodMonitor` custom resource (CR) that configures the monitoring stack to scrape Collector metrics
 [source,yaml]
 ----
 apiVersion: monitoring.coreos.com/v1
