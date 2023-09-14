@@ -1,9 +1,9 @@
 // Module included in the following assemblies:
 //
-// * distr-tracing-otel-migrating.adoc
+// * otel-migrating.adoc
 
 :_mod-docs-content-type: PROCEDURE
-[id="distr-tracing-otel-migrating-from-jaeger-with-sidecars_{context}"]
+[id="migrating-to-otel-from-jaeger-with-sidecars_{context}"]
 = Migrating from the {JaegerShortName} to the {OTELShortName} with sidecars
 
 The {OTELShortName} Operator supports sidecar injection into deployment workloads, so you can migrate from a {JaegerShortName} sidecar to a {OTELShortName} sidecar.
