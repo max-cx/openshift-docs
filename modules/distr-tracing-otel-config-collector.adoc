@@ -238,7 +238,7 @@ The Prometheus receiver scrapes metrics endpoints..
 ----
 <1> Scrape configurations using Prometheus format.
 <2> Prometheus job name.
-<3> Interval to scrape the metrics data.
+<3> Interval to scrape the metrics data It accepts time units. Default: 1m.
 <4> Targets where the metrics are exposed. This example scrapes the metrics from an application called "my-app" in the "example" Project.
 
 [id="zipkin-receiver_{context}"]
