@@ -235,6 +235,37 @@ The Zipkin receiver ingests data in the Zipkin v1 and v2 formats.
 <1> The Zipkin HTTP endpoint. If omitted, the default `+0.0.0.0:9411+` is used.
 <2> The TLS server side configuration. See the OTLP receiver configuration section for more details.
 
+[id="opencensus-receiver_{context}"]
+==== OpenCensus Receiver
+
+The OpenCensus Receiver provides backwards compatibility with the OpenCensus project in order
+to ease migration of instrumented codebases. It receives data via gRPC or HTTP/Json using OpenCensus format.
+
+* Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
+* Supported signals: metrics, traces
+
+.OpenTelemetry Collector custom resource with enabled OpenCensus receiver
+[source,yaml]
+----
+  config: |
+    receivers:
+      opencensus:
+        endpoint: 0.0.0.0:9411 <1>
+        tls: <2>
+        cors_allowed_origins: <3>
+          # Origins can have wildcards with *, use * by itself to match any origin.
+          - https://*.example.com
+
+    service:
+      pipelines:
+        traces:
+          receivers: [opencensus]
+          ...
+----
+<1> The OpenCensus endpoint. If omitted, the default `+0.0.0.0:55678+` is used.
+<2> The TLS server side configuration. See the OTLP receiver configuration section for more details.
+<3> The HTTP/Json endpoint can also optionally configure CORS, which is enabled by specifying a list of allowed CORS origins in this field.
+
 [id="processors_{context}"]
 === Processors
 
