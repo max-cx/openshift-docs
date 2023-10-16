@@ -158,12 +158,15 @@ The OTLP receiver ingests data using the OpenTelemetry protocol (OTLP).
         protocols:
           grpc:
             endpoint: 0.0.0.0:4317 <1>
+            tls: <2>
+              ca_file: ca.pem
+              cert_file: cert.pem
+              key_file: key.pem
+              client_ca_file: client.pem <3>
+              reload_interval: 1h <4>
           http:
-            endpoint: 0.0.0.0:4318 <2>
-          tls: <3>
-            ca_file: ca.pem
-            cert_file: cert.pem
-            key_file: key.pem
+            endpoint: 0.0.0.0:4318 <5>
+            tls: <6>
 
     service:
       pipelines:
@@ -173,8 +176,11 @@ The OTLP receiver ingests data using the OpenTelemetry protocol (OTLP).
           receivers: [otlp]
 ----
 <1> The OTLP gRPC endpoint. If omitted, the default `+0.0.0.0:4317+` is used.
-<2> The OTLP HTTP endpoint. If omitted, the default `+0.0.0.0:4318+` is used.
-<3> The TLS server side configuration. Defines paths to TLS certificates. If omitted, TLS is disabled.
+<2> The server-side TLS configuration. Defines paths to TLS certificates. If omitted, TLS is disabled.
+<3> The path to the TLS certificate at which the server verifies a client certificate. This sets the value of `ClientCAs` and `ClientAuth` to `RequireAndVerifyClientCert` in the `TLSConfig`. For more information, see the link:https://godoc.org/crypto/tls#Config[`Config` of the Golang TLS package].
+<4> Specifies the time interval at which the certificate is reloaded. If the value is not set, the certificate is never reloaded.  `reload_interval` accepts a string containing valid units of time such as `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`.
+<5> The OTLP HTTP endpoint. The default value is `+0.0.0.0:4318+`.
+<6> The server-side TLS configuration. For more information, see `grpc` protocol configuration section.
 
 [id="jaeger-receiver_{context}"]
 ==== Jaeger Receiver
@@ -298,7 +304,11 @@ The OTLP gRPC exporter exports data using the OpenTelemetry protocol (OTLP).
           ca_file: ca.pem
           cert_file: cert.pem
           key_file: key.pem
-        headers: <3>
+          insecure: false <3>
+          insecure_skip_verify: false <4>
+          reload_interval: 1h <5>
+          server_name_override: <name> <6>
+        headers: <7>
           X-Scope-OrgID: "dev"
     service:
       pipelines:
@@ -309,7 +319,11 @@ The OTLP gRPC exporter exports data using the OpenTelemetry protocol (OTLP).
 ----
 <1> The OTLP gRPC endpoint. If the `+https://+` scheme is used, then client transport security is enabled and overrides the `insecure` setting in the `tls`.
 <2> The client side TLS configuration. Defines paths to TLS certificates.
-<3> Headers are sent for every RPC performed during an established connection.
+<3> Disables client transport security when set to `true`. The default value is `false` by default.
+<4> Skips verifying the certificate when set to `true`. The default value is `false`.
+<5> Specifies the time interval at which the certificate is reloaded. If the value is not set, the certificate is never reloaded. `reload_interval` accepts a string containing valid units of time such as `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`.
+<6> Overrides the virtual host name of authority such as the authority header field in requests. You can use this for testing.
+<7> Headers are sent for every request performed during an established connection.
 
 [id="otlp-http-exporter_{context}"]
 ==== OTLP HTTP exporter
@@ -327,9 +341,6 @@ The OTLP HTTP exporter exports data using the OpenTelemetry protocol (OTLP).
       otlphttp:
         endpoint: http://tempo-ingester:4318 <1>
         tls: <2>
-          ca_file: ca.pem
-          cert_file: cert.pem
-          key_file: key.pem
         headers: <3>
           X-Scope-OrgID: "dev"
 
@@ -343,6 +354,31 @@ The OTLP HTTP exporter exports data using the OpenTelemetry protocol (OTLP).
 <1> The OTLP HTTP endpoint. If the `+https://+` scheme is used, then client transport security is enabled and overrides the `insecure` setting in the `tls`.
 <2> The client side TLS configuration. Defines paths to TLS certificates.
 <3> Headers are sent in every HTTP request.
+
+[id="jaeger-exporter_{context}"]
+==== Jaeger exporter
+
+The Jaeger exporter exports data using the Jaeger proto format through gRPC.
+
+* Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
+* Supported signals: traces
+
+.OpenTelemetry Collector custom resource with enabled Jaeger exporter
+[source,yaml]
+----
+  config: |
+    exporters:
+      jaeger:
+        endpoint: jaeger-all-in-one:14250 <1>
+        tls: <2>
+    service:
+      pipelines:
+        traces:
+          exporters: [jaeger]
+----
+<1> The Jaeger gRPC endpoint.
+<2> The client side TLS configuration. Defines paths to TLS certificates.
+
 
 [id="logging-exporter_{context}"]
 ==== Logging exporter
@@ -367,6 +403,50 @@ The Logging exporter prints data to the standard output.
           exporters: [logging]
 ----
 <1> Verbosity of the logging export: `detailed` or `normal` or `basic`. When set to `detailed`, pipeline data is verbosely logged. Defaults to `normal`.
+
+[id="prometheus-exporter_{context}"]
+==== Prometheus exporter
+
+The Prometheus exporter exports data using the Prometheus or OpenMetrics formats.
+
+* Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
+* Supported signals: metrics
+
+.OpenTelemetry Collector custom resource with an enabled Prometheus exporter
+[source,yaml]
+----
+  ports:
+  - name: promexporter <1>
+    port: 8889
+    protocol: TCP
+  config: |
+    exporters:
+      prometheus:
+        endpoint: 0.0.0.0:8889 <2>
+        tls: <3>
+          ca_file: ca.pem
+          cert_file: cert.pem
+          key_file: key.pem
+        namespace: prefix <4>
+        const_labels: <5>
+          label1: value1
+        enable_open_metrics: true <6>
+        resource_to_telemetry_conversion: <7>
+          enabled: true
+        metric_expiration: 180m <8>
+    service:
+      pipelines:
+        metrics:
+          exporters: [prometheus]
+----
+<1> Exposes the Prometheus port from the collector pod and service. You can enable scraping of metrics by Prometheus by using the port name in `ServiceMonitor` or `PodMonitor` custom resource.
+<2> The network endpoint where the metrics are exposed.
+<3> The server-side TLS configuration. Defines paths to TLS certificates.
+<4> If set, exports metrics under the provided value. No default.
+<5> Key-value pair labels that are applied for every exported metric. No default.
+<6> If `true`, metrics are exported using the OpenMetrics format. Exemplars are only exported in the OpenMetrics format and only for histogram and monotonic sum metrics such as `counter`. Disabled by default.
+<7> If `enabled` is `true`, all the resource attributes are converted to metric labels by default. Disabled by default.
+<8> Defines how long metrics are exposed without updates. The default is `5m`.
 
 [id="extensions_{context}"]
 === Extensions
