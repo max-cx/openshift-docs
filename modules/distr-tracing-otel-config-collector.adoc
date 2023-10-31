@@ -244,15 +244,14 @@ The Zipkin receiver ingests data in the Zipkin v1 and v2 formats.
 <2> The TLS server side configuration. See the OTLP receiver configuration section for more details.
 
 [id="opencensus-receiver_{context}"]
-==== OpenCensus Receiver
+==== OpenCensus receiver
 
-The OpenCensus Receiver provides backwards compatibility with the OpenCensus project in order
-to ease migration of instrumented codebases. It receives data via gRPC or HTTP/Json using OpenCensus format.
+The OpenCensus receiver provides backwards compatibility with the OpenCensus project for easier migration of instrumented codebases. It receives data in the OpenCensus format via gRPC or HTTP and Json.
 
 * Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
 * Supported signals: metrics, traces
 
-.OpenTelemetry Collector custom resource with enabled OpenCensus receiver
+.OpenTelemetry Collector custom resource with the enabled OpenCensus receiver
 [source,yaml]
 ----
   config: |
@@ -261,8 +260,7 @@ to ease migration of instrumented codebases. It receives data via gRPC or HTTP/J
         endpoint: 0.0.0.0:9411 <1>
         tls: <2>
         cors_allowed_origins: <3>
-          # Origins can have wildcards with *, use * by itself to match any origin.
-          - https://*.example.com
+          - https://*.<example>.com
 
     service:
       pipelines:
@@ -270,9 +268,9 @@ to ease migration of instrumented codebases. It receives data via gRPC or HTTP/J
           receivers: [opencensus]
           ...
 ----
-<1> The OpenCensus endpoint. If omitted, the default `+0.0.0.0:55678+` is used.
-<2> The TLS server side configuration. See the OTLP receiver configuration section for more details.
-<3> The HTTP/Json endpoint can also optionally configure CORS, which is enabled by specifying a list of allowed CORS origins in this field.
+<1> The OpenCensus endpoint. If omitted, the default is `+0.0.0.0:55678+`.
+<2> The TLS server-side configuration. See the OTLP receiver configuration section for more details.
+<3> You can also use the HTTP JSON endpoint to optionally configure CORS, which is enabled by specifying a list of allowed CORS origins in this field. Wildcards with `*` are accepted under `cors_allowed_origins`. To match any origin, enter only `*`.
 
 [id="processors_{context}"]
 === Processors
