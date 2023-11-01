@@ -46,10 +46,10 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: `<cr_name>-collector` <1>
+      app.kubernetes.io/name: `<cr-name>-collector` <1>
   podMetricsEndpoints:
-  - port: metrics <2>
-  - port: promexporter <3>
+  - port: metrics <1>
+  - port: promexporter <2>
     relabelings:
     - action: labeldrop
       regex: pod

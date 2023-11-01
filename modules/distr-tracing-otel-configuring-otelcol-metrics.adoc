@@ -4,7 +4,7 @@
 
 :_content-type: PROCEDURE
 [id="configuring-otelcol-metrics_{context}"]
-= Configuring the OpenTelemetry Collector metrics
+= Configuring OpenTelemetry Collector metrics
 
 You can enable metrics and alerts of OpenTelemetry Collector instances.
 
@@ -14,7 +14,7 @@ You can enable metrics and alerts of OpenTelemetry Collector instances.
 
 .Procedure
 
-* To enable metrics of a OpenTelemetry Collector instance, set the `spec.observability.metrics.enableMetrics` field to `true`:
+. To enable metrics of a OpenTelemetry Collector instance, set the `spec.observability.metrics.enableMetrics` field to `true`:
 +
 [source,yaml]
 ----
@@ -32,4 +32,4 @@ spec:
 
 You can use the *Administrator* view of the web console to verify successful configuration:
 
-* Go to *Observe* -> *Targets*, filter by *Source: User*, and check that the *ServiceMonitors* in the `opentelemetry-collector-<instance_name>` format have the *Up* status.
+. Go to *Observe* -> *Targets*, filter for *Source: User*, and check that *ServiceMonitors* in the format `opentelemetry-collector-<instance_name>` have the *Up* status.
