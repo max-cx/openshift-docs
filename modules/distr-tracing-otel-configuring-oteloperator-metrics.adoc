@@ -4,7 +4,7 @@
 
 :_content-type: PROCEDURE
 [id="configuring-oteloperator-metrics_{context}"]
-= Configuring {OTELOperator} metrics and alerts
+= Configuring the {OTELOperator} metrics and alerts
 
 When installing the {OTELOperator} from the web console, you can select the *Enable Operator recommended cluster monitoring on this Namespace* checkbox, which enables creating metrics of the {OTELOperator}.
 
@@ -18,4 +18,4 @@ If the checkbox was not selected during installation, you can manually enable me
 
 You can use the *Administrator* view of the web console to verify successful configuration:
 
-. Go to *Observe* -> *Targets*, filter for *Source: Platform*, and search for `opentelemetry-operator`, which must have the *Up* status.
+. Go to *Observe* -> *Targets*, filter by *Source: Platform*, and search for `opentelemetry-operator`, which must have the *Up* status.

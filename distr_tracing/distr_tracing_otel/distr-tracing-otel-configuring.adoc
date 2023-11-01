@@ -15,7 +15,7 @@ include::modules/distr-tracing-otel-config-send-metrics-monitoring-stack.adoc[le
 [id="setting-up-monitoring-for-otel"]
 == Setting up monitoring for the {OTELShortName}
 
-The {OTELOperator} supports monitoring and alerting of each OpenTelemtry Collector instances and exposes upgrade and operational metrics about the Operator itself.
+The {OTELOperator} supports monitoring and alerting of each OpenTelemtry Collector instance and exposes upgrade and operational metrics about the Operator itself.
 
 
 include::modules/distr-tracing-otel-configuring-otelcol-metrics.adoc[leveloffset=+1]
