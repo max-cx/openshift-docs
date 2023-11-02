@@ -8,17 +8,16 @@ This module included in the following assemblies:
 
 The {OTELName} can inject and configure OpenTelemetry auto-instrumentation libraries into your workloads. Currently, the project supports the injection of instrumentation libraries fro Go, Java, NodeJS, Python and ApacheHTTPD.
 
-Auto-instrumentation in OpenTelemetry refers to the capability where the framework automatically instruments an application, without
-necessitating manual code changes. This enables developers and operators to get observability into their applications with minimal effort and changes to the existing codebase.
+Auto-instrumentation in OpenTelemetry refers to the capability where the framework automatically instruments an application without manual code changes. This enables developers and Operators to get observability into their applications with minimal effort and changes to the existing codebase.
 
-== Important
-
-Note that the {OTELName} operator product only supports the injection mechanism of the instrumentation libraries: not the instrumentation libraries or the upstream images. Customers can build their own instrumentation images or use the ones provided by the community.
+[IMPORTANT]
+====
+The {OTELName} Operator only supports the injection mechanism of the instrumentation libraries but does not support instrumentation libraries or upstream images. Customers can build their own instrumentation images or use community images.
+====
 
 == Instrumentation options
 
-_sample OpenTelemetry collector custom resource file_
-
+.Sample OpenTelemetry collector custom resource file
 [source,yaml]
 ----
 apiVersion: opentelemetry.io/v1alpha1
@@ -42,41 +41,92 @@ spec:
       value: "true"
 ----
 
-Table 1. Parameters used by the Operator to define the Instrumentation
-
+.Parameters used by the Operator to define the Instrumentation
 [cols=",,",options="header",]
 |===
 |Parameter |Description |Values
-|env |Common environment variables to define across all the instrumentations |
-|exporter |Exporter defines exporter configuration |
-|propagators |Propagators defines inter-process context propagation configuration |tracecontext;baggage;b3;b3multi;jaeger;ottrace;none
-|resource |Resource attributes configuration |
-|sampler |Sampling configuration |
-|apacheHttpd |Configuration for the ApacheHTTPD instrumentation |
-|dotnet |Configuration for the DotNet instrumentation |
-|go |Configuration for the Golang instrumentation |
-|java |Configuration for the Java instrumentation |
-|nodejs |Configuration for the NodeJS instrumentation |
-|python |Configuration for the Python instrumentation |
+
+|env
+|Common environment variables to define across all the instrumentations
+|
+
+|exporter
+|Exporter defines exporter configuration
+|
+
+|propagators
+|Propagators defines inter-process context propagation configuration
+|`tracecontext`, `baggage`, `b3`, `b3multi`, `jaeger`, `ottrace`, `none`
+
+|resource
+|Resource attributes configuration
+|
+
+|sampler
+|Sampling configuration
+|
+
+|apacheHttpd
+|Configuration for the ApacheHTTPD instrumentation
+|
+
+|dotnet
+|Configuration for the DotNet instrumentation
+|
+
+|go
+|Configuration for the Golang instrumentation
+|
+
+|java
+|Configuration for the Java instrumentation
+|
+
+|nodejs
+|Configuration for the NodeJS instrumentation
+|
+
+|python
+|Configuration for the Python instrumentation
+|
+
 |===
 
 == Using the Instrumentation CR with Service Mesh
 
-When using the Instrumentation CR with OpenShift Service Mesh product, it is necessary to use the b3multi propagator.
+When using the Instrumentation CR with {SMProductName}, you must use the `b3multi` propagator.
 
 === Configure the Apache HTTPD auto-instrumentation
 
-These are the parameters for the `+.spec.apacheHttpd+` field:
-
+.Prameters for the `+.spec.apacheHttpd+` field
 [cols=",,",options="header",]
 |===
 |Name |Description |Default
-|attrs |Apache HTTPD agent specific attributes |
-|configPath |Location of Apache HTTPD server configuration|/usr/local/apache2/conf
-|env |Apache HTTPD specific env vars |
-|image |container image with Apache SDK and auto-instrumentation |
-|resourceRequirements |the compute resource requirements |
-|version |Apache HTTPD server version |2.4 |
+
+|attrs
+|Apache HTTPD agent specific attributes
+|
+
+|configPath
+|Location of Apache HTTPD server configuration
+|/usr/local/apache2/conf
+
+|env
+|Apache HTTPD specific env vars
+|
+
+|image
+|container image with Apache SDK and auto-instrumentation
+|
+
+|resourceRequirements
+|the compute resource requirements
+|
+
+|version
+|Apache HTTPD server version
+|2.4
+
 |===
 
 To enable the injection, you need to provide the following annotation to your PodSpec:
@@ -90,10 +140,19 @@ instrumentation.opentelemetry.io/inject-apache-httpd: "true"
 
 [cols=",",options="header",]
 |===
-|Name |Description
-|env |DotNet specific env vars
-|image |container image with DotNet SDK and auto-instrumentation
-|resourceRequirements |the compute resource requirements
+
+|Name
+|Description
+
+|env
+|DotNet specific env vars
+
+|image
+|container image with DotNet SDK and auto-instrumentation
+
+|resourceRequirements
+|the compute resource requirements
+
 |===
 
 For DotNet auto-instrumentation, the OTEL_EXPORTER_OTLP_ENDPOINT environment variable is required to be set if the endpoint of the exporters is set to 4317. DotNet autoinstrumentation uses http/proto by default and the telemetry data needs to be setn to 4318 port.
@@ -109,10 +168,19 @@ instrumentation.opentelemetry.io/inject-dotnet: "true"
 
 [cols=",",options="header",]
 |===
-|Name |Description
-|env |Golang specific env vars
-|image |container image with Golang SDK and auto-instrumentation
-|resourceRequirements |the compute resource requirements
+
+|Name
+|Description
+
+|env
+|Golang specific env vars
+
+|image
+|container image with Golang SDK and auto-instrumentation
+
+|resourceRequirements
+|the compute resource requirements
+
 |===
 
 To enable the injection, you need to provide the folllowing annotation to your PodSpec:
@@ -126,10 +194,19 @@ instrumentation.opentelemetry.io/inject-go: "true"
 
 [cols=",",options="header",]
 |===
-|Name |Description
-|env |Java specific env vars
-|image |container image with Java SDK and auto-instrumentation
-|resourceRequirements |the compute resource requirements
+
+|Name
+|Description
+
+|env
+|Java specific env vars
+
+|image
+|container image with Java SDK and auto-instrumentation
+
+|resourceRequirements
+|the compute resource requirements
+
 |===
 
 To enable the injection, you need to provide the following annotation to your PodSpec:
@@ -143,10 +220,19 @@ instrumentation.opentelemetry.io/inject-java: "true"
 
 [cols=",",options="header",]
 |===
-|Name |Description
-|env |NodeJS specific env vars
-|image |container image with NodeJS SDK and auto-instrumentation
-|resourceRequirements |the compute resource requirements
+
+|Name
+|Description
+
+|env
+|NodeJS specific env vars
+
+|image
+|container image with NodeJS SDK and auto-instrumentation
+
+|resourceRequirements
+|the compute resource requirements
+
 |===
 
 To enable the injection, you need to provide the following annotations
@@ -189,17 +275,26 @@ supplementalGroups:
 
 [source,terminal]
 ----
-oc adm policy add-scc-to-user otel-go-instrumentation-scc -z <SERVICE_ACCOUNT>
+$ oc adm policy add-scc-to-user otel-go-instrumentation-scc -z <SERVICE_ACCOUNT>
 ----
 
 === Configure the Python auto-instrumentation
 
 [cols=",",options="header",]
 |===
-|Name |Description
-|env |Python specific env vars
-|image |container image with Python SDK and auto-instrumentation
-|resourceRequirements |the compute resource requirements
+
+|Name
+|Description
+
+|env
+|Python specific env vars
+
+|image
+|container image with Python SDK and auto-instrumentation
+
+|resourceRequirements
+|the compute resource requirements
+
 |===
 
 For Python auto-instrumentation, the OTEL_EXPORTER_OTLP_ENDPOINT environment variable is required to be set if the endpoint of the exporters is set to 4317. Python autoinstrumentation uses http/proto by default and the telemetry data needs to be setn to 4318 port.
