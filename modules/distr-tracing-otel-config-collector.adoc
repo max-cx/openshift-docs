@@ -260,6 +260,7 @@ The OpenCensus receiver provides backwards compatibility with the OpenCensus pro
         endpoint: 0.0.0.0:9411 <1>
         tls: <2>
         cors_allowed_origins: <3>
+          - https://*.<example>.com
 
     service:
       pipelines:
