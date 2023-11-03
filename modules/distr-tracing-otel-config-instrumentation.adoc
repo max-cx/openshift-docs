@@ -6,7 +6,7 @@ This module included in the following assemblies:
 [id="distr-tracing-config-otel-instrumentation_{context}"]
 = OpenTelemetry Instrumentation configuration options
 
-The {OTELName} can inject and configure OpenTelemetry auto-instrumentation libraries into your workloads. Currently, the project supports the injection of instrumentation libraries fro Go, Java, NodeJS, Python and ApacheHTTPD.
+The {OTELName} can inject and configure the OpenTelemetry auto-instrumentation libraries into your workloads. Currently, the project supports injection of the instrumentation libraries from Go, Java, Node.js, Python, and the Apache HTTP Server (`httpd`).
 
 Auto-instrumentation in OpenTelemetry refers to the capability where the framework automatically instruments an application without manual code changes. This enables developers and Operators to get observability into their applications with minimal effort and changes to the existing codebase.
 
@@ -67,7 +67,7 @@ spec:
 |
 
 |apacheHttpd
-|Configuration for the ApacheHTTPD instrumentation
+|Configuration for the Apache HTTP Server instrumentation
 |
 
 |dotnet
@@ -96,7 +96,7 @@ spec:
 
 When using the Instrumentation CR with {SMProductName}, you must use the `b3multi` propagator.
 
-=== Configure the Apache HTTPD auto-instrumentation
+=== Configure the Apache HTTP Server auto-instrumentation
 
 .Prameters for the `+.spec.apacheHttpd+` field
 [cols=",,",options="header",]
@@ -104,15 +104,15 @@ When using the Instrumentation CR with {SMProductName}, you must use the `b3mult
 |Name |Description |Default
 
 |attrs
-|Apache HTTPD agent specific attributes
+|Attributes specific to the Apache HTTP Server
 |
 
 |configPath
-|Location of Apache HTTPD server configuration
+|Location of the Apache HTTP Server configuration
 |/usr/local/apache2/conf
 
 |env
-|Apache HTTPD specific env vars
+|Environment variables that are specific to the Apache HTTP Server
 |
 
 |image
@@ -124,7 +124,7 @@ When using the Instrumentation CR with {SMProductName}, you must use the `b3mult
 |
 
 |version
-|Apache HTTPD server version
+|Apache HTTP Server version
 |2.4
 
 |===
