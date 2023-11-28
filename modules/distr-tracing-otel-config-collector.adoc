@@ -625,32 +625,6 @@ The OTLP HTTP exporter exports data using the OpenTelemetry protocol (OTLP).
 <2> The client side TLS configuration. Defines paths to TLS certificates.
 <3> Headers are sent in every HTTP request.
 
-[id="jaeger-exporter_{context}"]
-==== Jaeger exporter
-
-The Jaeger exporter exports data using the Jaeger proto format through gRPC.
-
-* Support level: link:https://access.redhat.com/support/offerings/techpreview[Technology Preview]
-* Supported signals: traces
-
-.OpenTelemetry Collector custom resource with enabled Jaeger exporter
-[source,yaml]
-----
-  config: |
-    exporters:
-      jaeger:
-        endpoint: jaeger-all-in-one:14250 <1>
-        tls: <2>
-    service:
-      pipelines:
-        traces:
-          exporters: [jaeger]
-----
-<1> The Jaeger gRPC endpoint.
-<2> The client side TLS configuration. Defines paths to TLS certificates.
-
-
-[id="logging-exporter_{context}"]
 ==== Logging exporter
 
 The Logging exporter prints data to the standard output.
