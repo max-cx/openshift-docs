@@ -10,7 +10,7 @@ You can set up sending telemetry data to an OpenTelemetry Collector instance wit
 
 .Prerequisites
 
-* The {TempoName} is installed and a TempoStack instance is deployed.
+* The {TempoName} is installed, and a TempoStack instance is deployed.
 
 * You have access to the cluster through the web console or the {oc-first}:
 
@@ -22,7 +22,7 @@ You can set up sending telemetry data to an OpenTelemetry Collector instance wit
 
 .Procedure
 
-. Create a project for the OpenTelemetry Collector:
+. Create a project for an OpenTelemetry Collector instance:
 +
 [source,yaml]
 ----
@@ -146,10 +146,10 @@ spec:
 |`grpc`
 
 |OTEL_EXPORTER_OTLP_TIMEOUT
-|Maximum time the OTLP exporter will wait for each batch export.
+|Maximum time interval for the OTLP exporter to wait for each batch export.
 |`10s`
 
 |OTEL_EXPORTER_OTLP_INSECURE
-|Disables client transport security for gRPC requests; an HTTPS schema overrides it.
+|Disables client transport security for gRPC requests. An HTTPS schema overrides it.
 |`False`
 |===

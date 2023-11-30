@@ -12,7 +12,7 @@ The {OTELOperator} allows sidecar injection into deployment workloads and automa
 
 .Prerequisites
 
-* The {TempoName} is installed and a TempoStack instance is deployed.
+* The {TempoName} is installed, and a TempoStack instance is deployed.
 
 * You have access to the cluster through the web console or the {oc-first}:
 
@@ -24,7 +24,7 @@ The {OTELOperator} allows sidecar injection into deployment workloads and automa
 
 .Procedure
 
-. Create a project for the OpenTelemtry Collector.
+. Create a project for an OpenTelemetry Collector instance:
 +
 [source,yaml]
 ----
@@ -34,7 +34,7 @@ metadata:
   name: observability
 ----
 
-. Create a service account.
+. Create a service account:
 +
 [source,yaml]
 ----
@@ -45,7 +45,7 @@ metadata:
   namespace: observability
 ----
 
-. Grant permissions to the service account for the `k8sattributes` and `resourcedetection` processors.
+. Grant the following permissions to the service account for the `k8sattributes` and `resourcedetection` processors:
 +
 [source,yaml]
 ----
@@ -72,7 +72,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ----
 
-. Deploy the OpenTelemetry Collector as a sidecar.
+. Deploy the OpenTelemetry Collector as a sidecar:
 +
 [source,yaml]
 ----
@@ -116,4 +116,4 @@ spec:
 
 . Create your deployment using the `otel-collector-sidecar` service account.
 
-. Add the `sidecar.opentelemetry.io/inject: "true"` annotation to your `Deployment` object. This will inject all the needed environment variables to send data from your workloads to the OpenTelemetryCollector instance.
+. Add the `sidecar.opentelemetry.io/inject: "true"` annotation to your `Deployment` object. This will inject all the needed environment variables to send data from your workloads to the OpenTelemetry Collector instance.

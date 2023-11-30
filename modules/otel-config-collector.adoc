@@ -69,18 +69,28 @@ spec:
 |Parameter |Description |Values |Default
 |receivers:
 |A receiver is how data gets into the Collector. By default, no receivers are configured. There must be at least one enabled receiver for a configuration to be considered valid. Receivers are enabled by being added to a pipeline.
-|`otlp`, `jaeger`, `zipkin`
+|`otlp`, `jaeger`, `prometheus`, `zipkin`, `kafka`, `opencensus`
 |None
 
 |processors:
 |Processors run through the data between it is received and exported. By default, no processors are enabled.
-|
+|`batch`, `memory_limiter`, `resourcedetection`, `attributes`, `span`, `k8sattributes`, `filter`, `routing`
 |None
 
 |exporters:
 |An exporter sends data to one or more back ends or destinations. By default, no exporters are configured. There must be at least one enabled exporter for a configuration to be considered valid. Exporters are enabled by being added to a pipeline. Exporters might be used with their default settings, but many require configuration to specify at least the destination and security settings.
-|`otlp`, `otlphttp`, `debug`, `prometheus`
+|`otlp`, `otlphttp`, `debug`, `prometheus`, `kafka`
 |None
+
+|connectors:
+|
+|`spanmetrics`
+|
+
+|extensions:
+|
+|`bearertokenauth`, `oauth2client`, `jaegerremotesamplin`, `pprof`, `health_check`, `memory_ballast`, `zpages`
+|
 
 |service:
   pipelines:
@@ -487,13 +497,19 @@ The Attributes processor can modify attributes of a span, log, or metric. You ca
 
 The processor operates on a list of actions, executing them in the order specified in the configuration. The following actions are supported:
 
-* Insert:: Inserts a new attribute into the input data when the specified key does not already exist.
-* Update:: Updates an attribute in the input data if the key already exists.
-* Upsert:: Combines the insert and update actions: Inserts a new attribute if the key does not exist yet. Updates the attribute if the key already exists.
-* Delete:: Removes an attribute from the input data.
-* Hash:: Hashes an existing attribute value as SHA1.
-* Extract:: Extracts values by using a regular expression rule from the input key to the target keys defined in the rule. If a target key already exists, it will be overridden similarly to the Span Processor's `to_attributes` setting with the existing attribute as the source.
-* Convert:: Converts an existing attribute to a specified type.
+Insert:: Inserts a new attribute into the input data when the specified key does not already exist.
+
+Update:: Updates an attribute in the input data if the key already exists.
+
+Upsert:: Combines the insert and update actions: Inserts a new attribute if the key does not exist yet. Updates the attribute if the key already exists.
+
+Delete:: Removes an attribute from the input data.
+
+Hash:: Hashes an existing attribute value as SHA1.
+
+Extract:: Extracts values by using a regular expression rule from the input key to the target keys defined in the rule. If a target key already exists, it will be overridden similarly to the Span Processor's `to_attributes` setting with the existing attribute as the source.
+
+Convert:: Converts an existing attribute to a specified type.
 
 .OpenTelemetry Collector using the Attributes processor
 [source,yaml]
