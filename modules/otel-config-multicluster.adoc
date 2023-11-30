@@ -137,8 +137,6 @@ spec:
   ingress:
     type: route
     hostname: "observability-cluster.com"
-    annotations:
-      acme.cert-manager.io/http01-ingress-class: openshift-default
     route:
       termination: "edge"
   config: |
