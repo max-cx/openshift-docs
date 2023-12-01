@@ -41,53 +41,56 @@ spec:
       value: "true"
 ----
 
+//[cols=",,",options="header",]
+
 .Parameters used by the Operator to define the Instrumentation
-[cols=",,",options="header",]
+[options="header"]
+[cols="l, a, a"]
 |===
 |Parameter |Description |Values
 
 |env
-|Common environment variables to define across all the instrumentations
+|Common environment variables to define across all the instrumentations.
 |
 
 |exporter
-|Exporter configuration
+|Exporter configuration.
 |
 
 |propagators
-|Propagators defines inter-process context propagation configuration
+|Propagators defines inter-process context propagation configuration.
 |`tracecontext`, `baggage`, `b3`, `b3multi`, `jaeger`, `ottrace`, `none`
 
 |resource
-|Resource attributes configuration
+|Resource attributes configuration.
 |
 
 |sampler
-|Sampling configuration
+|Sampling configuration.
 |
 
 |apacheHttpd
-|Configuration for the Apache HTTP Server instrumentation
+|Configuration for the Apache HTTP Server instrumentation.
 |
 
 |dotnet
-|Configuration for the .NET instrumentation
+|Configuration for the .NET instrumentation.
 |
 
 |go
-|Configuration for the Go instrumentation
+|Configuration for the Go instrumentation.
 |
 
 |java
-|Configuration for the Java instrumentation
+|Configuration for the Java instrumentation.
 |
 
 |nodejs
-|Configuration for the Node.js instrumentation
+|Configuration for the Node.js instrumentation.
 |
 
 |python
-|Configuration for the Python instrumentation
+|Configuration for the Python instrumentation.
 |
 
 |===
@@ -104,27 +107,27 @@ When using the Instrumentation custom resource (CR) with {SMProductName}, you mu
 |Name |Description |Default
 
 |attrs
-|Attributes specific to the Apache HTTP Server
+|Attributes specific to the Apache HTTP Server.
 |
 
 |configPath
-|Location of the Apache HTTP Server configuration
+|Location of the Apache HTTP Server configuration.
 |/usr/local/apache2/conf
 
 |env
-|Environment variables specific to the Apache HTTP Server
+|Environment variables specific to the Apache HTTP Server.
 |
 
 |image
-|Container image with the Apache SDK and auto-instrumentation
+|Container image with the Apache SDK and auto-instrumentation.
 |
 
 |resourceRequirements
-|The compute resource requirements
+|The compute resource requirements.
 |
 
 |version
-|Apache HTTP Server version
+|Apache HTTP Server version.
 |2.4
 
 |===
@@ -139,18 +142,16 @@ instrumentation.opentelemetry.io/inject-apache-httpd: "true"
 
 [cols=",",options="header",]
 |===
-
-|Name
-|Description
+|Name |Description
 
 |env
-|Environment variables specific to .NET
+|Environment variables specific to .NET.
 
 |image
-|Container image with the .NET SDK and auto-instrumentation
+|Container image with the .NET SDK and auto-instrumentation.
 
 |resourceRequirements
-|The compute resource requirements
+|The compute resource requirements.
 
 |===
 
@@ -166,18 +167,16 @@ instrumentation.opentelemetry.io/inject-dotnet: "true"
 
 [cols=",",options="header",]
 |===
-
-|Name
-|Description
+|Name |Description
 
 |env
-|Environment variables specific to Go
+|Environment variables specific to Go.
 
 |image
-|Container image with the Go SDK and auto-instrumentation
+|Container image with the Go SDK and auto-instrumentation.
 
 |resourceRequirements
-|The compute resource requirements
+|The compute resource requirements.
 
 |===
 
@@ -224,18 +223,16 @@ $ oc adm policy add-scc-to-user otel-go-instrumentation-scc -z <service_account>
 
 [cols=",",options="header",]
 |===
-
-|Name
-|Description
+|Name |Description
 
 |env
-|Environment variables specific to Java
+|Environment variables specific to Java.
 
 |image
-|Container image with the Java SDK and auto-instrumentation
+|Container image with the Java SDK and auto-instrumentation.
 
 |resourceRequirements
-|The compute resource requirements
+|The compute resource requirements.
 
 |===
 
@@ -249,18 +246,16 @@ instrumentation.opentelemetry.io/inject-java: "true"
 
 [cols=",",options="header",]
 |===
-
-|Name
-|Description
+|Name |Description
 
 |env
-|Environment variables specific to Node.js
+|Environment variables specific to Node.js.
 
 |image
-|Container image with the Node.js SDK and auto-instrumentation
+|Container image with the Node.js SDK and auto-instrumentation.
 
 |resourceRequirements
-|The compute resource requirements
+|The compute resource requirements.
 
 |===
 
@@ -277,18 +272,16 @@ The `+instrumentation.opentelemetry.io/otel-go-auto-target-exe+` annotation sets
 
 [cols=",",options="header",]
 |===
-
-|Name
-|Description
+|Name |Description
 
 |env
-|Environment variables specific to Python
+|Environment variables specific to Python.
 
 |image
-|Container image with the Python SDK and auto-instrumentation
+|Container image with the Python SDK and auto-instrumentation.
 
 |resourceRequirements
-|The compute resource requirements
+|The compute resource requirements.
 
 |===
 
@@ -311,10 +304,10 @@ instrumentation.opentelemetry.io/inject-sdk: "true"
 
 Note that all the annotations accept the following values:
 
-* `true`:: Injects the `+Instrumentation+` resource from the namespace.
-* `false`:: Does not inject any instrumentation.
-* `instrumentation-name`:: The name of the Instrumentation resource to inject from the current namespace.
-* `other-namespace/instrumentation-name`:: The name of the Instrumentation resource to inject from another namespace.
+`true`:: Injects the `+Instrumentation+` resource from the namespace.
+`false`:: Does not inject any instrumentation.
+`instrumentation-name`:: The name of the Instrumentation resource to inject from the current namespace.
+`other-namespace/instrumentation-name`:: The name of the Instrumentation resource to inject from another namespace.
 
 === Multi-container pods
 
