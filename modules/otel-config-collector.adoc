@@ -83,12 +83,12 @@ spec:
 |None
 
 |connectors:
-|
+|Connectors join pairs of pipelines, that is by consuming data as end-of-pipeline exporters and emitting data as start-of-pipeline receivers, and can be used to summarize, replicate, or route consumed data. By default, no connectors are configured.
 |`spanmetrics`
 |
 
 |extensions:
-|
+|Optional components for tasks that do not involve processing telemetry data. By default, no extensions are configured.
 |`bearertokenauth`, `oauth2client`, `jaegerremotesamplin`, `pprof`, `health_check`, `memory_ballast`, `zpages`
 |
 
