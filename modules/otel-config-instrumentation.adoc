@@ -4,7 +4,7 @@
 
 :_mod-docs-content-type: REFERENCE
 [id="otel-instrumentation-config_{context}"]
-= OpenTelemetry Instrumentation configuration options
+= OpenTelemetry instrumentation configuration options
 
 The {OTELName} can inject and configure the OpenTelemetry auto-instrumentation libraries into your workloads. Currently, the project supports injection of the instrumentation libraries from Go, Java, Node.js, Python, .NET, and the Apache HTTP Server (`httpd`).
 
@@ -95,9 +95,9 @@ spec:
 
 |===
 
-== Using the Instrumentation CR with Service Mesh
+== Using the instrumentation CR with Service Mesh
 
-When using the Instrumentation custom resource (CR) with {SMProductName}, you must use the `b3multi` propagator.
+When using the instrumentation custom resource (CR) with {SMProductName}, you must use the `b3multi` propagator.
 
 === Configuration of the Apache HTTP Server auto-instrumentation
 
