@@ -39,7 +39,7 @@ Here are some of the use cases for the OpenTelemetry Collector:
 
 This update introduces the following enhancements:
 
-* The *OpenShift distributed tracing data collection Operator* is renamed to the *{OTELOperator}*.
+* The *OpenShift distributed tracing data collection Operator* is renamed as the *{OTELOperator}*.
 * Support for the ARM architecture.
 * Support for the Prometheus receiver for metrics collection.
 * Support for the Kafka receiver and exporter for sending traces and metrics to Kafka.

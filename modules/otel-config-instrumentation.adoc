@@ -326,4 +326,4 @@ The instrumentation is run on the first container that is available by default a
 instrumentation.opentelemetry.io/container-names: "<container_1>,<container_2>"
 ----
 
-NOTE: Go auto-instrumentation does not support multi-container auto-instrumentation injection.
+NOTE: The Go auto-instrumentation does not support multi-container auto-instrumentation injection.
