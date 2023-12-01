@@ -61,6 +61,69 @@ This update introduces the following bug fixes:
 
 [id="known-issues_otel-3-0-rn"]
 === Known issues
+Curently,  operator cluster-monitoring is disabled (link:https://issues.redhat.com/browse/TRACING-3761[TRACING=3139]). The monitoring can be enabled manually by annotation the operator namespace and creating service monitor.
+
++
+.Workaround
++
+Add label to the namespace: `oc label namespace openshift-opentelemetry-operator openshift.io/cluster-monitoring=true`
++
+[source,yaml]
+----
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  namespace: openshift-opentelemetry-operator
+  name: opentelemetry-operator-controller-manager-metrics-monitor
+spec:
+  endpoints:
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    path: /metrics
+    port: https
+    scheme: https
+    tlsConfig:
+      insecureSkipVerify: true
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: opentelemetry-operator
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: otel-operator-prometheus
+  namespace: openshift-opentelemetry-operator
+  annotations:
+    include.release.openshift.io/self-managed-high-availability: "true"
+    include.release.openshift.io/single-node-developer: "true"
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - services
+  - endpoints
+  - pods
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: otel-operator-prometheus
+  namespace: openshift-opentelemetry-operator
+  annotations:
+    include.release.openshift.io/self-managed-high-availability: "true"
+    include.release.openshift.io/single-node-developer: "true"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: otel-operator-prometheus
+subjects:
+- kind: ServiceAccount
+  name: prometheus-k8s
+  namespace: openshift-monitoring
+----
 
 * None.
 
