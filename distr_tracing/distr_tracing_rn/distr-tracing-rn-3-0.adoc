@@ -41,7 +41,7 @@ In Red Hat OpenShift distributed tracing 3.0, Tempo provided by the {TempoOperat
 [id="new-features-and-enhancements_jaeger-release-notes_distributed-tracing-rn-3-0"]
 === New features and enhancements
 
-This update introduces the following enhancements for {JaegerShortName}:
+This update introduces the following enhancements for the {JaegerShortName}:
 
 * Support for the ARM architecture.
 * Support for cluster-wide proxy environments.
@@ -49,7 +49,7 @@ This update introduces the following enhancements for {JaegerShortName}:
 [id="bug-fixes_jaeger-release-notes_distributed-tracing-rn-3-0"]
 === Bug fixes
 
-This update introduces the following bug fixes for {JaegerShortName}:
+This update introduces the following bug fixes for the {JaegerShortName}:
 
 * Fixed support for disconnected environments when using the `oc adm catalog mirror` CLI command. (link:https://issues.redhat.com/browse/TRACING-3546[TRACING-3546])
 
@@ -70,7 +70,7 @@ endif::openshift-rosa[]
 [id="new-features-and-enhancements_tempo-release-notes_distributed-tracing-rn-3-0"]
 === New features and enhancements
 
-This update introduces the following enhancements for {TempoShortName}:
+This update introduces the following enhancements for the {TempoShortName}:
 
 * Support for the ARM architecture.
 * Support for span request count, duration, and error count (RED) metrics. The metrics can be visualized in the Jaeger console deployed as part of Tempo or in the web console in the *Observe* menu.
@@ -78,10 +78,10 @@ This update introduces the following enhancements for {TempoShortName}:
 [id="bug-fixes_tempo-release-notes_distributed-tracing-rn-3-0"]
 === Bug fixes
 
-This update introduces the following bug fixes for {TempoShortName}:
+This update introduces the following bug fixes for the {TempoShortName}:
 
 * Fixed support for the custom TLS CA option for connecting to object storage. (link:https://issues.redhat.com/browse/TRACING-3462[TRACING-3462])
-* Fixed support for disconnected environments via `oc adm catalog mirror`. (link:https://issues.redhat.com/browse/TRACING-3523[TRACING-3523])
+* Fixed support for disconnected environments when using the `oc adm catalog mirror` CLI command. (link:https://issues.redhat.com/browse/TRACING-3523[TRACING-3523])
 * Fixed mTLS when Gateway is not deployed. (link:https://issues.redhat.com/browse/TRACING-3510[TRACING-3510])
 
 [id="known-issues_tempo-release-notes_distributed-tracing-rn-3-0"]
