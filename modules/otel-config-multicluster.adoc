@@ -69,7 +69,7 @@ roleRef:
 
 . Create the YAML file to define the `OpenTelemetryCollector` custom resource (CR) in the edge clusters.
 +
-.OpenTelemetryCollector for the edge clusters
+.Example `OpenTelemetryCollector` custom resource for the edge clusters
 [source,yaml]
 ----
 apiVersion: opentelemetry.io/v1alpha1
@@ -124,7 +124,7 @@ spec:
 
 . Create the YAML file to define the `OpenTelemetryCollector` custom resource (CR) in the central cluster.
 +
-.OpenTelemetryCollector for the central cluster
+.Example `OpenTelemetryCollector` custom resource for the central cluster
 [source,yaml]
 ----
 apiVersion: opentelemetry.io/v1alpha1

@@ -35,7 +35,7 @@ spec:
 
 Alternatively, a manually created Prometheus `PodMonitor` can provide fine control, for example removing duplicated labels added during Prometheus scraping.
 
-.Example of the `PodMonitor` custom resource (CR) that configures the monitoring stack to scrape Collector metrics
+.Example of the `PodMonitor` custom resource that configures the monitoring stack to scrape the Collector metrics
 [source,yaml]
 ----
 apiVersion: monitoring.coreos.com/v1
@@ -62,6 +62,6 @@ spec:
     - action: labeldrop
       regex: job
 ----
-<1> The name of the OpenTelemetry custom resource.
+<1> The name of the OpenTelemetry Collector custom resource.
 <2> The name of the internal metrics port for the OpenTelemetry Collector. This port name is always `metrics`.
 <3> The name of the Prometheus exporter port for the OpenTelemetry Collector.

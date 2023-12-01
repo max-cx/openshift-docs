@@ -908,7 +908,7 @@ The BearerTokenAuth extension is currently a link:https://access.redhat.com/supp
 
 The BearerTokenAuth extension is an authenticator for receivers and exporters that are based on the HTTP and the gRPC protocol.
 You can use the OpenTelemetry Collector custom resource to configure client authentication and server authentication for the BearerTokenAuth extension on the receiver and exporter side.
-This extension supports traces, metrics, logs.
+This extension supports traces, metrics, and logs.
 
 .OpenTelemetry Collector custom resource with client and server authentication configured for the BearerTokenAuth extension
 [source,yaml]
@@ -951,7 +951,7 @@ The OAuth2Client extension is currently a link:https://access.redhat.com/support
 
 The OAuth2Client extension is an authenticator for exporters that are based on the HTTP and the gRPC protocol.
 Client authentication for the OAuth2Client extension is configured in a separate section in the OpenTelemetry Collector custom resource.
-This extension supports traces, metrics, logs.
+This extension supports traces, metrics, and logs.
 
 .OpenTelemetry Collector custom resource with client authentication configured for the OAuth2Client extension
 [source,yaml]
@@ -992,8 +992,8 @@ This extension supports traces, metrics, logs.
 ----
 <1> Client identifier, which is provided by the identity provider.
 <2> Confidential key used to authenticate the client to the identity provider.
-<3> Further metadata which is transferred during authentication. Consisting of key and value. For example audience specifies the intended audience for the access token. It indicates the recipient of the token.
-<4> URL of the OAuth2 token endpoint, where the Collector will request access tokens.
+<3> Further metadata, in the key-value pair format, which is transferred during authentication. For example, `audience` specifies the intended audience for the access token, indicating the recipient of the token.
+<4> The URL of the OAuth2 token endpoint, where the Collector requests access tokens.
 <5> The scopes define the specific permissions or access levels requested by the client.
 <6> The Transport Layer Security (TLS) settings for the token client, which is used to establish a secure connection when requesting tokens.
 <7> When set to `true`, configures the Collector to use an insecure or non-verified TLS connection to call the configured token endpoint.
