@@ -39,7 +39,7 @@ Here are some of the use cases for the OpenTelemetry Collector:
 
 This update introduces the following enhancements:
 
-* The *OpenShift distributed tracing data collection* Operator is renamed to the *{OTELOperator}*.
+* The *OpenShift distributed tracing data collection Operator* is renamed to the *{OTELOperator}*.
 * Support for the ARM architecture.
 * Support for the Prometheus receiver for metrics collection.
 * Support for the Kafka receiver and exporter for sending traces and metrics to Kafka.
@@ -47,10 +47,10 @@ This update introduces the following enhancements:
 * The {OTELOperator} creates the Prometheus `ServiceMonitor` custom resource if the Prometheus exporter is enabled.
 * The Operator enables the `Instrumentation` custom resource that allows injecting upstream OpenTelemetry auto-instrumentation libraries.
 
-[id="deprecations_otel-3-0-rn"]
+[id="removal-notice_otel-3-0-rn"]
 === Removal notice
 
-* In {OTELName} {DTProductVersion}, the Jaeger exporter is removed. Users are advised to switch to the OTLP exporter for sending data to the Jaeger collector.
+* In {OTELName} {DTProductVersion}, the Jaeger exporter has been removed. Bug fixes and support are provided only through the end of the 2.9 lifecycle. As an alternative to the Jaeger exporter for sending data to the Jaeger collector, you can use the OTLP exporter instead.
 
 [id="bug-fixes_otel-3-0-rn"]
 === Bug fixes

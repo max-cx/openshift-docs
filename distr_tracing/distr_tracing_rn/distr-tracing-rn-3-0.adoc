@@ -31,6 +31,7 @@ include::modules/distr-tracing-product-overview.adoc[leveloffset=+1]
 [id="jaeger-release-notes_distributed-tracing-rn-3-0"]
 == {JaegerName}
 
+[id="deprecated-functionality_jaeger-release-notes_distributed-tracing-rn-3-0"]
 === Deprecated functionality
 
 In Red Hat OpenShift distributed tracing 3.0, Jaeger and Elasticsearch are deprecated, and both are planned to be removed in a future release. Red Hat will provide critical and above CVE bug fixes and support for these components during the current release lifecycle, but these components will no longer receive feature enhancements.
@@ -40,13 +41,17 @@ In Red Hat OpenShift distributed tracing 3.0, Tempo provided by the {TempoOperat
 [id="new-features-and-enhancements_jaeger-release-notes_distributed-tracing-rn-3-0"]
 === New features and enhancements
 
-* Support cluster-wide proxy environments.
-* ARM architecture is now supported.
+This update introduces the following enhancements for {JaegerShortName}:
+
+* Support for the ARM architecture.
+* Support for cluster-wide proxy environments.
 
 [id="bug-fixes_jaeger-release-notes_distributed-tracing-rn-3-0"]
 === Bug fixes
 
-* Fixed support for disconnected environments via `oc adm catalog mirror`. (link:https://issues.redhat.com/browse/TRACING-3546[TRACING-3546])
+This update introduces the following bug fixes for {JaegerShortName}:
+
+* Fixed support for disconnected environments when using the `oc adm catalog mirror` CLI command. (link:https://issues.redhat.com/browse/TRACING-3546[TRACING-3546])
 
 [id="known-issues_jaeger-release-notes_distributed-tracing-rn-3-0"]
 === Known issues
@@ -55,7 +60,7 @@ In Red Hat OpenShift distributed tracing 3.0, Tempo provided by the {TempoOperat
 
 ifndef::openshift-rosa[]
 
-* The streaming deployment via AMQ/Kafka is unsupported on IBM Z and IBM Power Systems.
+* Currently, the streaming deployment via AMQ/Kafka is not supported on the IBM Z and IBM Power Systems architectures.
 endif::openshift-rosa[]
 
 // Tempo section
@@ -65,11 +70,15 @@ endif::openshift-rosa[]
 [id="new-features-and-enhancements_tempo-release-notes_distributed-tracing-rn-3-0"]
 === New features and enhancements
 
-* Support span request count, duration and error count (RED) metrics. The metrics can be visualized in the Jaeger console deployed as part of Tempo or in the OpenShift console in the observe menu.
-* ARM architecture is now supported.
+This update introduces the following enhancements for {TempoShortName}:
+
+* Support for the ARM architecture.
+* Support for span request count, duration, and error count (RED) metrics. The metrics can be visualized in the Jaeger console deployed as part of Tempo or in the web console in the *Observe* menu.
 
 [id="bug-fixes_tempo-release-notes_distributed-tracing-rn-3-0"]
 === Bug fixes
+
+This update introduces the following bug fixes for {TempoShortName}:
 
 * Fixed support for the custom TLS CA option for connecting to object storage. (link:https://issues.redhat.com/browse/TRACING-3462[TRACING-3462])
 * Fixed support for disconnected environments via `oc adm catalog mirror`. (link:https://issues.redhat.com/browse/TRACING-3523[TRACING-3523])
