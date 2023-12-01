@@ -102,7 +102,8 @@ When using the Instrumentation custom resource (CR) with {SMProductName}, you mu
 === Configuration of the Apache HTTP Server auto-instrumentation
 
 .Prameters for the `+.spec.apacheHttpd+` field
-[cols=",,",options="header",]
+[options="header"]
+[cols="l, a, a"]
 |===
 |Name |Description |Default
 
@@ -140,7 +141,8 @@ instrumentation.opentelemetry.io/inject-apache-httpd: "true"
 
 === Configuration of the .NET auto-instrumentation
 
-[cols=",",options="header",]
+[options="header"]
+[cols="l, a"]
 |===
 |Name |Description
 
@@ -165,7 +167,8 @@ instrumentation.opentelemetry.io/inject-dotnet: "true"
 
 === Configuration of the Go auto-instrumentation
 
-[cols=",",options="header",]
+[options="header"]
+[cols="l, a"]
 |===
 |Name |Description
 
@@ -221,7 +224,8 @@ $ oc adm policy add-scc-to-user otel-go-instrumentation-scc -z <service_account>
 
 === Configuration of the Java auto-instrumentation
 
-[cols=",",options="header",]
+[options="header"]
+[cols="l, a"]
 |===
 |Name |Description
 
@@ -244,7 +248,8 @@ instrumentation.opentelemetry.io/inject-java: "true"
 
 === Configuration of the Node.js auto-instrumentation
 
-[cols=",",options="header",]
+[options="header"]
+[cols="l, a"]
 |===
 |Name |Description
 
@@ -270,7 +275,8 @@ The `+instrumentation.opentelemetry.io/otel-go-auto-target-exe+` annotation sets
 
 === Configuration of the Python auto-instrumentation
 
-[cols=",",options="header",]
+[options="header"]
+[cols="l, a"]
 |===
 |Name |Description
 
@@ -305,8 +311,11 @@ instrumentation.opentelemetry.io/inject-sdk: "true"
 Note that all the annotations accept the following values:
 
 `true`:: Injects the `+Instrumentation+` resource from the namespace.
+
 `false`:: Does not inject any instrumentation.
+
 `instrumentation-name`:: The name of the Instrumentation resource to inject from the current namespace.
+
 `other-namespace/instrumentation-name`:: The name of the Instrumentation resource to inject from another namespace.
 
 === Multi-container pods
