@@ -367,7 +367,8 @@ The batch processor batches traces and metrics to reduce the number of outgoing 
 ----
 
 .Parameters used by the batch processor
-[cols="3",options="header"]
+[options="header"]
+[col="l, a, a"]
 |===
 |Parameter |Description |Default
 
@@ -415,7 +416,8 @@ The Memory Limiter processor periodically checks the Collector's memory usage an
 ----
 
 .Parameters used by the Memory Limiter processor
-[cols="3",options="header"]
+[options="header"]
+[col="l, a, a"]
 |===
 | Parameter | Description | Default
 
@@ -821,7 +823,7 @@ The Prometheus exporter exports metrics in the Prometheus or OpenMetrics formats
         metrics:
           exporters: [prometheus]
 ----
-<1> Exposes the Prometheus port from the collector pod and service. You can enable scraping of metrics by Prometheus by using the port name in `ServiceMonitor` or `PodMonitor` custom resource.
+<1> Exposes the Prometheus port from the Collector pod and service. You can enable scraping of metrics by Prometheus by using the port name in `ServiceMonitor` or `PodMonitor` custom resource.
 <2> The network endpoint where the metrics are exposed.
 <3> The server-side TLS configuration. Defines paths to TLS certificates.
 <4> If set, exports metrics under the provided value. No default.
@@ -894,7 +896,7 @@ The Spanmetrics connector aggregates Request, Error, and Duration (R.E.D) OpenTe
         metrics:
           receivers: [spanmetrics]
 ----
-<1>: Defines the flush interval of the generated metrics. Defaults to `15s`.
+<1> Defines the flush interval of the generated metrics. Defaults to `15s`.
 
 [id="extensions_{context}"]
 === Extensions
