@@ -1,6 +1,6 @@
 :_mod-docs-content-type: ASSEMBLY
 [id="otel-instrumentation"]
-= Configuring and deploying the OpenTelemetry Instrumentation injection
+= Configuring and deploying the OpenTelemetry instrumentation injection
 include::_attributes/common-attributes.adoc[]
 :context: otel-instrumentation
 
