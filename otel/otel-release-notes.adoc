@@ -61,12 +61,12 @@ This update introduces the following bug fixes:
 
 [id="known-issues_otel-3-0-rn"]
 === Known issues
-Curently,  operator cluster-monitoring is disabled (link:https://issues.redhat.com/browse/TRACING-3761[TRACING=3139]). The monitoring can be enabled manually by annotation the operator namespace and creating service monitor.
 
-+
+Curently, cluster monitoring of the {OTELOperator} is disabled (link:https://issues.redhat.com/browse/TRACING-3761[TRACING=3139]). You can enable monitoring manually by adding an annotation in the Operator namespace and creating a service monitor.
+
 .Workaround
-+
-Add label to the namespace: `oc label namespace openshift-opentelemetry-operator openshift.io/cluster-monitoring=true`
+
+* Add label to the namespace: `oc label namespace openshift-opentelemetry-operator openshift.io/cluster-monitoring=true`
 +
 [source,yaml]
 ----

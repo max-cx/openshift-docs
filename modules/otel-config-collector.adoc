@@ -187,9 +187,9 @@ The OTLP receiver ingests traces and metrics using the OpenTelemetry protocol (O
 <1> The OTLP gRPC endpoint. If omitted, the default `+0.0.0.0:4317+` is used.
 <2> The server-side TLS configuration. Defines paths to TLS certificates. If omitted, TLS is disabled.
 <3> The path to the TLS certificate at which the server verifies a client certificate. This sets the value of `ClientCAs` and `ClientAuth` to `RequireAndVerifyClientCert` in the `TLSConfig`. For more information, see the link:https://godoc.org/crypto/tls#Config[`Config` of the Golang TLS package].
-<4> Specifies the time interval at which the certificate is reloaded. If the value is not set, the certificate is never reloaded.  `reload_interval` accepts a string containing valid units of time such as `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`.
+<4> Specifies the time interval at which the certificate is reloaded. If the value is not set, the certificate is never reloaded. The `reload_interval` accepts a string containing valid units of time such as `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`.
 <5> The OTLP HTTP endpoint. The default value is `+0.0.0.0:4318+`.
-<6> The server-side TLS configuration. For more information, see `grpc` protocol configuration section.
+<6> The server-side TLS configuration. For more information, see the `grpc` protocol configuration section.
 
 [id="jaeger-receiver_{context}"]
 ==== Jaeger Receiver
@@ -222,7 +222,7 @@ The Jaeger receiver ingests traces in the Jaeger formats.
 <2> The Jaeger Thrift HTTP endpoint. If omitted, the default `+0.0.0.0:14268+` is used.
 <3> The Jaeger Thrift Compact endpoint. If omitted, the default `+0.0.0.0:6831+` is used.
 <4> The Jaeger Thrift Binary endpoint. If omitted, the default `+0.0.0.0:6832+` is used.
-<5> The TLS server side configuration. See the OTLP receiver configuration section for more details.
+<5> The  server-side TLS configuration. See the OTLP receiver configuration section for more details.
 
 [id="prometheus-receiver_{context}"]
 ==== Prometheus Receiver
@@ -258,7 +258,7 @@ The Prometheus receiver scrapes the metrics endpoints.
 
 The Zipkin receiver ingests traces in the Zipkin v1 and v2 formats.
 
-.OpenTelemetry Collector custom resource with enabled Zipkin receiver
+.OpenTelemetry Collector custom resource with the enabled Zipkin receiver
 [source,yaml]
 ----
   config: |
@@ -273,7 +273,7 @@ The Zipkin receiver ingests traces in the Zipkin v1 and v2 formats.
           receivers: [zipkin]
 ----
 <1> The Zipkin HTTP endpoint. If omitted, the default `+0.0.0.0:9411+` is used.
-<2> The TLS server side configuration. See the OTLP receiver configuration section for more details.
+<2> The server-side TLS configuration. See the OTLP receiver configuration section for more details.
 
 [id="kafka-receiver_{context}"]
 ==== Kafka Receiver
@@ -307,7 +307,7 @@ The Kafka receiver receives traces, metrics, and logs from Kafka in the OTLP for
           receivers: [kafka]
 ----
 <1> The list of Kafka brokers. The default is `+localhost:9092+`.
-<2> Kafka protocol version. For example, `+2.0.0+`. This is a required field.
+<2> The Kafka protocol version. For example, `+2.0.0+`. This is a required field.
 <3> The name of the Kafka topic to read from. The default is `+otlp_spans+`.
 <4> The plaintext authentication configuration. If omitted, plaintext authentication is disabled.
 <5> The client-side TLS configuration. Defines paths to the TLS certificates. If omitted, TLS authentication is disabled.
@@ -336,9 +336,9 @@ The OpenCensus receiver provides backwards compatibility with the OpenCensus pro
           ...
 ----
 <1> The OpenCensus endpoint. If omitted, the default is `+0.0.0.0:55678+`.
-<2> The TLS server-side configuration. See the OTLP receiver configuration section for more details.
+<2> The server-side TLS configuration. See the OTLP receiver configuration section for more details.
 <3> You can also use the HTTP JSON endpoint to optionally configure CORS, which is enabled by specifying a list of allowed CORS origins in this field.
-Wildcards with `+*+` are accepted under `cors_allowed_origins`.
+Wildcards with `+*+` are accepted under the `cors_allowed_origins`.
 To match any origin, enter only `+*+`.
 
 [id="processors_{context}"]
@@ -348,9 +348,9 @@ To match any origin, enter only `+*+`.
 [id="batch-processor_{context}"]
 ==== Batch processor
 
-The batch processor batches traces and metrics to reduce the number of outgoing connections needed to transfer the telemetry information.
+The Batch processor batches traces and metrics to reduce the number of outgoing connections needed to transfer the telemetry information.
 
-.Example of the OpenTelemetry Collector custom resource when using the batch processor
+.Example of the OpenTelemetry Collector custom resource when using the Batch processor
 [source,yaml]
 ----
   config: |
@@ -366,31 +366,31 @@ The batch processor batches traces and metrics to reduce the number of outgoing 
           processors: [batch]
 ----
 
-.Parameters used by the batch processor
+.Parameters used by the Batch processor
 [options="header"]
 [col="l, a, a"]
 |===
 |Parameter |Description |Default
 
-| `timeout`
-| Sends the batch after a specific time duration, irrespective of its size.
-| 200ms
+|`timeout`
+|Sends the batch after a specific time duration and irrespective of the batch size.
+|`200ms`
 
-| `send_batch_size`
-| Sends the batch of telemetry data after the specified number of spans or metrics.
-| 8192
+|`send_batch_size`
+|Sends the batch of telemetry data after the specified number of spans or metrics.
+|`8192`
 
-| `send_batch_max_size`
-| The maximum allowable size of the batch. Must be equal or greater than `send_batch_size`.
-| 0
+|`send_batch_max_size`
+|The maximum allowable size of the batch. Must be equal or greater than the `send_batch_size`.
+|`0`
 
-| `metadata_keys`
-| When activated, a batcher instance is created for each unique set of values found in the `client.Metadata`.
-| []
+|`metadata_keys`
+|When activated, a batcher instance is created for each unique set of values found in the `client.Metadata`.
+|`[]`
 
-| `metadata_cardinality_limit`
-| When the `metadata_keys` are populated, this configuration restricts the number of distinct metadata key-value combinations processed throughout the duration of the process.
-| 1000
+|`metadata_cardinality_limit`
+|When the `metadata_keys` are populated, this configuration restricts the number of distinct metadata key-value combinations processed throughout the duration of the process.
+|`1000`
 |===
 
 [id="memorylimiter-processor_{context}"]
@@ -419,27 +419,27 @@ The Memory Limiter processor periodically checks the Collector's memory usage an
 [options="header"]
 [col="l, a, a"]
 |===
-| Parameter | Description | Default
+|Parameter |Description |Default
 
-| `check_interval`
-| Time between memory usage measurements. The optimal value is 1s. For spiky traffic patterns, you can decrease the `check_interval` or increase the `spike_limit_mib`.
-| `0s`
+|`check_interval`
+|Time between memory usage measurements. The optimal value is `1s`. For spiky traffic patterns, you can decrease the `check_interval` or increase the `spike_limit_mib`.
+|`0s`
 
-| `limit_mib`
-| The hard limit, which is the maximum amount of memory in MiB allocated on the heap. Typically, the total memory usage of the OpenTelemetry Collector is about 50 MiB greater than this value.
-| `0`
+|`limit_mib`
+|The hard limit, which is the maximum amount of memory in MiB allocated on the heap. Typically, the total memory usage of the OpenTelemetry Collector is about 50 MiB greater than this value.
+|`0`
 
-| `spike_limit_mib`
-| Spike limit, which is the maximum expected spike of memory usage in MiB. The optimal value is approximately 20% of `limit_mib`. To calculate the soft limit, subtract the `spike_limit_mib` from the `limit_mib`.
-| 20% of `limit_mib`
+|`spike_limit_mib`
+|Spike limit, which is the maximum expected spike of memory usage in MiB. The optimal value is approximately 20% of `limit_mib`. To calculate the soft limit, subtract the `spike_limit_mib` from the `limit_mib`.
+|20% of `limit_mib`
 
-| `limit_percentage`
-| Same as the `limit_mib` but expressed as a percentage of the total available memory. The `limit_mib` setting takes precedence over this setting.
-| `0`
+|`limit_percentage`
+|Same as the `limit_mib` but expressed as a percentage of the total available memory. The `limit_mib` setting takes precedence over this setting.
+|`0`
 
-| `spike_limit_percentage`
-| Same as the `spike_limit_mib` but expressed as a percentage of the total available memory. Intended to be used with the `limit_percentage` setting.
-| `0`
+|`spike_limit_percentage`
+|Same as the `spike_limit_mib` but expressed as a percentage of the total available memory. Intended to be used with the `limit_percentage` setting.
+|`0`
 
 |===
 
@@ -587,7 +587,7 @@ Span renaming requires specifying attributes for the new name by using the `from
 <1> Defines the keys to form the new span name.
 <2> An optional separator.
 
-This processor can be used to extract attributes from the span name.
+You can use the processor to extract attributes from the span name.
 
 .OpenTelemetry Collector using the Span processor for extracting attributes from a span name
 [source,yaml]
@@ -600,9 +600,9 @@ This processor can be used to extract attributes from the span name.
             rules:
               - ^\/api\/v1\/document\/(?P<documentId>.*)\/update$ <1>
 ----
-<1> This rule defines how the extraction is to be executed. You can define more rules; for example, in this case, if the regular expression matches the name, a `documentID` attibute is created. In this example, if the input span name is `/api/v1/document/12345678/update`, this results in the `/api/v1/document/{documentId}/update` output span name, and a new `"documentId"="12345678"` attribute is added to the span.
+<1> This rule defines how the extraction is to be executed. You can define more rules: for example, in this case, if the regular expression matches the name, a `documentID` attibute is created. In this example, if the input span name is `/api/v1/document/12345678/update`, this results in the `/api/v1/document/{documentId}/update` output span name, and a new `"documentId"="12345678"` attribute is added to the span.
 
-The span status can be modified.
+You can have the span status modified.
 
 .OpenTelemetry Collector using the Span Processor for status change
 [source,yaml]
@@ -698,7 +698,7 @@ config: |
 <2> The default exporter when the attribute value is not present in the table in the next section.
 <3> The table that defines which values are to be routed to which exporters.
 
-Optionally can be set `attribute_source` configuratiion, which defines where to look for the attribute in `from_attribute`. The allowed value is `context` to search the context, which includes the HTTP headers, or `resource` to search the resource attributes.
+You can optionally create an `attribute_source` configuratiion, which defines where to look for the attribute in `from_attribute`. The allowed value is `context` to search the context, which includes the HTTP headers, or `resource` to search the resource attributes.
 
 [id="exporters_{context}"]
 === Exporters
@@ -733,10 +733,10 @@ The OTLP gRPC exporter exports traces and metrics using the OpenTelemetry protoc
           exporters: [otlp]
 ----
 <1> The OTLP gRPC endpoint. If the `+https://+` scheme is used, then client transport security is enabled and overrides the `insecure` setting in the `tls`.
-<2> The client side TLS configuration. Defines paths to TLS certificates.
+<2> The client-side TLS configuration. Defines paths to TLS certificates.
 <3> Disables client transport security when set to `true`. The default value is `false` by default.
 <4> Skips verifying the certificate when set to `true`. The default value is `false`.
-<5> Specifies the time interval at which the certificate is reloaded. If the value is not set, the certificate is never reloaded. `reload_interval` accepts a string containing valid units of time such as `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`.
+<5> Specifies the time interval at which the certificate is reloaded. If the value is not set, the certificate is never reloaded. The `reload_interval` accepts a string containing valid units of time such as `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`.
 <6> Overrides the virtual host name of authority such as the authority header field in requests. You can use this for testing.
 <7> Headers are sent for every request performed during an established connection.
 
@@ -840,7 +840,7 @@ The Kafka exporter is currently a link:https://access.redhat.com/support/offerin
 
 The Kafka exporter exports logs, metrics, and traces to Kafka. This exporter uses a synchronous producer that blocks and does not batch messages. It must be used with batch and queued retry processors for higher throughput and resiliency.
 
-.OpenTelemetry Collector custom resource with enabled Kafka exporter
+.OpenTelemetry Collector custom resource with an enabled Kafka exporter
 [source,yaml]
 ----
   config: |
@@ -865,7 +865,7 @@ The Kafka exporter exports logs, metrics, and traces to Kafka. This exporter use
           exporters: [kafka]
 ----
 <1> The list of Kafka brokers. The default is `+localhost:9092+`.
-<2> Kafka protocol version. For example, `+2.0.0+`. This is a required field.
+<2> The Kafka protocol version. For example, `+2.0.0+`. This is a required field.
 <3> The name of the Kafka topic to read from. The following are the defaults: `+otlp_spans+` for traces, `+otlp_metrics+` for metrics, `+otlp_logs+` for logs.
 <4> The plaintext authentication configuration. If omitted, plaintext authentication is disabled.
 <5> The client-side TLS configuration. Defines paths to the TLS certificates. If omitted, TLS authentication is disabled.
