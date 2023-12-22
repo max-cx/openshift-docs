@@ -106,21 +106,26 @@ spec:
     exporters:
       otlphttp:
         endpoint: https://observability-cluster.com:443 # <1>
-        insecure: false
-        compression: on
         tls:
-          cert_file: "/path/to/server-cert.pem"
-          key_file: "/path/to/server-key.pem"
-          client_ca_file: "/path/to/client-ca.pem"
-
+          insecure: false
+          cert_file: /certs/server.crt
+          key_file: /certs/server.key
+          ca_file: /certs/ca.crt
     service:
       pipelines:
         traces:
           receivers: [jaeger, opencensus, otlp, zipkin]
           processors: [memory_limiter, k8sattributes, resourcedetection, batch]
           exporters: [otlp]
+  volumes:
+    - name: otel-certs
+      secret: 
+        name: otel-certs
+  volumeMounts:
+    - name: otel-certs
+      mountPath: /certs
 ----
-<1> The Collector exporter is configured to export OTLP HTTP and points to the OpenTelemetry Collector from the central cluster.
+<1> The Collector exporter is configured to export OTLP HTTP and points to the OpenTelemetry Collector from the central cluster. Note you need to provide the certificate as a secret and mount it in your OpenTelemetry Collector instance. You can create the certificate by hand or using the {cert-manager-operator}.
 
 . Create the YAML file to define the `OpenTelemetryCollector` custom resource (CR) in the central cluster.
 +
@@ -136,18 +141,21 @@ spec:
   mode: "deployment"
   ingress:
     type: route
-    hostname: "observability-cluster.com"
     route:
-      termination: "edge"
+      termination: "passthrough"
   config: |
     receivers:
       otlp:
         protocols:
           http:
+            tls: # <1>
+              cert_file: /certs/server.crt
+              key_file: /certs/server.key
+              client_ca_file: /certs/ca.crt
     exporters:
       logging:
       otlp:
-        endpoint: "tempo-<simplest>-distributor:4317" # <1>
+        endpoint: "tempo-<simplest>-distributor:4317" # <2>
         tls:
           insecure: true
     service:
@@ -156,5 +164,104 @@ spec:
           receivers: [otlp]
           processors: []
           exporters: [otlp]
+  volumes:
+    - name: otel-certs
+      secret: 
+        name: otel-certs
+  volumeMounts:
+    - name: otel-certs
+      mountPath: /certs
 ----
-<1> The Collector exporter is configured to export OTLP and points to the Tempo distributor endpoint, which in this example is `"tempo-simplest-distributor:4317"` and already created.
+<1> The Collector receiver needs the certificate that you can generate using the {cert-manager-operator} or generate it from your machine, create a secret and mount it in your collector.
+<2> The Collector exporter is configured to export OTLP and points to the Tempo distributor endpoint, which in this example is `"tempo-simplest-distributor:4317"` and already created.
+
+To generate the cetificates using {cert-manager-operator}, you will need to create an Issuer:
+
+[source,yaml]
+----
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: selfsigned-issuer
+spec:
+  selfSigned: {}
+----
+
+Now, you need to create a self-signed certificate:
+
+[source,yaml]
+----
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ca
+spec:
+  isCA: true
+  commonName: ca
+  subject:
+    organizations:
+      - Organization # <1>
+    organizationalUnits:
+      - Widgets
+  secretName: ca-secret
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: selfsigned-issuer
+    kind: Issuer
+    group: cert-manager.io
+----
+
+<1> You should set the name of your organization here.
+
+Now, you need to create your CA issuer:
+
+[source,yaml]
+----
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: test-ca-issuer
+spec:
+  ca:
+    secretName: ca-secret
+----
+
+Create the client and server certificates:
+[source,yaml]
+----
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: server
+spec:
+  secretName: server-tls
+  isCA: false
+  usages:
+    - server auth
+    - client auth
+  dnsNames:
+  - "otel.observability.svc.cluster.local" # <1>
+  issuerRef:
+    name: ca-issuer
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: client
+spec:
+  secretName: client-tls
+  isCA: false
+  usages:
+    - server auth
+    - client auth
+  dnsNames:
+  - "otel.observability.svc.cluster.local" # <2>
+  issuerRef:
+    name: ca-issuer
+----
+<1> List of exact DNS names that should be mapped to a solver in the server OpenTelemetry Collector instance.
+<2> List of exact DNS names that should be mapped to a solver in the client OpenTelemetry Collector instance.
+
+Secrets will be generated for the client and server after applying this configuration.
