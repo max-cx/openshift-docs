@@ -125,7 +125,7 @@ spec:
     - name: otel-certs
       mountPath: /certs
 ----
-<1> The Collector exporter is configured to export OTLP HTTP and points to the OpenTelemetry Collector from the central cluster. Note you need to provide the certificate as a secret and mount it in your OpenTelemetry Collector instance. You can create the certificate by hand or using the {cert-manager-operator}.
+<1> The Collector exporter is configured to export OTLP HTTP and points to the OpenTelemetry Collector from the central cluster.
 
 . Create the YAML file to define the `OpenTelemetryCollector` custom resource (CR) in the central cluster.
 +
