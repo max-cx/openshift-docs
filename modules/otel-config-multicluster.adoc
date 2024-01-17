@@ -16,6 +16,17 @@ data to one OpenTelemetry Collector instance.
 * The {TempoOperator} is installed.
 * A TempoStack is deployed on the cluster.
 
+* You have the following certificates mounted as secrets in the {OTEL} instance:
++
+[TIP]
+====
+You can create these certificates manually or by using the {cert-manager-operator}.
+====
++
+** TLS certificate: for example, as a `cert_file`.
+** TLS key: for example, as a `key_file`.
+** CA certificate: for example, as a `ca_file`.
+
 .Procedure
 
 . Create a service account for the OpenTelemetry Collector.
