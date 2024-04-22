@@ -82,6 +82,39 @@ The Jaeger receiver ingests traces in the Jaeger formats.
 <4> The Jaeger Thrift Binary endpoint. If omitted, the default `+0.0.0.0:6832+` is used.
 <5> The  server-side TLS configuration. See the OTLP receiver configuration section for more details.
 
+[id="k8sobjectsreceiver-receiver_{context}"]
+=== K8S Objects Receiver
+
+The Kubernetes Objects receiver collects, either by pulling or watching, objects from the Kubernetes API server.
+The most common use case for this receiver is watching Kubernetes events, but it can be used to collect any type of Kubernetes object.
+Since the receiver gathers telemetry for the cluster as a whole, only one instance of the receiver is needed across the cluster in order to collect all the data.
+
+.OpenTelemetry Collector custom resource with an enabled k8sobjects receiver
+[source,yaml]
+----
+  config: |
+    receivers:
+      k8sobjects:
+        objects:
+        - name: pods # <1>
+          mode: watch # <2>
+          interval: # <3>
+          label_selector: # <4>
+          field_selector: # <5>
+          namespaces: [<namespace>,...] # <6>
+    service:
+      pipelines:
+        logs:
+          receivers: [k8sobjects]
+
+----
+<1> The Resource name observed by the k8sobjects receiver. For example `pods`, `deployments` or `events`.
+<2> The observation mode used by the k8sobjects receiver. Valid options are `pull` and `watch`.
+<3> The request the interval at which object is pulled. Only useful for pull mode. If omitted, the default `+1h+` is used.
+<4> Label selector to define targets.
+<5> Field selector to filter targets.
+<6> A list of namespaces to collect events from. If omitted, the default `+all+` is used.
+
 [id="prometheus-receiver_{context}"]
 === Prometheus Receiver
 
@@ -869,7 +902,47 @@ This extension supports traces, metrics, and logs.
 <10> The path to the client's private key file that is used with the client certificate if needed for authentication.
 <11> Sets a timeout for the token client's request.
 <12> You can assign the authenticator configuration to an OTLP exporter.
+[id="filestorage-extension_{context}"]
+=== Filestorage extension
 
+The File Storage extension can persist state to the local file system.
+The extension requires read and write access to a directory. A default directory can be used, but it must already exist in order for the extension to operate.
+
+The OAuth2Client extension persists the sending queue for the OTLP exporters that are based on the HTTP and the gRPC protocol.
+This extension supports traces, metrics, and logs.
+
+.OpenTelemetry Collector custom resource with configured FileStorage extension to persist as OTLP sendig queue.
+[source,yaml]
+----
+  config: |
+    extensions:
+      file_storage/all_settings:
+        directory: /var/lib/otelcol/mydir # <1>
+        timeout: 1s # <2>
+        compaction:
+          on_start: true # <3>
+          directory: /tmp/ # <4>
+          max_transaction_size: 65_536 # <5>
+        fsync: false # <6>
+
+    exporters:
+      otlp:
+        sending_queue:
+          storage: file_storage/all_settings # <7>
+
+    service:
+      extensions: [file_storage/all_settings]
+      pipelines:
+        traces:
+          receivers: [otlp]
+          exporters: [otlp]
+----
+<1> Specifies the directory in which the telemetry data is stored.
+<2> Specifies the a timeout to open the storedfiles.
+<3> Starts the compaction when the collector starts. If omitted, the default `+false+` is used.
+<4> Specifies the directory in which compactor stores the telemetry data is stored.
+<5> Defines maximum size of the compaction transaction. A value of zero will ignore transaction sizes. If omitted, the default `+65536+` is used.
+<6> When set, will force the database to perform an fsync after each write. This helps to ensure database integretity if there is an interruption to the database process, but at the cost of performance.
 
 [id="jaegerremotesampling-extension_{context}"]
 === Jaeger Remote Sampling extension
