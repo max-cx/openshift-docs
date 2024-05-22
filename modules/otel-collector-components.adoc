@@ -684,6 +684,42 @@ The Debug exporter prints traces and metrics to the standard output.
 ----
 <1> Verbosity of the debug export: `detailed` or `normal` or `basic`. When set to `detailed`, pipeline data is verbosely logged. Defaults to `normal`.
 
+[id="load-balancing-exporter_{context}"]
+=== Load Balancing exporter
+
+This is an exporter that will consistently export spans, metrics and logs depending on the routing_key configured.
+
+.OpenTelemetry Collector custom resource with an enabled load balancing exporter
+[source,yaml]
+----
+  config: |
+    exporters:
+      loadbalancing:
+        routing_key: "service" <1>
+        protocol:
+          otlp: <2>
+            timeout: 1s
+        resolver: <3>
+          static: <4>
+            hostnames:
+            - backend-1:4317
+            - backend-2:4317
+          dns: <5>
+            hostname: otelcol-headless.observability.svc.cluster.local
+          k8s: <6>
+            service: lb-svc.kube-public
+            ports:
+              - 15317
+              - 16317
+----
+<1> The options for routing_key are: service, traceID, metric (metric name), resource. If no routing_key is configured, the default routing mechanism is traceID for traces, while service is the default for metrics. This means that spans belonging to the same traceID (or service.name, when service is used as the routing_key) will be sent to the same backend.
+<2> The only loadbalancing protocol that is supported is OTLP. All options from the OTLP exporter are supported.
+<3> Only one resolver must be configured.
+<4> The static resolver distributes the load across the listed endpoints.
+<5> The DNS resolver can only be used with a k8s headless service.
+<6> The k8s resolver is the recommended resolver on openshift.
+
+
 [id="prometheus-exporter_{context}"]
 === Prometheus exporter
 
