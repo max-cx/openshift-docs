@@ -1,4 +1,4 @@
-/ Module included in the following assemblies:
+// Module included in the following assemblies:
 //
 // * observability/otel/otel-troubleshooting.adoc
 
@@ -18,22 +18,22 @@ To troubleshoot instrumentation injection, you can perform the following activit
 
 . Run the following command to verify that the `Instrumentation` object was successfully created:
 +
-[source,console]
+[source,terminal]
 ----
-oc get instrumentation -n <workload_project> # <1>
+$ oc get instrumentation -n <workload_project> # <1>
 ----
 <1> The namespace where the instrumentation was created.
 
 . Run the following command to verify that the `opentelemetry-auto-instrumentation` init-container successfully started, which is a prerequisite for instrumentation injection into workloads:
 +
-[source,console]
+[source,terminal]
 ----
-oc get events -n <workload_project> # <1>
+$ oc get events -n <workload_project> # <1>
 ----
 <1> The namespace where the instrumentation is injected for workloads.
 +
 .Example output
-[source,console]
+[source,terminal]
 ----
 ... Created container opentelemetry-auto-instrumentation
 ... Started container opentelemetry-auto-instrumentation
@@ -54,9 +54,9 @@ Fixing the order of deployment requires the following steps:
 
 . Run the following command to inspect the Operator logs for instrumentation errors:
 +
-[source,console]
+[source,terminal]
 ----
-oc logs -l app.kubernetes.io/name=opentelemetry-operator --container manager -n openshift-opentelemetry-operator --follow
+$ oc logs -l app.kubernetes.io/name=opentelemetry-operator --container manager -n openshift-opentelemetry-operator --follow
 ----
 
 . Troubleshoot pod annotations for the instrumentations for a specific programming language. See the required annotation fields and values in "Configuring the instrumentation".
@@ -69,9 +69,9 @@ instrumentation.opentelemetry.io/inject-python="true"
 ----
 +
 .Example command to get pod annotations for an instrumented Python application
-[source,console]
+[source,terminal]
 ----
-oc get pods -n <workload_project> -o jsonpath='{range .items[?(@.metadata.annotations["instrumentation.opentelemetry.io/inject-python"]=="true")]}{.metadata.name}{"\n"}{end}'
+$ oc get pods -n <workload_project> -o jsonpath='{range .items[?(@.metadata.annotations["instrumentation.opentelemetry.io/inject-python"]=="true")]}{.metadata.name}{"\n"}{end}'
 ----
 
 .. Verify that the annotation applied to the instrumentation object is correct for the programming language that you are instrumenting.
