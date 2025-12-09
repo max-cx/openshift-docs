@@ -146,7 +146,7 @@ spec:
     tracing:
       query_timeout: 30 #<1>
       enabled: true
-      in_cluster_url: 'http://tempo-sample-query-frontend.tracing-system.svc.cluster.local:16685'
+      in_cluster_url: 'http://tempo.tracing-system.svc.cluster.local:16685'
       url: '[Tempo query frontend Route url]'
       use_grpc: true # <2>
 ----
