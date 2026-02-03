@@ -6,4 +6,5 @@
 [id="removed-features_{context}"]
 = Removed features
 
+[role="_abstract"]
 None.

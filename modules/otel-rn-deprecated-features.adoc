@@ -6,4 +6,5 @@
 [id="deprecated-features_{context}"]
 = Deprecated features
 
+[role="_abstract"]
 None.

@@ -6,6 +6,7 @@
 [id="known-issues_{context}"]
 = Known issues
 
+[role="_abstract"]
 None.
 
 ////
