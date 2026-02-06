@@ -1,34 +1,38 @@
 // Module included in the following assemblies:
 //
-// * observability/otel/otel-forwarding-telemetry-data.adoc
+// * forwarding/otel-forwarding-telemetry-data.adoc
 
 :_mod-docs-content-type: CONCEPT
 [id="otel-forwarding-data-to-google-managed-prometheus_{context}"]
-= Forwarding telemetry data to Google Managed Prometheus
+= Forwarding telemetry data to Google-managed Prometheus
 
 [role="_abstract"]
-To forward metrics to the Google Managed Prometheus, use the OpenTelemetry Collector with the OTLP exporter, Metric Start Time processor and Google Client Auth extension.
-The OTLP exporter should be configured with Google Client Auth extension, which can use standard secret authentication or Workload Identity Federation (WIF).
+To forward metrics to Google-managed Prometheus, you need the OTLP Exporter, Metric Start Time Processor, and Google Client Authorization Extension.
 
-.OpenTelemetry Collector custom resource with configured OTLP exporter and Google WIF authentication.
+[IMPORTANT]
+====
+The Google Client Authorization Extension is required for the OTLP Exporter to use the OpenShift secret authentication or Google Workload Identity Federation (WIF).
+====
+
+.OpenTelemetry Collector custom resource with the OTLP Exporter and Google WIF authentication
 [source,yaml]
 ----
 # ...
   mode: sidecar
   env:
-    - name: GOOGLE_APPLICATION_CREDENTIALS # <1>
+    - name: GOOGLE_APPLICATION_CREDENTIALS <1>
       value: "/etc/workload-identity/credential-configuration.json"
   volumes:
     - name: workload-identity-credential-configuration
       configMap:
-        name: gcp-wif-credentials # <2>
-     - name: service-account-token-volume
-       projected:
-         sources:
-         - serviceAccountToken:
-             audience: openshift
-             expirationSeconds: 3600
-             path: token
+        name: gcp-wif-credentials <2>
+    - name: service-account-token-volume
+      projected:
+	sources:
+	- serviceAccountToken:
+	    audience: openshift
+	    expirationSeconds: 3600
+	    path: token
   volumeMounts:
     - name: workload-identity-credential-configuration
       mountPath: "/etc/workload-identity"
@@ -49,12 +53,12 @@ The OTLP exporter should be configured with Google Client Auth extension, which 
 
     processors:
       metricstarttime:
-        strategy: subtract_initial_point # <4>
+        strategy: subtract_initial_point <4>
 
       resource/gcp_project_id:
         attributes:
         - action: insert
-          value: project_id # <5>
+          value: <project_id> <5>
           key: gcp.project_id
 
       k8sattributes: {}
@@ -84,8 +88,8 @@ The OTLP exporter should be configured with Google Client Auth extension, which 
           exporters: [otlphttp]
 # ...
 ----
-<1> The environment variable `GOOGLE_APPLICATION_CREDENTIALS` can be configured to use the traditional secret or use the workload identity federation (WIF). This specific example uses WIF.
-<2> Config map contains the Google WIF configuration file `credential-configuration.json`.
-<3> The path to the service account token used by WIF. In this case `/var/run/secrets/otel/serviceaccount/token`.
-<4> The `subtract_initial_point` strategy is stateful, requiring the Collector to run as a sidecar to maintain per-pod state. Alternative strategies available; choose the one that best fits your use case.
-<5> Replace with your GCP project ID.
+<1> You can configure the environment variable `GOOGLE_APPLICATION_CREDENTIALS` to use an OpenShift secret or the Google Workload Identity Federation (WIF). This example uses the WIF.
+<2> The config map contains the Google WIF configuration file `credential-configuration.json`.
+<3> The path to the service account token used by the WIF.
+<4> The `subtract_initial_point` strategy is stateful and requires the Collector to run as a sidecar to maintain the per-pod state. Alternative strategies are available, so choose the strategy that best fits your use case.
+<5> The GCP project ID.
