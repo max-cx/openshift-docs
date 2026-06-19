@@ -6,4 +6,7 @@ include::_attributes/common-attributes.adoc[]
 
 toc::[]
 
+[role="_abstract"]
+The {otel} is based on the open source link:https://opentelemetry.io/[OpenTelemetry project], which aims to provide unified, standardized, and vendor-neutral telemetry data collection for cloud-native software.
+
 include::modules/otel-product-overview.adoc[leveloffset=+1]
