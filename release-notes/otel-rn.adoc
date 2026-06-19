@@ -9,6 +9,11 @@ toc::[]
 [role="_abstract"]
 Use the {otel} to deploy the OpenTelemetry Collector and instrument your workloads to collect, process, and forward traces, metrics, and logs from your cloud-native applications.
 
+[NOTE]
+====
+Only supported features are documented. Undocumented features are currently unsupported. If you need assistance with a feature, contact Red{nbsp}Hat support.
+====
+
 include::snippets/distr-tracing-and-otel-disclaimer-about-docs-for-supported-features-only.adoc[]
 
 include::modules/otel-rn-3.10.0.adoc[leveloffset=+1]
