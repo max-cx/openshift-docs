@@ -1,0 +1,9 @@
+// Module included in the following assemblies:
+//
+// * otel-collector/otel-collector-extensions.adoc
+
+:_mod-docs-content-type: REFERENCE
+[id="otel-extensions-headers-setter-extension_{context}"]
+= Headers Setter Extension
+
+[role="_abstract"]
